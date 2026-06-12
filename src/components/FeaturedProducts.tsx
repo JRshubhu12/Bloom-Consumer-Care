@@ -558,7 +558,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                       <div className="text-center pt-1">
                         <button
                           onClick={() => {
-                            const el = document.getElementById("bloom-collection");
+                            const el = document.getElementById("featured-products");
                             if (el) el.scrollIntoView({ behavior: "smooth" });
                           }}
                           className="text-[10px] uppercase tracking-widest text-[#4B3425]/75 hover:text-[#523821] font-mono font-bold underline transition-colors"

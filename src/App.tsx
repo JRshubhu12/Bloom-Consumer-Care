@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, MotionConfig } from "motion/react";
 import { ShoppingBag, ChevronRight, Check, Trash2, Menu, X, ArrowRight } from "lucide-react";
 
 // Component imports
@@ -9,7 +9,6 @@ import BestSellersStrip from "./components/BestSellersStrip";
 import AboutBloom from "./components/AboutBloom";
 import OurImpact from "./components/OurImpact";
 import WhyBloom from "./components/WhyBloom";
-import ProductExperience from "./components/ProductExperience";
 import IngredientHighlight from "./components/IngredientHighlight";
 import WomenEmpowerment from "./components/WomenEmpowerment";
 import HealthBenefits from "./components/HealthBenefits";
@@ -97,7 +96,7 @@ export default function App() {
 
   const navLinks = [
     { href: "#about-story", label: "About" },
-    { href: "#bloom-collection", label: "Products" },
+    { href: "#featured-products", label: "Products" },
     { href: "#why-bloom", label: "Why Bloom" },
     { href: "#women-empowerment", label: "Women Empowerment" },
     { href: "#founder-reviews", label: "Founder Story" },
@@ -105,7 +104,8 @@ export default function App() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-bg-primary overflow-x-hidden scroll-smooth">
+    <MotionConfig reducedMotion="always">
+      <div className="relative min-h-screen bg-bg-primary overflow-x-hidden scroll-smooth">
       
       {/* GLOBAL BG FLOATING PARTICLES */}
       <FloatingParticles />
@@ -126,7 +126,7 @@ export default function App() {
             <img 
               src="https://i.ibb.co/1fM8bVCF/image-removebg-preview.png" 
               alt="BLOOM Logo" 
-              className="h-9 sm:h-11 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+              className="h-12 sm:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
               referrerPolicy="no-referrer"
             />
             <div className="flex flex-col">
@@ -346,7 +346,7 @@ export default function App() {
         {/* HERO SECTION */}
         <Hero 
           onShopClick={() => {
-            const el = document.getElementById("bloom-collection");
+            const el = document.getElementById("featured-products");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
           onStoryClick={() => {
@@ -366,9 +366,6 @@ export default function App() {
 
         {/* WHY THE GOLD STANDARD CARDS */}
         <WhyBloom />
-
-        {/* PRODUCTS SHOP EXPERIENCE */}
-        <ProductExperience onAddToCart={handleAddToCart} />
 
         {/* ORGANIC INGREDIENTS HOVER PROFILES */}
         <IngredientHighlight />
@@ -424,5 +421,6 @@ export default function App() {
       </div>
 
     </div>
+    </MotionConfig>
   );
 }

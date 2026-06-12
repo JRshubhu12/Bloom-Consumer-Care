@@ -84,7 +84,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#bloom-collection" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
+                <a href="#featured-products" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span>Products</span>
                 </a>
@@ -123,19 +123,19 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 font-sans text-sm text-[#5C554D]">
               <li>
-                <a href="#bloom-collection" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
+                <a href="#featured-products" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span>Roasted Makhana</span>
                 </a>
               </li>
               <li>
-                <a href="#bloom-collection" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
+                <a href="#featured-products" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span>Dry Fruit Mixes</span>
                 </a>
               </li>
               <li>
-                <a href="#bloom-collection" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
+                <a href="#featured-products" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span>Healthy Namkeen</span>
                 </a>
