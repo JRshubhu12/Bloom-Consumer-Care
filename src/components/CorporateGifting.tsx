@@ -500,13 +500,9 @@ export default function CorporateGifting({ onAddToCart }: CorporateGiftingProps 
                   {/* Visual animation representing progress roadmap */}
                   <div className="h-16 relative bg-white/45 border border-gold-light/15 rounded-xl flex items-center justify-between px-6 overflow-hidden">
                     
-                    {/* Animated pipeline vector bars */}
-                    <div className="absolute inset-0 opacity-15 overflow-hidden">
-                      <motion.div
-                        className="w-[200%] h-full bg-[linear-gradient(45deg,transparent_25%,#C6A769_25%,#C6A769_50%,transparent_50%,transparent_75%,#C6A769_75%)] bg-[length:24px_24px]"
-                        animate={{ x: ["0%", "-10%"] }}
-                        transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
-                      />
+                    {/* Static high-end pipeline vector bars */}
+                    <div className="absolute inset-0 opacity-10">
+                      <div className="w-full h-full bg-[linear-gradient(45deg,transparent_25%,#C6A769_25%,#C6A769_50%,transparent_50%,transparent_75%,#C6A769_75%)] bg-[length:24px_24px]" />
                     </div>
 
                     {/* Interactive dots representing nodes */}
@@ -553,14 +549,9 @@ export default function CorporateGifting({ onAddToCart }: CorporateGiftingProps 
         {/* Highly polished, minimalist luxury Bottom Statement */}
         <div className="mt-24 text-center space-y-4">
           <div className="w-px h-16 bg-gradient-to-b from-transparent to-[#C6A769] mx-auto" />
-          <motion.p
-            className="font-serif text-3xl sm:text-4xl italic font-medium tracking-wide text-charcoal/80"
-            initial={{ opacity: 0.8 }}
-            animate={{ opacity: [0.75, 0.95, 0.75] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          >
+          <p className="font-serif text-3xl sm:text-4xl italic font-medium tracking-wide text-charcoal/80">
             "The journey has just begun."
-          </motion.p>
+          </p>
           <div className="w-1 h-1 rounded-full bg-gold mx-auto" />
         </div>
 

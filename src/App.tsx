@@ -33,18 +33,17 @@ export default function App() {
   const [checkoutStep, setCheckoutStep] = useState<"cart" | "success">("cart");
 
   const [scrolled, setScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    let lastScrolled = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
-      
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        setScrollProgress((window.scrollY / totalHeight) * 100);
+      const isScrolled = window.scrollY > 15;
+      if (isScrolled !== lastScrolled) {
+        lastScrolled = isScrolled;
+        setScrolled(isScrolled);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -117,12 +116,6 @@ export default function App() {
           ? "bg-[#FAF8F4]/95 backdrop-blur-md border-b border-[#C6A769]/25 shadow-md py-2 px-4 sm:px-6 lg:px-8" 
           : "bg-transparent py-4 px-4 sm:px-6 lg:px-8"
       }`}>
-        
-        {/* RUNNING GOLD SCROLL PROGRESS INDICATOR */}
-        <div 
-          className="absolute bottom-0 left-0 h-[2.5px] bg-[#C3A77D] transition-all duration-100 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
 
         <header className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 ${
           scrolled ? "bg-transparent border-none p-0" : "bg-[#FAF8F4]/85 backdrop-blur-md border border-[#C6A769]/22 shadow-lg rounded-full px-6 sm:px-10 py-3.5"

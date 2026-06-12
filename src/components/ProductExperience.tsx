@@ -135,16 +135,8 @@ export default function ProductExperience({ onAddToCart }: ProductExperienceProp
                   style={{
                     perspective: 1000
                   }}
-                  animate={{
-                    y: [0, -6, 0]
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
                   onClick={() => handleZoomToggle(activeProduct.id)}
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.03, y: -4 }}
                 >
                   {/* Luxury Inner Tin Border decoration */}
                   <div className="absolute inset-1.5 border border-gold-light/35 rounded-xl pointer-events-none" />

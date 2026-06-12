@@ -424,13 +424,9 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                       <div className="absolute inset-0 bg-radial from-[#C6A769]/15 via-transparent to-transparent opacity-80 pointer-events-none group-hover:scale-125 transition-transform duration-700" />
 
                       {/* Float frame containment for pouch & bowl synchrony */}
-                      <motion.div
-                        className="w-full h-full relative flex items-center justify-center"
-                        animate={{ y: [0, -6, 0] }}
-                        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                      >
+                      <div className="w-full h-full relative flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-2">
                         {/* 1. LUXURY COLOURED CORE BRANDING POUCH (behind bowl) */}
-                        <div className={`w-28 h-36 rounded-t-[32px] rounded-b-lg bg-gradient-to-b ${item.colorTheme.gradient} border border-white/60 p-3 shadow-md relative flex flex-col justify-between items-center z-10 transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:-translate-y-2`}>
+                        <div className={`w-28 h-36 rounded-t-[32px] rounded-b-lg bg-gradient-to-b ${item.colorTheme.gradient} border border-white/60 p-3 shadow-md relative flex flex-col justify-between items-center z-10 transition-all duration-700 ease-out group-hover:scale-[1.03]`}>
                           
                           {/* Inner gold foil-drawn border */}
                           <div className="absolute inset-1.5 border border-[#C6A769]/25 rounded-t-[28px] rounded-b-md pointer-events-none" />
@@ -457,28 +453,17 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                           </div>
                         </div>
 
-                        {/* 2. SPECIFIC INGREDIENT PARTICLES SLATE (rotating in relation to focus) */}
+                        {/* 2. SPECIFIC INGREDIENT PARTICLES SLATE (positioned statically with optional CSS scale response) */}
                         {item.particles.map((particle, pIdx) => (
-                          <motion.div
+                          <div
                             key={pIdx}
-                            className={`absolute w-6 h-6 rounded-full flex items-center justify-center text-[8px] border border-white/60 shadow-xs text-charcoal/80 z-15 ${particle.color}`}
+                            className={`absolute w-6 h-6 rounded-full flex items-center justify-center text-[8px] border border-white/60 shadow-xs text-charcoal/80 z-15 transition-transform duration-500 group-hover:scale-110 ${particle.color}`}
                             style={{
-                              x: particle.x,
-                              y: particle.y,
-                            }}
-                            animate={{
-                              y: [particle.y, particle.y - 8, particle.y],
-                              rotate: [0, 10, 0]
-                            }}
-                            transition={{
-                              duration: 3.5,
-                              delay: pIdx * 0.4,
-                              repeat: Infinity,
-                              ease: "easeInOut"
+                              transform: `translate(${particle.x}px, ${particle.y}px)`
                             }}
                           >
                             <span className="select-none scale-75">{particle.label}</span>
-                          </motion.div>
+                          </div>
                         ))}
 
                         {/* 3. HERO DISPLAY: BOWL CONTAINING REAL SNACKS (stands proud in front of pouch) */}
@@ -506,7 +491,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                         {/* 4. Natural shadow beneath the heavy ceramic bowl */}
                         <div className="absolute w-28 h-2 bg-black/15 rounded-full filter blur-[5px] translate-y-28 scale-100 opacity-80 group-hover:scale-95 group-hover:opacity-60 transition-all duration-500 pointer-events-none" />
 
-                      </motion.div>
+                      </div>
 
                     </div>
 

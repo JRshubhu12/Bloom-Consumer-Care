@@ -151,31 +151,25 @@ export default function AboutBloom() {
               <div className="absolute inset-0 z-0 pointer-events-none md:flex justify-center items-center py-12 px-6 hidden">
                 <svg className="w-full h-full text-gold-light/40" viewBox="0 0 400 200" fill="none">
                   {/* Farm to Ingredients Path */}
-                  <motion.path 
+                  <path 
                     d="M 50 100 C 100 50, 150 50, 150 100" 
                     stroke="currentColor" 
                     strokeWidth="1.5" 
                     strokeDasharray="4 4"
-                    animate={{ strokeDashoffset: [0, -10] }}
-                    transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
                   />
                   {/* Ingredients to Workforce Path */}
-                  <motion.path 
+                  <path 
                     d="M 150 100 C 200 150, 250 150, 250 100" 
                     stroke="currentColor" 
                     strokeWidth="1.5" 
                     strokeDasharray="4 4"
-                    animate={{ strokeDashoffset: [0, 10] }}
-                    transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
                   />
                   {/* Workforce to Finished Product Path */}
-                  <motion.path 
+                  <path 
                     d="M 250 100 C 300 50, 350 50, 350 100" 
                     stroke="currentColor" 
                     strokeWidth="1.5" 
                     strokeDasharray="4 4"
-                    animate={{ strokeDashoffset: [0, -10] }}
-                    transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
                   />
                 </svg>
               </div>

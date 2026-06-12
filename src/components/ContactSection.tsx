@@ -197,14 +197,12 @@ export default function ContactSection() {
 
                 {/* Simulated Pin Locations */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                  <motion.div
-                    animate={{ scale: [1, 1.25, 1] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="w-4 h-4 rounded-full bg-cocoa border-2 border-white mx-auto shadow flex items-center justify-center"
+                  <div
+                    className="w-4 h-4 rounded-full bg-cocoa border-2 border-white mx-auto shadow flex items-center justify-center animate-pulse"
                     title="Varanasi Head Office"
                   >
                     <span className="w-2 h-2 rounded-full bg-gold" />
-                  </motion.div>
+                  </div>
                   <span className="font-mono text-[8px] text-charcoal bg-white border border-gold-light/35 px-1.5 py-0.5 rounded shadow-sm mt-1 block leading-none font-bold">Varanasi HQ</span>
                 </div>
 

@@ -258,13 +258,11 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
               style={{ y: floatingItemFastY }}
               className="absolute top-[18%] left-[12%] w-20 z-20 drop-shadow-lg"
             >
-              <motion.img 
+              <img 
                 src="https://i.ibb.co/F4g1VSL4/image.png" 
                 alt="Assorted Dry Fruits" 
-                animate={{ rotate: [0, 8, 0] }} 
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} 
                 referrerPolicy="no-referrer"
-                className="w-full h-auto"
+                className="w-full h-auto transform hover:rotate-6 transition-transform duration-500"
               />
             </motion.div>
             
@@ -273,48 +271,38 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
               style={{ y: floatingItemSlowY }}
               className="absolute top-[42%] right-[-8%] w-16 z-20 drop-shadow-md opacity-90 blur-[0.5px]"
             >
-              <motion.img 
+              <img 
                 src="https://i.ibb.co/F4g1VSL4/image.png" 
                 alt="Assorted Dry Fruits" 
-                animate={{ rotate: [0, -12, 0] }} 
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
                 referrerPolicy="no-referrer"
-                className="w-full h-auto"
+                className="w-full h-auto transform hover:-rotate-12 transition-transform duration-500"
               />
             </motion.div>
 
             {/* Accent Particles */}
-            <motion.div className="absolute top-[55%] left-[45%] w-4 h-4 bg-[#D38B2D] rounded-full z-20 shadow-md"
-              animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} 
-            />
-            <motion.div className="absolute bottom-[35%] left-[5%] w-3 h-3 bg-[#D38B2D] rounded-full z-20 shadow-md"
-              animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} 
-            />
+            <div className="absolute top-[55%] left-[45%] w-4 h-4 bg-[#D38B2D] rounded-full z-20 shadow-md" />
+            <div className="absolute bottom-[35%] left-[5%] w-3 h-3 bg-[#D38B2D] rounded-full z-20 shadow-md" />
             
             {/* Green Leaf accent */}
-            <motion.div className="absolute top-[45%] left-[60%] z-20 text-[#607D3B]"
-              animate={{ y: [0, -5, 0], rotate: [-10, 10, -10] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }} 
-            >
+            <div className="absolute top-[45%] left-[60%] z-20 text-[#607D3B]">
               <Leaf className="w-8 h-8 fill-current drop-shadow-sm" />
-            </motion.div>
+            </div>
 
           </motion.div>
         </div>
       </div>
 
       {/* Footer Scroll Indicator */}
-      <motion.div 
+      <div 
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20"
         onClick={onStoryClick}
-        animate={{ y: [0, 5, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
         <span className="text-[10px] sm:text-xs text-[#847D75] tracking-wider mb-2 uppercase font-medium">Discover Our Story</span>
         <div className="w-[1px] h-8 bg-gradient-to-b from-[#C3A77D] to-transparent"></div>
         <div className="w-5 h-8 border border-[#C3A77D] rounded-full flex justify-center pt-1.5 absolute bottom-[-15px] bg-[#F9F7F2]">
            <div className="w-1 h-2 bg-[#C3A77D] rounded-full"></div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
