@@ -19,15 +19,38 @@ interface Product {
 const products: Product[] = [
   {
     id: "prod-1",
-    name: "Roasted Makhana",
-    description: "Freshly roasted lotus seeds prepared with a commitment to crunch and freshness.",
+    name: "Mint Flavour Makhana",
+    description: "Freshly roasted lotus seeds infused with refreshing mint, prepared for the perfect crunch.",
     image: "https://m.media-amazon.com/images/I/71paW2uT-kL.jpg",
     benefits: ["Zero Preservatives", "Freshly Roasted", "Quality Ingredients"],
-    weight: "100g",
-    flavors: ["Mint Flavour", "Chatpata Masala", "Plain Salted", "Magic Masala"]
+    weight: "100g"
   },
   {
     id: "prod-2",
+    name: "Chatpata Masala Makhana",
+    description: "Tangy and spicy roasted makhana, bursting with authentic Indian chatpata flavors.",
+    image: "https://img1.exportersindia.com/product_images/bc-full/2025/10/14951820/chatpata-masala-makhana-1761546855-8402310.jpeg",
+    benefits: ["Zero Preservatives", "Spicy & Tangy", "High Fiber Crunch"],
+    weight: "100g"
+  },
+  {
+    id: "prod-3",
+    name: "Plain Salted Makhana",
+    description: "Lightly salted, classic roasted makhana that brings out the natural, wholesome taste.",
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/9/545694968/TX/LZ/SH/99605915/plain-salted-roasted-makhana.jpeg",
+    benefits: ["Lightly Salted", "Healthy Snacking", "Zero Trans Fat"],
+    weight: "100g"
+  },
+  {
+    id: "prod-4",
+    name: "Magic Masala Makhana",
+    description: "An irresistible blend of magical spices coating perfectly roasted crunchy makhana.",
+    image: "https://cdn2.foodviva.com/static-content/food-images/snacks-recipes/roasted-makhana-masala/roasted-makhana-masala.jpg",
+    benefits: ["Bold Flavor", "Freshly Roasted", "Quality Ingredients"],
+    weight: "100g"
+  },
+  {
+    id: "prod-5",
     name: "Energy Bar",
     description: "Naturally delicious snack bar made entirely from premium dry fruits.",
     image: "https://5.imimg.com/data5/SELLER/Default/2022/6/DA/PX/HQ/64879238/dry-fruit-sweet-500x500.jpeg",
@@ -35,7 +58,7 @@ const products: Product[] = [
     weight: "40g"
   },
   {
-    id: "prod-3",
+    id: "prod-6",
     name: "Premium Dry Fruit Mix",
     description: "A perfect premium blend of wholesome California almonds, whole cashews, and golden raisins.",
     image: "https://m.media-amazon.com/images/I/71m18e2dMAL._AC_UF894,1000_QL80_.jpg",
@@ -43,7 +66,7 @@ const products: Product[] = [
     weight: "150g"
   },
   {
-    id: "prod-4",
+    id: "prod-7",
     name: "Makhana Mix Namkeen",
     description: "Traditional Indian namkeen blend prepared using premium makhana and light spices.",
     image: "https://myheartbeets.com/wp-content/uploads/2022/02/roasted-makhana-mix.jpg",
@@ -81,7 +104,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
         </div>
 
         {/* 4 Products Grid (Carousel on Mobile) */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-8 text-left md:overflow-visible">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 lg:gap-8 text-left md:overflow-visible">
           {products.map((prod) => (
             <div 
               key={prod.id}
@@ -107,10 +130,10 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               <div className="p-6 flex flex-col flex-grow bg-[#F7EFE5]">
                 {/* Title & Desc */}
                 <div className="mb-4">
-                  <h3 className="font-serif text-xl font-bold text-charcoal mb-2">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-charcoal mb-2 line-clamp-2 min-h-[56px]">
                     {prod.name}
                   </h3>
-                  <p className="font-sans text-xs sm:text-sm text-charcoal/70 leading-relaxed min-h-[40px]">
+                  <p className="font-sans text-xs sm:text-sm text-charcoal/70 leading-relaxed min-h-[60px] line-clamp-3">
                     {prod.description}
                   </p>
                 </div>
