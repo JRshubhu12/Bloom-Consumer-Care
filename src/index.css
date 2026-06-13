@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #FAF8F4;
-  --color-bg-secondary: #F4EFE8;
-  --color-gold: #C8A96B;
-  --color-gold-light: #E5D5B8;
-  --color-cocoa: #6B4A32;
-  --color-sage: #A3B18A;
-  --color-charcoal: #222222;
+  --color-bg-primary: #FFFBF2;
+  --color-bg-secondary: #F7EFE5;
+  --color-gold: #E88D14;
+  --color-gold-light: #FAD199;
+  --color-cocoa: #5C3A21;
+  --color-sage: #7B9B62;
+  --color-charcoal: #2A2421;
   
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-display: 'Cinzel', serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-display: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -38,7 +38,7 @@
   color: var(--color-bg-primary);
 }
 
-/* Custom premium ambient lighting and luxury scrollbar styling */
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -52,44 +52,6 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #A8884C;
-}
-
-/* Luxury micro-animations classes */
-.gold-glow {
-  box-shadow: 0 0 40px -10px rgba(200, 169, 107, 0.15);
-}
-
-.luxury-glowing-btn {
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 12px rgba(195, 167, 125, 0.45), 0 0 4px rgba(195, 167, 125, 0.2);
-}
-
-.luxury-glowing-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -70%;
-  width: 30%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.22);
-  transform: rotate(30deg);
-  transition: none;
-}
-
-.luxury-glowing-btn:hover::after {
-  left: 130%;
-  transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.luxury-glowing-btn:hover {
-  box-shadow: 0 0 20px rgba(195, 167, 125, 0.8) !important;
-}
-
-.luxury-card-overlay {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
 }
 
 @keyframes infinite-scroll {
@@ -106,23 +68,5 @@
   width: max-content;
   animation: infinite-scroll 45s linear infinite;
   will-change: transform;
-}
-
-@keyframes float-slow {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  100% {
-    transform: translate3d(35px, -45px, 0) scale(1.08);
-  }
-}
-
-@keyframes float-reverse {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1.05);
-  }
-  100% {
-    transform: translate3d(-45px, 35px, 0) scale(0.95);
-  }
 }
 

@@ -1,187 +1,174 @@
 import { useState } from "react";
-import { motion } from "motion/react";
-import { TESTIMONIALS } from "../data";
-import { Quote, Sparkles, Award, Star, ArrowRight, HeartHandshake, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Quote, Sparkles, Calendar, ChevronRight, Award } from "lucide-react";
 
 export default function FounderTestimonials() {
-  const [activeTimelineYear, setActiveTimelineYear] = useState<string>("2026 (Q1)");
+  const [activeTab, setActiveTab] = useState<"2026" | "future">("2026");
 
-  const timelineYears = [
-    { year: "2026 (Q1)", title: "The Wetland Sabbatical", desc: "Founder resides in Mithila, studying water lily poppy cultivation standards and forming direct ties with 10 female household heads." },
-    { year: "2026 (Q2)", title: "Empowerment Seed Cluster 01", desc: "Constructing our first eco-roasting plant. Integrating 100 women with high salary cards, providing banking accounts and health camps." },
-    { year: "2026 (Q3)", title: "Flagship Canister launch", desc: "Introducing the flagship premium Himalayan Salt and Saffron Royal lines into premium gourmet spaces, supporting 500 women." },
-    { year: "2026 (Q4)", title: "The ₹100 Crore Restoration", desc: "Aiming to build a nationwide organic brand to fully fund village colleges and modern solar drying beds across Bihar." }
-  ];
-
-  const currentTimeline = timelineYears.find((t) => t.year === activeTimelineYear) || timelineYears[0];
+  const timelineData = {
+    "2026": {
+      title: "The Beginning of Bloom",
+      content: "Bloom Consumer Care was founded with a simple vision: to create fresh, preservative-free snacks made with quality ingredients and a commitment to better everyday snacking. Inspired by the growing demand for healthier food choices, Bloom began its journey with carefully crafted roasted makhana and wholesome snack blends designed for modern families. Every product reflects our focus on freshness, quality, transparency, and customer trust. This is only the beginning of our journey as we continue building a brand dedicated to better snacking experiences.",
+      quote: "Purely Natural. Zero Preservatives. Crafted With Care."
+    },
+    "future": {
+      title: "Growing Responsibly",
+      content: "Expanding product offerings, improving packaging, and increasing availability while maintaining the brand's commitment to quality and freshness.",
+      quote: "Crafted With Care. Growing With Purpose."
+    }
+  };
 
   return (
-    <section id="founder-reviews" className="py-24 bg-bg-primary relative overflow-hidden">
+    <section id="founder-reviews" className="py-24 bg-[#FAF8F5] relative overflow-hidden select-none">
       
-      {/* Absolute visual elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-gold/5 blur-[120px] pointer-events-none" />
+      {/* Background soft blurs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gold/5 blur-[130px] pointer-events-none" />
 
-      {/* INFINITE CAROUSEL TESTIMONIALS (First sub-block) */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 mb-24">
+      {/* 1. MEET THE FOUNDER SECTION */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-12 mb-28">
         
-        {/* Carousel Header */}
-        <div className="max-w-2xl mx-auto text-center space-y-3 mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-medium">Customer & Artisan Whispers</span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-medium text-charcoal">Voice of the Circle</h2>
+        {/* Section Header */}
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-20">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-medium">
+            Leadership
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-charcoal">
+            Meet The Founder
+          </h2>
           <div className="w-12 h-[1px] bg-gold mx-auto" />
         </div>
 
-        {/* Outer continuous container carousel */}
-        <div className="relative w-full overflow-hidden select-none py-4">
+        {/* Founder Row Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Mask gradients at the edges */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bg-primary to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg-primary to-transparent z-10 pointer-events-none" />
-
-          {/* Scrolling tape wrapper */}
-          <div className="flex animate-infinite-scroll gap-6">
-            
-            {/* Array duplicated twice for perfect infinite cycle wraps */}
-            {[...TESTIMONIALS, ...TESTIMONIALS].map((test, idx) => (
-              <div
-                key={`${test.id}-${idx}`}
-                className="w-[280px] sm:w-[350px] bg-white border border-gold-light/25 rounded-2xl p-6 flex flex-col justify-between shrink-0 hover:border-gold transition-colors shadow-[0_10px_25px_-5px_rgba(107,74,50,0.03)] text-left"
-              >
-                <div className="space-y-4">
-                  {/* Stars indicators */}
-                  <div className="flex items-center gap-1.5 text-gold">
-                    {Array.from({ length: test.rating }).map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-gold" />
-                    ))}
-                    <span className="font-mono text-[9px] text-charcoal/50 uppercase tracking-widest font-bold ml-1">
-                      {test.empowermentNote}
-                    </span>
-                  </div>
-
-                  <p className="font-serif text-charcoal/85 text-xs sm:text-sm leading-relaxed font-light italic">
-                    "{test.text}"
-                  </p>
-                </div>
-
-                <div className="border-t border-gold-light/20 pt-4 mt-6 flex items-center justify-between text-xs">
-                  <div className="space-y-0.5">
-                    <strong className="font-serif text-cocoa font-semibold block">{test.name}</strong>
-                    <span className="font-sans text-[10px] text-charcoal/50 leading-none">{test.role}</span>
-                  </div>
-                  <span className="font-mono text-[9px] uppercase font-bold text-sage bg-sage/5 px-2.5 py-1 rounded-full border border-sage/10">
-                    {test.location.split(",")[0]}
-                  </span>
-                </div>
+          {/* Left Panel: Luxury Frame with Founder Portrait */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="bg-white border border-[#C6A769]/20 rounded-3xl p-6 shadow-[0_15px_40px_rgba(107,74,50,0.03)] relative max-w-sm w-full">
+              <div className="absolute inset-3 border border-[#C6A769]/10 rounded-2xl pointer-events-none" />
+              
+              <div className="relative w-full h-80 bg-[#FCFBF8] rounded-2xl border border-[#C6A769]/10 overflow-hidden shadow-inner">
+                <img
+                  src="https://i.ibb.co/JWM9tdJx/Screenshot-2026-06-13-00-04-10.png"
+                  alt="Shiwani Narayan"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
               </div>
-            ))}
 
+              <div className="text-center mt-5">
+                <h4 className="font-serif text-lg font-semibold text-charcoal leading-none">Shiwani Narayan</h4>
+                <span className="font-mono text-[9px] tracking-widest text-[#C6A769] uppercase font-bold block mt-1.5">
+                  Founder, Bloom Consumer Care
+                </span>
+              </div>
+            </div>
           </div>
+
+          {/* Right Panel: Biography and Vision */}
+          <div className="lg:col-span-7 text-left space-y-8">
+            <div className="space-y-4">
+              <p className="font-sans text-sm sm:text-base text-charcoal/80 leading-relaxed font-light">
+                Shiwani Narayan holds a BA, MA, and MCA and brings experience from the financial services sector, where she worked as a Financial Consultant at HDFC Life.
+              </p>
+              <p className="font-sans text-sm sm:text-base text-charcoal/80 leading-relaxed font-light">
+                Her professional journey helped her understand the importance of trust, quality, and long-term customer relationships. Inspired by the growing demand for healthier food choices, she founded Bloom Consumer Care with a vision to create preservative-free snacks that combine freshness, quality ingredients, and honest food practices.
+              </p>
+              <p className="font-sans text-sm sm:text-base text-charcoal/80 leading-relaxed font-light">
+                Today, Bloom Consumer Care focuses on delivering better snacking experiences through carefully crafted products designed for modern households.
+              </p>
+            </div>
+
+            {/* Vision Callout Box */}
+            <div className="bg-white/60 border-l-2 border-[#C6A769] p-6 rounded-r-2xl shadow-[0_8px_20px_rgba(107,74,50,0.01)] relative">
+              <Quote className="w-8 h-8 text-[#C6A769]/15 absolute -top-3 left-4" />
+              <p className="font-serif text-base italic text-cocoa leading-relaxed relative z-10">
+                "Our goal is simple — to create snacks that people can enjoy with confidence, knowing they are made with quality ingredients and a commitment to freshness."
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      {/* FOUNDER SECTION & TIMELINE INDEX (Second sub-block) */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Panel: Founder Visual Portrait with social goals */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <div className="bg-white border border-gold-light/35 rounded-3xl p-8 shadow-[0_20px_50px_rgba(107,74,50,0.06)] relative text-left overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-2xl pointer-events-none" />
-              
-              {/* Symmetrical border frames */}
-              <div className="absolute inset-2.5 border border-gold-light/20 rounded-[20px] pointer-events-none" />
-
-              <div className="space-y-6 relative z-10">
-                
-                {/* Simulated portrait vector profile styling */}
-                <div className="relative w-full h-64 bg-bg-secondary rounded-2xl flex flex-col items-center justify-center border border-gold/15 overflow-hidden shadow-inner select-none">
-                  <img
-                    src="https://i.ibb.co/JWM9tdJx/Screenshot-2026-06-13-00-04-10.png"
-                    alt="Shiwani Narayan"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-top"
-                    loading="lazy"
-                  />
-                  <div className="absolute bottom-4 inset-x-4 bg-white/95 backdrop-blur-xs border border-gold/20 p-3 rounded-xl text-center shadow-md">
-                    <h4 className="font-serif text-sm font-semibold text-cocoa">Shiwani Narayan</h4>
-                    <span className="font-mono text-[8px] tracking-widest text-[#4B3425] uppercase block mt-1 font-bold">Founder, Bloom Consumer Care</span>
-                  </div>
-                </div>
-
-                {/* Portrait Sub Copy */}
-                <div className="space-y-2">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-gold font-bold block">Founder Biography</span>
-                  <p className="font-sans text-xs sm:text-sm text-charcoal/80 leading-relaxed font-light">
-                    Shiwani Narayan holds a BA/MA/MCA and has worked as a financial consultant at HDFC Life (2022–2026), where she gained experience serving lower-income groups by providing tailored insurance solutions. She brings strong business acumen and a passion for social impact to Bloom Consumer Care.
-                  </p>
-                </div>
-
-                <div className="border-t border-gold-light/20 pt-4 flex items-center gap-3">
-                  <div className="p-2 rounded bg-bg-primary text-gold">
-                    <Award className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h5 className="font-serif text-xs font-semibold text-charcoal">₹100 Cr Village Return Pledge</h5>
-                    <span className="font-sans text-[10px] text-charcoal/50 font-light block">Directing wholesale margins to sponsor local female education.</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          {/* Right Panel: Story Timeline Stepper */}
-          <div className="lg:col-span-7 space-y-8 text-left">
-            <div className="space-y-3">
-              <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-semibold">The Growth Saga</span>
-              <h3 className="font-serif text-3xl font-medium tracking-tight text-charcoal leading-snug">
-                From Wetland Study to <br />
-                <span className="italic font-normal text-cocoa">Nationwide Organic Rehabilitation</span>
-              </h3>
-              <div className="w-12 h-[2px] bg-cocoa mt-2" />
-            </div>
-
-            {/* Timesteping list */}
-            <div className="space-y-4">
-              <div className="flex gap-2">
-                {timelineYears.map((t) => (
-                  <button
-                    key={t.year}
-                    onClick={() => setActiveTimelineYear(t.year)}
-                    className={`px-4 py-2 rounded-lg font-mono text-xs transition-all duration-350 border ${
-                      t.year === activeTimelineYear
-                        ? "bg-cocoa border-gold text-bg-primary font-bold shadow-sm"
-                        : "bg-white border-gold-light/25 text-charcoal/65 hover:border-gold"
-                    }`}
-                  >
-                    {t.year}
-                  </button>
-                ))}
-              </div>
-
-              {/* Display card representing active year */}
-              <div className="bg-bg-secondary/40 border border-gold-light/30 rounded-2xl p-6 min-h-[160px] flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-gold" />
-                    <h4 className="font-serif text-base sm:text-lg font-semibold text-charcoal">
-                      {currentTimeline.title}
-                    </h4>
-                  </div>
-                  <p className="font-sans text-xs sm:text-sm text-charcoal/70 leading-relaxed font-light">
-                    {currentTimeline.desc}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-1.5 mt-4 text-[10px] text-gold uppercase tracking-wider font-mono font-bold">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Sovereign Standard Locked</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
+      {/* 2. THE BLOOM JOURNEY TIMELINE */}
+      <div className="max-w-5xl mx-auto px-6 sm:px-12 border-t border-[#C6A769]/15 pt-20">
+        
+        {/* Timeline Header */}
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-medium">
+            Chronology
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl font-medium tracking-tight text-charcoal">
+            The Bloom Journey
+          </h2>
+          <div className="w-12 h-[1px] bg-gold mx-auto" />
         </div>
+
+        {/* Tab Controls */}
+        <div className="flex justify-center gap-4 mb-10">
+          <button
+            onClick={() => setActiveTab("2026")}
+            className={`px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 border ${
+              activeTab === "2026"
+                ? "bg-[#452B18] border-[#452B18] text-white font-semibold shadow-md"
+                : "bg-white border-[#C6A769]/20 text-charcoal/70 hover:border-[#C6A769]/60"
+            }`}
+          >
+            2026
+          </button>
+          <button
+            onClick={() => setActiveTab("future")}
+            className={`px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 border ${
+              activeTab === "future"
+                ? "bg-[#452B18] border-[#452B18] text-white font-semibold shadow-md"
+                : "bg-white border-[#C6A769]/20 text-charcoal/70 hover:border-[#C6A769]/60"
+            }`}
+          >
+            Future
+          </button>
+        </div>
+
+        {/* Timeline Display Card */}
+        <div className="max-w-3xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white/80 border border-[#C6A769]/15 rounded-3xl p-8 sm:p-10 text-left shadow-[0_12px_24px_rgba(107,74,50,0.015)] relative overflow-hidden"
+            >
+              <div className="flex items-center gap-3 mb-4 text-[#C6A769]">
+                <Calendar className="w-5 h-5" />
+                <h4 className="font-serif text-xl sm:text-2xl font-semibold text-charcoal">
+                  {timelineData[activeTab].title}
+                </h4>
+              </div>
+
+              <p className="font-sans text-sm sm:text-base text-charcoal/75 leading-relaxed font-light mb-8">
+                {timelineData[activeTab].content}
+              </p>
+
+              {/* Elegant quote highlight */}
+              <div className="border-t border-[#C6A769]/15 pt-6 text-center">
+                <span className="font-serif text-lg sm:text-xl italic text-cocoa/90 tracking-wide block">
+                  {timelineData[activeTab].quote}
+                </span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Bottom Statement */}
+        <div className="text-center pt-24 pb-12">
+          <h3 className="font-serif text-xl sm:text-2xl italic font-normal text-cocoa/90 tracking-tight leading-relaxed">
+            Crafted With Care. <br className="sm:hidden" />
+            <span className="font-medium not-italic text-charcoal ml-2 sm:ml-3">Growing With Purpose.</span>
+          </h3>
+        </div>
+
       </div>
 
     </section>

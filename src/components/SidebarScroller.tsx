@@ -5,9 +5,10 @@ const SECTIONS = [
   { id: "hero", label: "Home" },
   { id: "about-story", label: "Our Story" },
   { id: "best-sellers", label: "Products" },
+  { id: "our-promise", label: "Our Promise" },
   { id: "women-empowerment", label: "Women Empowerment" },
+  { id: "whats-next", label: "Coming Next" },
   { id: "founder-reviews", label: "Founder Story" },
-  { id: "future-vision", label: "Future Vision" },
   { id: "contact-partners", label: "Contact" },
 ];
 

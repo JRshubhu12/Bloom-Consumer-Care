@@ -1,133 +1,145 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { INGREDIENTS } from "../data";
-import { Sparkles, Sprout, Landmark, ShieldCheck } from "lucide-react";
+import { motion } from "motion/react";
+import { Check, ShieldCheck } from "lucide-react";
 
 export default function IngredientHighlight() {
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const ingredientsList = [
+    {
+      id: "makhana",
+      name: "Roasted Makhana",
+      image: "/food-macro/makhana.png",
+      description: "Light, crunchy, and naturally satisfying. Known for its balanced nutritional profile and delicious texture, makhana forms the heart of many Bloom products.",
+      highlights: ["Naturally Light", "Source of Protein", "Rich in Nutrients", "Perfect Everyday Snack"]
+    },
+    {
+      id: "almonds",
+      name: "Premium Almonds",
+      image: "/food-macro/almonds.png",
+      description: "Carefully selected almonds that add crunch, flavor, and nutritional goodness.",
+      highlights: ["Protein Rich", "Naturally Nutritious", "Premium Quality Selection", "Delicious Crunch"]
+    },
+    {
+      id: "cashews",
+      name: "Whole Cashews",
+      image: "/food-macro/cashews.png",
+      description: "Smooth, creamy, and naturally satisfying. Selected for consistency, freshness, and premium taste.",
+      highlights: ["Rich Taste", "Quality Sourced", "Carefully Selected", "Freshly Packed"]
+    },
+    {
+      id: "raisins",
+      name: "Golden Raisins",
+      image: "/food-macro/dry_fruits.png",
+      description: "Naturally sweet and flavorful. Added to create a balanced blend of taste and texture.",
+      highlights: ["Naturally Sweet", "Soft Texture", "Quality Selected", "Great Snacking Companion"]
+    }
+  ];
+
+  const promises = [
+    "No Unnecessary Preservatives",
+    "Carefully Selected Ingredients",
+    "Quality-Focused Production",
+    "Freshly Packed",
+    "Transparent Product Information"
+  ];
 
   return (
-    <section className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-secondary relative overflow-hidden">
+    <section id="inside-pack" className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-primary relative overflow-hidden">
       
-      {/* Visual luxury framing layouts */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] rounded-full bg-gold/5 blur-[120px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Header content comparable to Forest Essentials */}
+        {/* Editorial Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-20">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-medium">
-            Natural Chemical Assets
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-bold">
+            Inside Every Pack
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-charcoal">
-            The Living Ingredients Showcase <br />
-            <span className="italic font-normal text-cocoa">Superfoods Graded with Sovereignty</span>
+            Simple ingredients. <br />
+            <span className="italic font-normal text-cocoa">Naturally nutritious. Carefully selected.</span>
           </h2>
-          <div className="w-12 h-[1px] bg-gold mx-auto" />
-          <p className="font-sans text-charcoal/70 max-w-lg mx-auto font-light leading-relaxed text-sm sm:text-base">
-            Hover over each biological superfood to reveal its verified micro-nutrient density, ancient biological classification, and certified farming location.
+          <div className="w-12 h-[2px] bg-gold mx-auto" />
+          <p className="font-sans text-charcoal/80 max-w-xl mx-auto leading-relaxed text-sm sm:text-base">
+            Every Bloom product begins with quality ingredients chosen for their taste, freshness, and nutritional value. We focus on creating wholesome snacks with ingredients people know and trust.
           </p>
         </div>
 
-        {/* Floating cards grid representing the core luxury ingredients list */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {INGREDIENTS.map((ing, idx) => {
-            const IsHovered = hoveredIdx === idx;
+        {/* Floating Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          {ingredientsList.map((ing, idx) => {
             return (
               <motion.div
                 key={ing.id}
-                onMouseEnter={() => setHoveredIdx(idx)}
-                onMouseLeave={() => setHoveredIdx(null)}
-                className="bg-white border border-gold-light/25 rounded-2xl p-6 flex flex-col justify-between text-left relative overflow-hidden transition-all duration-300 min-h-[380px] shadow-[0_15px_45px_-5px_rgba(107,74,50,0.04)]"
+                className="bg-white border border-gold-light/40 rounded-[2rem] p-6 flex flex-col justify-between text-left relative overflow-hidden transition-all duration-300 min-h-[460px] shadow-sm group"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
                 whileHover={{
-                  y: -3,
-                  borderColor: "rgba(200, 169, 107, 0.75)",
-                  boxShadow: "0 20px 40px -10px rgba(107,74,50,0.08)"
+                  y: -4,
+                  borderColor: "rgba(232, 141, 20, 0.4)",
+                  boxShadow: "0 15px 35px -10px rgba(92, 58, 33, 0.1)"
                 }}
               >
-                
-                {/* 3D abstract element float rendering representing the crop piece */}
-                <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-gold/15 to-transparent rounded-full filter blur-xl transform translate-x-4 -translate-y-4 pointer-events-none" />
-
-                <div className="space-y-4 relative z-10">
-                  
-                  {/* Top line scientific name */}
-                  <div className="flex items-center justify-between border-b border-gold-light/25 pb-3">
-                    <span className="font-mono text-[9px] tracking-widest text-[#B39359] uppercase font-bold">
-                      {ing.luxuryRating}
-                    </span>
-                    <Sprout className="w-4 h-4 text-gold" />
+                <div>
+                  {/* Large High-Res Image Container */}
+                  <div className="w-full h-48 rounded-xl overflow-hidden bg-bg-secondary relative flex items-center justify-center mb-6">
+                    <img 
+                      src={ing.image} 
+                      alt={ing.name} 
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                      loading="lazy"
+                    />
                   </div>
 
-                  {/* Scientific binomial classification */}
-                  <div className="space-y-1">
-                    <h3 className="font-serif text-xl sm:text-2xl font-semibold text-charcoal">
-                      {ing.name}
-                    </h3>
-                    <p className="font-mono text-[10px] text-cocoa/70 italic tracking-wide">
-                      {ing.scientificName}
-                    </p>
-                  </div>
+                  <h3 className="font-serif text-xl font-bold text-charcoal mb-3">
+                    {ing.name}
+                  </h3>
 
-                  <p className="font-sans text-xs sm:text-sm text-charcoal/80 leading-relaxed font-light">
+                  <p className="font-sans text-sm text-charcoal/70 leading-relaxed mb-6">
                     {ing.description}
                   </p>
                 </div>
 
-                {/* Info block displaying micro nutrients on hover or default styling */}
-                <div className="border-t border-gold-light/35 pt-4 mt-6 relative z-10 space-y-3">
-                  
-                  <div className="flex items-center gap-1.5 text-gold font-mono text-[9px] uppercase tracking-wider font-semibold">
-                    <Landmark className="w-3.5 h-3.5" />
-                    <span>Origin: {ing.origin.split(",").slice(0, 1)}</span>
-                  </div>
-
-                  {/* Micro-table parameters */}
-                  <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
-                    <div className="bg-bg-primary p-2 rounded-lg border border-gold-light/10">
-                      <span className="text-charcoal/50 block uppercase text-[8px]">Protein Density</span>
-                      <strong className="text-cocoa font-semibold mt-0.5 block">{ing.protein}</strong>
-                    </div>
-                    <div className="bg-bg-primary p-2 rounded-lg border border-gold-light/10">
-                      <span className="text-charcoal/50 block uppercase text-[8px]">Dietary Fiber</span>
-                      <strong className="text-cocoa font-semibold mt-0.5 block">{ing.fiber}</strong>
-                    </div>
-                  </div>
-
-                  {/* Hover full details */}
-                  <AnimatePresence>
-                    {IsHovered && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="space-y-2 pt-2 border-t border-gold-light/20 text-[10px] font-mono text-charcoal/85 text-left"
-                      >
-                        <div className="flex justify-between">
-                          <span>Mineral Salts:</span>
-                          <span className="text-cocoa font-semibold">{ing.minerals.split(",")[0]}</span>
+                {/* Highlights row */}
+                <div className="border-t border-gold-light/40 pt-5">
+                  <ul className="space-y-2.5">
+                    {ing.highlights.map((highlight, hIdx) => (
+                      <li key={hIdx} className="flex items-center gap-2.5 text-[11px] font-sans font-semibold text-charcoal/80 uppercase tracking-wide">
+                        <div className="bg-sage/10 p-1 rounded-full">
+                          <Check className="w-3 h-3 text-sage stroke-[3]" />
                         </div>
-                        <div className="flex justify-between">
-                          <span>Energy Multiplier:</span>
-                          <span className="text-cocoa font-semibold">{ing.energy}</span>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                {/* Ambient glowing spotlight corner highlight */}
-                <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 bg-gold transition-transform duration-500 origin-bottom-right ${IsHovered ? "scale-x-[15] scale-y-[15]" : ""}`} style={{ opacity: 0.12 }} />
-
               </motion.div>
             );
           })}
         </div>
+
+        {/* Bottom Section - Ingredient Promise */}
+        <motion.div 
+          className="bg-white border-2 border-gold-light/50 rounded-3xl p-8 sm:p-10 max-w-5xl mx-auto text-center shadow-sm"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="flex items-center justify-center gap-3 mb-5 text-gold">
+            <ShieldCheck className="w-8 h-8 stroke-[2]" />
+            <h3 className="font-serif text-2xl font-bold text-charcoal">Our Ingredient Promise</h3>
+          </div>
+          
+          <div className="w-16 h-[2px] bg-gold/40 mx-auto mb-8" />
+
+          <div className="flex flex-wrap justify-center items-center gap-y-5 gap-x-10">
+            {promises.map((promise, pIdx) => (
+              <div key={pIdx} className="flex items-center gap-2 text-sm font-sans font-semibold tracking-wide text-charcoal/85 uppercase">
+                <div className="w-2 h-2 rounded-full bg-gold" />
+                <span>{promise}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
       </div>
     </section>

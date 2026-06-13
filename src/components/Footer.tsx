@@ -223,7 +223,7 @@ export default function Footer() {
                 placeholder="Enter email to receive secret seasonal catalogs..."
                 className="flex-1 bg-white border border-[#EAE4DB] rounded-lg px-4 py-2.5 text-xs focus:border-[#C3A77D] outline-none text-[#2F2924]"
               />
-              <button type="submit" className="px-5 py-2.5 bg-cocoa text-bg-primary rounded-lg hover:bg-charcoal transition-all text-xs font-mono tracking-wider font-bold uppercase luxury-glowing-btn cursor-pointer">
+              <button type="submit" className="px-5 py-2.5 bg-cocoa text-bg-primary rounded-lg hover:bg-charcoal transition-all text-xs font-mono tracking-wider font-bold uppercase cursor-pointer">
                 Subscribe
               </button>
             </form>

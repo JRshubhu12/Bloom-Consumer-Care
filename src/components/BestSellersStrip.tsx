@@ -149,7 +149,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       <button
                         onClick={() => handleQuickAdd(prod.name, prod.id)}
                         disabled={isAdding}
-                        className="py-2 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-sm hover:shadow-md cursor-pointer luxury-glowing-btn disabled:opacity-80"
+                        className="py-2 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-sm hover:shadow-md cursor-pointer disabled:opacity-80"
                       >
                         {isAdding ? (
                           <>
@@ -222,7 +222,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       <button
                         onClick={() => handleQuickAdd(prod.name, prod.id)}
                         disabled={isAdding}
-                        className="py-2.5 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[9.5px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-sm cursor-pointer luxury-glowing-btn"
+                        className="py-2.5 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[9.5px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-sm cursor-pointer"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
                         <span>Quick Add</span>

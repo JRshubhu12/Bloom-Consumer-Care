@@ -9,14 +9,13 @@ import Hero from "./components/Hero";
 import BestSellersStrip from "./components/BestSellersStrip";
 import AboutBloom from "./components/AboutBloom";
 import OurImpact from "./components/OurImpact";
-import WhyBloom from "./components/WhyBloom";
 import IngredientHighlight from "./components/IngredientHighlight";
 import WomenEmpowerment from "./components/WomenEmpowerment";
 import HealthBenefits from "./components/HealthBenefits";
 import FeaturedProducts from "./components/FeaturedProducts";
 import SidebarScroller from "./components/SidebarScroller";
 import LuxuryLoader from "./components/LuxuryLoader";
-import CorporateGifting from "./components/CorporateGifting";
+import WhatsComingNext from "./components/WhatsComingNext";
 import FounderTestimonials from "./components/FounderTestimonials";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
@@ -63,8 +62,30 @@ export default function App() {
     };
     rafId = requestAnimationFrame(raf);
 
+    // Global hash link click handler for Lenis smooth scrolling
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (anchor && anchor.hash && anchor.hash.startsWith("#")) {
+        const targetId = anchor.hash;
+        if (targetId === "#") {
+          e.preventDefault();
+          lenis.scrollTo(0);
+          return;
+        }
+        const targetElement = document.querySelector(targetId);
+        if (targetElement && targetElement instanceof HTMLElement) {
+          e.preventDefault();
+          lenis.scrollTo(targetElement);
+          setIsMobileMenuOpen(false);
+        }
+      }
+    };
+    document.addEventListener("click", handleAnchorClick);
+
     return () => {
       cancelAnimationFrame(rafId);
+      document.removeEventListener("click", handleAnchorClick);
       lenis.destroy();
     };
   }, [isLoading]);
@@ -131,11 +152,9 @@ export default function App() {
   };
 
   const navLinks = [
-    { href: "#about-story", label: "About" },
-    { href: "#featured-products", label: "Products" },
-    { href: "#why-bloom", label: "Why Bloom" },
-    { href: "#women-empowerment", label: "Women Empowerment" },
-    { href: "#founder-reviews", label: "Founder Story" },
+    { href: "#about-story", label: "Story" },
+    { href: "#featured-products", label: "Shop" },
+    { href: "#our-promise", label: "Impact" },
     { href: "#contact-partners", label: "Contact" },
   ];
 
@@ -157,15 +176,15 @@ export default function App() {
       {/* FLOATING LUXURY APPLE-STYLE SIDEBAR SCROLLER */}
       <SidebarScroller />
 
-      {/* LUXURY FLOATING FROSTED GLASS PILL NAVIGATION HEADER */}
-      <div className={`fixed top-0 left-0 right-0 z-50 w-full select-none pointer-events-none transition-all duration-200 ${
-        scrolled ? "py-2 px-4 sm:px-6 lg:px-8" : "py-4 px-4 sm:px-6 lg:px-8"
+      {/* PREMIUM FOOD BRAND HEADER */}
+      <div className={`fixed top-0 left-0 right-0 z-50 w-full select-none pointer-events-none transition-all duration-300 ${
+        scrolled ? "py-3 px-4 sm:px-6 lg:px-8" : "py-5 px-4 sm:px-6 lg:px-8"
       }`}>
 
-        <header className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-200 pointer-events-auto bg-[#FAF8F4] border border-[#C6A769]/15 shadow-sm rounded-full ${
+        <header className={`max-w-5xl mx-auto flex items-center justify-between transition-all duration-300 pointer-events-auto bg-[#F7EFE5]/95 backdrop-blur-md border border-charcoal/5 rounded-full ${
           scrolled 
-            ? "px-5 sm:px-8 py-2 border-[#C6A769]/25 shadow-md" 
-            : "px-6 sm:px-10 py-3"
+            ? "px-5 sm:px-6 py-2.5 shadow-md" 
+            : "px-6 sm:px-8 py-3.5 shadow-sm"
         }`}>
           
           {/* Lotus Brand Logo Title */}
@@ -173,30 +192,30 @@ export default function App() {
             <img 
               src="/company-logo.png" 
               alt="BLOOM Logo" 
-              className="h-12 sm:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               loading="eager"
             />
             <div className="flex flex-col">
-              <span className="font-serif text-sm sm:text-base font-medium italic leading-none text-[#222222]">BLOOM</span>
-              <span className="font-sans text-[7.5px] tracking-[0.25em] text-[#4B3425]/85 uppercase font-bold mt-0.5 whitespace-nowrap">Consumer Care</span>
+              <span className="font-serif text-lg font-bold leading-none text-charcoal">BLOOM</span>
+              <span className="font-sans text-[8px] tracking-[0.2em] text-charcoal/70 uppercase font-bold mt-0.5 whitespace-nowrap">Consumer Care</span>
             </div>
           </a>
 
           {/* Premium Desktop Navigation Linkages */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#222222]/85 hover:text-[#C6A769] transition-colors font-semibold relative py-1 group"
+                className="font-sans text-xs uppercase tracking-widest text-charcoal/80 hover:text-charcoal transition-colors font-bold relative py-1 group whitespace-nowrap"
               >
                 {link.label}
-                <span className="absolute bottom-0 inset-x-0 h-[1.5px] bg-[#C6A769] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+                <span className="absolute bottom-0 inset-x-0 h-[2px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-250" />
               </a>
             ))}
           </nav>
 
-          {/* Premium Cart/Buy Icon Trigger with dynamically pulsing notifications */}
+          {/* Premium Cart/Buy Icon Trigger */}
           <div className="flex items-center gap-3">
             
             <button
@@ -204,33 +223,31 @@ export default function App() {
                 const el = document.getElementById("featured-products");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="relative p-2.5 sm:px-4 sm:py-2.5 bg-gradient-to-r from-[#5C3E26] to-[#452B18] hover:from-[#452B18] hover:to-[#221005] text-white rounded-full transition-all duration-300 shadow-md hover:shadow-lg luxury-glowing-btn cursor-pointer flex items-center gap-2 group"
-              title="Browse Gourmet Products"
+              className="relative px-5 py-2.5 bg-charcoal text-white hover:bg-charcoal/90 rounded-full transition-all duration-250 shadow-sm cursor-pointer flex items-center gap-2 group"
+              title="Shop Collection"
               id="header-buy-vessel"
             >
-              <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-              <span className="font-mono text-[9px] font-bold uppercase tracking-widest hidden sm:inline-block">BUY NOW</span>
-              {totalCartCount > 0 ? (
+              <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform duration-250" />
+              <span className="font-sans text-[11px] font-bold uppercase tracking-widest hidden sm:inline-block">Shop</span>
+              {totalCartCount > 0 && (
                 <motion.span 
                   key={totalCartCount}
                   initial={{ scale: 0.6, opacity: 0.5 }}
                   animate={{ scale: [0.6, 1.25, 1], opacity: 1 }}
                   transition={{ type: "spring", stiffness: 350, damping: 12 }}
-                  className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#768364] text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-xs border border-white/40"
+                  className="absolute -top-1 -right-1 min-w-[20px] h-[20px] px-1.5 rounded-full bg-sage text-white text-[10px] font-sans font-bold flex items-center justify-center shadow-sm"
                 >
                   {totalCartCount}
                 </motion.span>
-              ) : (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FAF8F4]/80 hidden sm:inline-block" />
               )}
             </button>
 
             {/* Mobile menu toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full border border-[#C6A769]/25 bg-white text-[#222222] hover:bg-bg-primary transition-colors cursor-pointer"
+              className="md:hidden p-2 rounded-full border border-charcoal/10 bg-white text-charcoal hover:bg-[#EBE3D5] transition-colors cursor-pointer"
             >
-              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
@@ -417,9 +434,6 @@ export default function App() {
         {/* METRICS COUNT UP */}
         <OurImpact />
 
-        {/* WHY THE GOLD STANDARD CARDS */}
-        <WhyBloom />
-
         {/* ORGANIC INGREDIENTS HOVER PROFILES */}
         <IngredientHighlight />
 
@@ -432,8 +446,8 @@ export default function App() {
         {/* LUXURY FLOATING FeaturedProducts INSPIRED BY COHESIVE FMCG BRAND */}
         <FeaturedProducts onAddToCart={handleAddToCart} />
 
-        {/* BOX PACKING UNBOX CORPORATE GIFTS */}
-        <CorporateGifting onAddToCart={handleAddToCart} />
+        {/* WHAT'S COMING NEXT PRODUCT ROADMAP */}
+        <WhatsComingNext />
 
         {/* CUSTOMERS ORAL HISTORY & FOUNDER GROWTH SAGA */}
         <FounderTestimonials />

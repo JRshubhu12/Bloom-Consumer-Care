@@ -122,7 +122,7 @@ export default function ContactSection() {
 
                     <button
                       type="submit"
-                      className="w-full mt-4 py-4 bg-cocoa text-bg-primary font-medium tracking-wide text-xs uppercase rounded-lg hover:bg-charcoal transition-colors flex items-center justify-center gap-2 cursor-pointer luxury-glowing-btn"
+                      className="w-full mt-4 py-4 bg-cocoa text-bg-primary font-medium tracking-wide text-xs uppercase rounded-lg hover:bg-charcoal transition-colors flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <Send className="w-4 h-4" />
                       <span>Send General Inquiry</span>
