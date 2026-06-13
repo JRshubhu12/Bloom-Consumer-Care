@@ -136,7 +136,7 @@ export default function ContactSection() {
                     exit={{ opacity: 0 }}
                     className="py-12 flex flex-col items-center justify-center text-center space-y-4"
                   >
-                    <div className="w-14 h-14 rounded-full bg-sage text-white flex items-center justify-center shadow-md animate-bounce">
+                    <div className="w-14 h-14 rounded-full bg-sage text-white flex items-center justify-center shadow-md">
                       <Check className="w-6 h-6" />
                     </div>
                     <h4 className="font-serif text-lg font-semibold text-charcoal">Enquiry Proposal Lodged!</h4>
@@ -158,7 +158,7 @@ export default function ContactSection() {
             <div className="bg-bg-secondary/45 border border-gold-light/40 rounded-2xl p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <span className="p-2 bg-sage/10 rounded-full text-sage">
-                  <MessageSquare className="w-5 h-5 animate-pulse" />
+                  <MessageSquare className="w-5 h-5" />
                 </span>
                 <div className="space-y-0.5">
                   <span className="font-mono text-[9px] uppercase tracking-widest text-[#B39359] font-bold block">Connoisseurs live link</span>
@@ -198,7 +198,7 @@ export default function ContactSection() {
                 {/* Simulated Pin Locations */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
                   <div
-                    className="w-4 h-4 rounded-full bg-cocoa border-2 border-white mx-auto shadow flex items-center justify-center animate-pulse"
+                    className="w-4 h-4 rounded-full bg-cocoa border-2 border-white mx-auto shadow flex items-center justify-center"
                     title="Varanasi Head Office"
                   >
                     <span className="w-2 h-2 rounded-full bg-gold" />

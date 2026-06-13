@@ -77,16 +77,15 @@ export default function WhyBloom() {
             return (
               <motion.div
                 key={card.id}
-                className="group relative bg-white/45 backdrop-blur-md rounded-2xl border border-gold-light/40 p-8 lg:p-10 flex flex-col justify-between text-left transition-all duration-300 shadow-[0_15px_40px_rgba(107,74,50,0.03)]"
-                initial={{ opacity: 0, y: 30 }}
+                className="group relative bg-white rounded-2xl border border-gold-light/25 p-8 lg:p-10 flex flex-col justify-between text-left transition-all duration-300 shadow-[0_15px_40px_rgba(107,74,50,0.03)]"
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.15 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 whileHover={{
-                  y: -6,
-                  borderColor: "rgba(200, 169, 107, 0.95)",
-                  boxShadow: "0 30px 60px -15px rgba(107,74,50,0.12)",
-                  backgroundColor: "rgba(255, 255, 255, 0.85)"
+                  y: -3,
+                  borderColor: "rgba(200, 169, 107, 0.75)",
+                  boxShadow: "0 20px 40px -10px rgba(107,74,50,0.08)",
                 }}
               >
                 {/* Floating soft gold background light bubble */}

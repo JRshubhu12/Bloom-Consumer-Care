@@ -44,10 +44,10 @@ export default function Footer() {
           <div className="relative group">
             <div className="absolute -inset-4 bg-gradient-to-r from-[#C3A77D]/10 to-[#768364]/10 rounded-full blur-xl group-hover:opacity-100 transition duration-500 opacity-60" />
             <img 
-              src="https://i.ibb.co/1fM8bVCF/image-removebg-preview.png" 
+              src="/company-logo.png" 
               alt="BLOOM Logo Centered" 
               className="h-28 sm:h-32 w-auto object-contain transition-transform duration-700 hover:scale-105 relative"
-              referrerPolicy="no-referrer"
+              loading="lazy"
             />
           </div>
 

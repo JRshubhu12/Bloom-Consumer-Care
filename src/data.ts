@@ -19,7 +19,8 @@ export const PRODUCTS: Product[] = [
       carbs: "18.5g",
       fat: "3.2g"
     },
-    healthHighlights: ["Zero Trans Fats", "Gluten-Free Certified", "Low Glycemic Index", "Rich in Anti-Aging Flavonoids"]
+    healthHighlights: ["Zero Trans Fats", "Gluten-Free Certified", "Low Glycemic Index", "Rich in Anti-Aging Flavonoids"],
+    imageUrl: "https://i.ibb.co/RTJ9J5BD/spicy-masala-phool-makhana.jpg"
   },
   {
     id: "makhana-mint-basil",
@@ -39,7 +40,8 @@ export const PRODUCTS: Product[] = [
       carbs: "18.1g",
       fat: "3.0g"
     },
-    healthHighlights: ["Promotes Digestion", "Rich in Antioxidants", "Heart Friendly", "No Added Preservatives"]
+    healthHighlights: ["Promotes Digestion", "Rich in Antioxidants", "Heart Friendly", "No Added Preservatives"],
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI9SurnUsQhwnAD0rR6zsL4fP3EQiG5ae6xamRyTyLIA&s=10"
   },
   {
     id: "dryfruit-royal",
@@ -59,7 +61,8 @@ export const PRODUCTS: Product[] = [
       carbs: "12.0g",
       fat: "11.5g"
     },
-    healthHighlights: ["Brain-Boosting Vitamin E", "High Copper & Zinc", "Immune Strength", "Natural Antioxidant Infusion"]
+    healthHighlights: ["Brain-Boosting Vitamin E", "High Copper & Zinc", "Immune Strength", "Natural Antioxidant Infusion"],
+    imageUrl: "https://i.ibb.co/F4g1VSL4/image.png"
   },
   {
     id: "namkeen-quinoa",
@@ -79,7 +82,8 @@ export const PRODUCTS: Product[] = [
       carbs: "15.2g",
       fat: "2.5g"
     },
-    healthHighlights: ["Over 5g complete Protein", "Baked - Zero Frying", "Low Saturated Fats", "High Iron & Magnesium"]
+    healthHighlights: ["Over 5g complete Protein", "Baked - Zero Frying", "Low Saturated Fats", "High Iron & Magnesium"],
+    imageUrl: "https://i.ibb.co/XrwZhg76/image.png"
   }
 ];
 

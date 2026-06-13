@@ -39,7 +39,7 @@ export default function FounderTestimonials() {
           <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg-primary to-transparent z-10 pointer-events-none" />
 
           {/* Scrolling tape wrapper */}
-          <div className="flex w-[200%] animate-infinite-scroll gap-6">
+          <div className="flex animate-infinite-scroll gap-6">
             
             {/* Array duplicated twice for perfect infinite cycle wraps */}
             {[...TESTIMONIALS, ...TESTIMONIALS].map((test, idx) => (
@@ -100,6 +100,7 @@ export default function FounderTestimonials() {
                     alt="Shiwani Narayan"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-top"
+                    loading="lazy"
                   />
                   <div className="absolute bottom-4 inset-x-4 bg-white/95 backdrop-blur-xs border border-gold/20 p-3 rounded-xl text-center shadow-md">
                     <h4 className="font-serif text-sm font-semibold text-cocoa">Shiwani Narayan</h4>

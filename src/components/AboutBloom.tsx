@@ -130,7 +130,7 @@ export default function AboutBloom() {
                       </p>
                     </div>
                     {Selected && (
-                      <div className="absolute right-2 top-2 w-1.5 h-1.5 rounded-full bg-gold animate-ping" />
+                      <div className="absolute right-2 top-2 w-1.5 h-1.5 rounded-full bg-gold" />
                     )}
                   </button>
                 );
@@ -195,7 +195,7 @@ export default function AboutBloom() {
                         <StageIcon className="w-5 h-5" />
                         {/* Golden orbit ring */}
                         {NodeSelected && (
-                          <div className="absolute inset-[-4px] border border-gold rounded-full animate-spin [animation-duration:8s]" />
+                          <div className="absolute inset-[-4px] border border-gold/40 rounded-full" />
                         )}
                       </div>
                       <span className="font-mono text-[9px] text-cocoa/55 mt-2 uppercase tracking-widest group-hover:text-gold font-semibold transition-colors">

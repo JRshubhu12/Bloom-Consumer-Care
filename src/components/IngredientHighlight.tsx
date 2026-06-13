@@ -38,15 +38,15 @@ export default function IngredientHighlight() {
                 key={ing.id}
                 onMouseEnter={() => setHoveredIdx(idx)}
                 onMouseLeave={() => setHoveredIdx(null)}
-                className="bg-white/80 border border-gold-light/40 rounded-2xl p-6 flex flex-col justify-between text-left relative overflow-hidden transition-all duration-300 min-h-[380px] shadow-[0_15px_45px_-5px_rgba(107,74,50,0.04)]"
-                initial={{ opacity: 0, y: 30 }}
+                className="bg-white border border-gold-light/25 rounded-2xl p-6 flex flex-col justify-between text-left relative overflow-hidden transition-all duration-300 min-h-[380px] shadow-[0_15px_45px_-5px_rgba(107,74,50,0.04)]"
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
                 whileHover={{
-                  y: -8,
-                  borderColor: "rgba(200, 169, 107, 0.95)",
-                  boxShadow: "0 30px 60px -15px rgba(107,74,50,0.1)"
+                  y: -3,
+                  borderColor: "rgba(200, 169, 107, 0.75)",
+                  boxShadow: "0 20px 40px -10px rgba(107,74,50,0.08)"
                 }}
               >
                 

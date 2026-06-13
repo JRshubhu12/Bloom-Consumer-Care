@@ -269,7 +269,7 @@ export default function CorporateGifting({ onAddToCart }: CorporateGiftingProps 
                     
                     <div className="flex items-center justify-between relative z-10">
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
                         <span className="font-mono text-[9px] uppercase tracking-widest text-[#EBC69F] font-bold bg-[#FAF5EC]/10 border border-[#C6A769]/20 px-2 py-0.5 rounded-md">
                           Interactive App Feature Preview
                         </span>
@@ -435,6 +435,7 @@ export default function CorporateGifting({ onAddToCart }: CorporateGiftingProps 
                                 }
                                 alt="Foil Cured item"
                                 className="w-full h-full object-cover rounded-full"
+                                loading="lazy"
                               />
                             </div>
 
@@ -487,7 +488,7 @@ export default function CorporateGifting({ onAddToCart }: CorporateGiftingProps 
                 <div className="bg-[#FAF8F4]/55 border border-gold-light/25 rounded-2xl p-5 space-y-3 relative overflow-hidden select-none">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
-                      <Star className="w-4 h-4 text-gold animate-spin" style={{ animationDuration: "12s" }} />
+                      <Star className="w-4 h-4 text-gold" />
                       <span className="font-mono text-[9px] tracking-widest text-cocoa uppercase font-bold">
                         Pesticide-Free Standard Pipeline
                       </span>
@@ -513,7 +514,6 @@ export default function CorporateGifting({ onAddToCart }: CorporateGiftingProps 
                       </div>
                       <div className="w-full h-[1px] bg-gold-light/40 mx-2" border-style="dashed" />
                       <div className="flex flex-col items-center">
-                        <span className="w-2 h-2 rounded-full bg-[#C6A769] animate-ping absolute" />
                         <span className="w-2 h-2 rounded-full bg-[#C6A769]" />
                         <span className="mt-1">Varanasi Lab</span>
                       </div>

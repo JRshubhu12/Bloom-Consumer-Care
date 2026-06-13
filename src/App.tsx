@@ -2,8 +2,9 @@ import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
 import { ShoppingBag, ChevronRight, Check, Trash2, Menu, X, ArrowRight } from "lucide-react";
 
+import Lenis from "lenis";
+
 // Component imports
-import FloatingParticles from "./components/FloatingParticles";
 import Hero from "./components/Hero";
 import BestSellersStrip from "./components/BestSellersStrip";
 import AboutBloom from "./components/AboutBloom";
@@ -13,6 +14,8 @@ import IngredientHighlight from "./components/IngredientHighlight";
 import WomenEmpowerment from "./components/WomenEmpowerment";
 import HealthBenefits from "./components/HealthBenefits";
 import FeaturedProducts from "./components/FeaturedProducts";
+import SidebarScroller from "./components/SidebarScroller";
+import LuxuryLoader from "./components/LuxuryLoader";
 import CorporateGifting from "./components/CorporateGifting";
 import FounderTestimonials from "./components/FounderTestimonials";
 import ContactSection from "./components/ContactSection";
@@ -32,6 +35,39 @@ export default function App() {
   const [checkoutStep, setCheckoutStep] = useState<"cart" | "success">("cart");
 
   const [scrolled, setScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (isLoading) return;
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like easeOutExpo
+      smoothWheel: true,
+    });
+
+    let rafId: number;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    };
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, [isLoading]);
 
   useEffect(() => {
     let lastScrolled = false;
@@ -104,30 +140,41 @@ export default function App() {
   ];
 
   return (
-    <MotionConfig reducedMotion="always">
-      <div className="relative min-h-screen bg-bg-primary overflow-x-hidden scroll-smooth">
+    <MotionConfig reducedMotion="user">
+      <AnimatePresence>
+        {isLoading && (
+          <LuxuryLoader onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative min-h-screen bg-bg-primary overflow-x-hidden scroll-smooth"
+      >
       
-      {/* GLOBAL BG FLOATING PARTICLES */}
-      <FloatingParticles />
+      {/* FLOATING LUXURY APPLE-STYLE SIDEBAR SCROLLER */}
+      <SidebarScroller />
 
       {/* LUXURY FLOATING FROSTED GLASS PILL NAVIGATION HEADER */}
-      <div className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 select-none ${
-        scrolled 
-          ? "bg-[#FAF8F4]/95 backdrop-blur-md border-b border-[#C6A769]/25 shadow-md py-2 px-4 sm:px-6 lg:px-8" 
-          : "bg-transparent py-4 px-4 sm:px-6 lg:px-8"
+      <div className={`fixed top-0 left-0 right-0 z-50 w-full select-none pointer-events-none transition-all duration-200 ${
+        scrolled ? "py-2 px-4 sm:px-6 lg:px-8" : "py-4 px-4 sm:px-6 lg:px-8"
       }`}>
 
-        <header className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "bg-transparent border-none p-0" : "bg-[#FAF8F4]/85 backdrop-blur-md border border-[#C6A769]/22 shadow-lg rounded-full px-6 sm:px-10 py-3.5"
+        <header className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-200 pointer-events-auto bg-[#FAF8F4] border border-[#C6A769]/15 shadow-sm rounded-full ${
+          scrolled 
+            ? "px-5 sm:px-8 py-2 border-[#C6A769]/25 shadow-md" 
+            : "px-6 sm:px-10 py-3"
         }`}>
           
           {/* Lotus Brand Logo Title */}
           <a href="#" className="flex items-center gap-3 group text-left">
             <img 
-              src="https://i.ibb.co/1fM8bVCF/image-removebg-preview.png" 
+              src="/company-logo.png" 
               alt="BLOOM Logo" 
               className="h-12 sm:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
-              referrerPolicy="no-referrer"
+              loading="eager"
             />
             <div className="flex flex-col">
               <span className="font-serif text-sm sm:text-base font-medium italic leading-none text-[#222222]">BLOOM</span>
@@ -164,9 +211,15 @@ export default function App() {
               <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
               <span className="font-mono text-[9px] font-bold uppercase tracking-widest hidden sm:inline-block">BUY NOW</span>
               {totalCartCount > 0 ? (
-                <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#768364] text-white text-[9px] font-mono font-bold flex items-center justify-center animate-pulse shadow-xs border border-white/40">
+                <motion.span 
+                  key={totalCartCount}
+                  initial={{ scale: 0.6, opacity: 0.5 }}
+                  animate={{ scale: [0.6, 1.25, 1], opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 350, damping: 12 }}
+                  className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#768364] text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-xs border border-white/40"
+                >
                   {totalCartCount}
-                </span>
+                </motion.span>
               ) : (
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FAF8F4]/80 hidden sm:inline-block" />
               )}
@@ -420,7 +473,7 @@ export default function App() {
         </button>
       </div>
 
-    </div>
+      </motion.div>
     </MotionConfig>
   );
 }

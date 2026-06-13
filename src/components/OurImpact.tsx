@@ -63,7 +63,7 @@ export default function OurImpact() {
   };
 
   return (
-    <section className="py-24 px-6 sm:px-12 lg:px-24 bg-white relative overflow-hidden">
+    <section id="future-vision" className="py-24 px-6 sm:px-12 lg:px-24 bg-white relative overflow-hidden">
       
       {/* Absolute Decorative ambient background details */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-gold/5 blur-[90px] pointer-events-none" />
@@ -136,25 +136,6 @@ export default function OurImpact() {
             );
           })}
         </div>
-
-        {/* Emotionally charging support letter footer */}
-        <motion.div 
-          className="mt-16 bg-bg-secondary/40 border border-gold/20 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-6 text-left"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="p-3 bg-white border border-gold/30 rounded-lg text-gold shrink-0">
-            <Landmark className="w-6 h-6 stroke-[1.5]" />
-          </div>
-          <div className="space-y-1">
-            <h4 className="font-serif text-charcoal font-semibold text-base">Direct Account Seeding Program</h4>
-            <p className="font-sans text-xs sm:text-sm text-charcoal/70 font-light leading-relaxed">
-              In contrast to middlemen-driven markets, Bloom deposits and channels wages <span className="text-cocoa font-semibold">directly into private bank accounts</span> owned by our women artisans, securing direct financial autonomy.
-            </p>
-          </div>
-        </motion.div>
 
       </div>
     </section>
