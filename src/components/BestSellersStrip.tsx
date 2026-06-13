@@ -123,7 +123,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                         e.stopPropagation();
                         setActiveDetailsId(activeDetailsId === prod.id ? null : prod.id);
                       }}
-                      className="absolute right-2 bottom-2 bg-charcoal/80 hover:bg-charcoal/90 backdrop-blur-xs p-1.5 rounded-full text-white opacity-85 hover:opacity-100 sm:group-hover:opacity-0 transition-all duration-300 z-10 cursor-pointer flex items-center justify-center border border-white/10"
+                      className="absolute right-2 bottom-2 bg-earth/80 hover:bg-earth/90 backdrop-blur-xs p-1.5 rounded-full text-white opacity-85 hover:opacity-100 sm:group-hover:opacity-0 transition-all duration-300 z-10 cursor-pointer flex items-center justify-center border border-white/10"
                       title="View Details"
                     >
                       <Eye className="w-3.5 h-3.5" />
@@ -177,7 +177,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                         e.stopPropagation();
                         setActiveDetailsId(null);
                       }}
-                      className="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal sm:hidden cursor-pointer p-1 rounded-full hover:bg-black/5"
+                      className="absolute top-4 right-4 text-earth/60 hover:text-earth sm:hidden cursor-pointer p-1 rounded-full hover:bg-black/5"
                       aria-label="Close Specs"
                     >
                       <X className="w-4 h-4" />
@@ -188,7 +188,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       {/* Title Segment */}
                       <div>
                         <span className="text-[8.5px] uppercase tracking-[0.25em] font-mono text-[#C3A77D] font-bold block">Reserve Specs</span>
-                        <h4 className="font-serif font-bold text-charcoal text-xs mt-0.5 tracking-tight line-clamp-2">{prod.name}</h4>
+                        <h4 className="font-serif font-bold text-earth text-xs mt-0.5 tracking-tight line-clamp-2">{prod.name}</h4>
                       </div>
 
                       {/* Nutrition facts mini-grid */}
@@ -205,7 +205,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       {/* Ingredients list */}
                       <div className="space-y-1">
                         <span className="text-[8.5px] font-mono tracking-wider text-cocoa uppercase font-bold block">✨ Ingredients:</span>
-                        <p className="text-[10px] font-sans text-charcoal/75 leading-relaxed">
+                        <p className="text-[10px] font-sans text-earth/75 leading-relaxed">
                           {prod.originalIngredients?.join(", ") || "Premium Selections"}
                         </p>
                       </div>
@@ -215,7 +215,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                     {/* Price and Add button footer */}
                     <div className="pt-3 border-t border-[#F4EFE8] flex items-center justify-between">
                       <div>
-                        <span className="text-[7.5px] font-mono text-charcoal/40 uppercase block font-bold">Pack Options:</span>
+                        <span className="text-[7.5px] font-mono text-earth/40 uppercase block font-bold">Pack Options:</span>
                         <strong className="text-xs font-mono font-bold text-cocoa">{prod.weightOptions?.join(" / ") || "120g"}</strong>
                       </div>
 

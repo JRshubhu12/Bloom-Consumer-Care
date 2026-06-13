@@ -21,14 +21,27 @@ export default function WomenEmpowerment() {
   ];
 
   return (
-    <section id="women-empowerment" className="py-16 px-6 sm:px-12 lg:px-24 bg-[#FAF8F5] relative overflow-hidden select-none">
+    <section
+      id="women-empowerment"
+      className="py-16 px-6 sm:px-12 lg:px-24 relative overflow-hidden select-none"
+      style={{ backgroundColor: "#FAF8F5" }}
+    >
 
-      {/* Background Soft Accents & Elegant Lotus Illustration */}
-      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[#E88D14]/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-[#5C3A21]/3 blur-[120px] pointer-events-none" />
+      {/* Background Soft Accents */}
+      <div
+        className="absolute top-1/4 right-0 w-[400px] h-[400px] pointer-events-none blur-[120px]"
+        style={{ backgroundColor: "#B68A3508" }}
+      />
+      <div
+        className="absolute bottom-1/4 left-0 w-[400px] h-[400px] pointer-events-none blur-[120px]"
+        style={{ backgroundColor: "#5C3A2108" }}
+      />
 
-      {/* Decorative Elegant Lotus Illustration (SVG) */}
-      <div className="absolute right-4 bottom-4 w-48 h-48 opacity-[0.04] pointer-events-none text-cocoa">
+      {/* Decorative Lotus Illustration */}
+      <div
+        className="absolute right-4 bottom-4 w-48 h-48 pointer-events-none"
+        style={{ color: "#5C3A21", opacity: 0.04 }}
+      >
         <svg viewBox="0 0 100 100" fill="currentColor">
           <path d="M50 15C50 15 42 32 42 45C42 58 50 65 50 65C50 65 58 58 58 45C58 32 50 15 50 15Z" />
           <path d="M50 25C50 25 32 37 32 50C32 63 45 68 45 68C45 68 48 57 48 50C48 43 50 25 50 25Z" opacity="0.8" />
@@ -42,27 +55,52 @@ export default function WomenEmpowerment() {
 
         {/* Header */}
         <div className="max-w-3xl mx-auto space-y-4 mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-medium bg-[#E88D14]/10 px-4 py-1.5 rounded-full border border-[#E88D14]/15 inline-block">
+          <span
+            className="font-mono text-xs uppercase tracking-[0.3em] font-medium px-4 py-1.5 rounded-full border inline-block"
+            style={{
+              color: "#B68A35",
+              backgroundColor: "#B68A3510",
+              borderColor: "#B68A3525"
+            }}
+          >
             Women Empowerment
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-charcoal">
-            Supporting Value & Opportunity
+          <h2
+            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight"
+            style={{ color: "#3A2A1F" }}
+          >
+            Supporting Value &amp; Opportunity
           </h2>
-          <p className="font-sans text-charcoal/60 text-base sm:text-lg font-medium mt-4">
+          <p
+            className="font-sans text-base sm:text-lg font-medium mt-4"
+            style={{ color: "#3A2A1F99" }}
+          >
             Creating opportunities through participation, respect, and shared progress.
           </p>
-          <div className="w-12 h-[1px] bg-gold mx-auto my-6" />
+          <div
+            className="w-12 h-[1px] mx-auto my-6"
+            style={{ backgroundColor: "#D4AF37" }}
+          />
         </div>
 
         {/* Narrative Description Block */}
         <div className="max-w-3xl mx-auto mb-12 text-center space-y-6">
-          <p className="font-sans text-base sm:text-lg text-charcoal/80 leading-relaxed font-light">
+          <p
+            className="font-sans text-base sm:text-lg leading-relaxed font-light"
+            style={{ color: "#3A2A1FCC" }}
+          >
             At Bloom Consumer Care, we believe that meaningful change begins with opportunity.
           </p>
-          <p className="font-sans text-base sm:text-lg text-charcoal/80 leading-relaxed font-light">
+          <p
+            className="font-sans text-base sm:text-lg leading-relaxed font-light"
+            style={{ color: "#3A2A1FCC" }}
+          >
             We value the contribution, dedication, and strength of women who play an important role in families, communities, and society. Through responsible business practices and inclusive participation, we aim to encourage growth, confidence, and long-term empowerment.
           </p>
-          <p className="font-sans text-base sm:text-lg text-charcoal/80 leading-relaxed font-light">
+          <p
+            className="font-sans text-base sm:text-lg leading-relaxed font-light"
+            style={{ color: "#3A2A1FCC" }}
+          >
             Our vision is rooted in respect, dignity, and the belief that progress is strongest when everyone has the opportunity to move forward together.
           </p>
         </div>
@@ -72,41 +110,61 @@ export default function WomenEmpowerment() {
           {cards.map((card, idx) => (
             <motion.div
               key={idx}
-              className="bg-white border border-gold-light/20 p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden group flex flex-col justify-between min-h-[240px]"
+              className="p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden group flex flex-col justify-between min-h-[240px]"
+              style={{
+                backgroundColor: "#F5EFE8",
+                border: "1px solid #EFE6D820"
+              }}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-20px" }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
               whileHover={{
                 y: -4,
-                borderColor: "rgba(232, 141, 20, 0.3)",
-                boxShadow: "0 12px 24px rgba(92, 58, 33, 0.05)"
+                borderColor: "#D4AF3740",
+                boxShadow: "0 12px 24px rgba(92, 58, 33, 0.08)"
               }}
             >
               <div>
                 <div className="text-3xl mb-5 transition-transform group-hover:scale-110 duration-300 inline-block">
                   {card.icon}
                 </div>
-                <h4 className="font-serif text-xl font-bold text-charcoal mb-3">
+                <h4
+                  className="font-serif text-xl font-bold mb-3"
+                  style={{ color: "#3A2A1F" }}
+                >
                   {card.title}
                 </h4>
-                <p className="font-sans text-sm text-charcoal/70 leading-relaxed font-light">
+                <p
+                  className="font-sans text-sm leading-relaxed font-light"
+                  style={{ color: "#5C3A21B3" }}
+                >
                   {card.desc}
                 </p>
               </div>
+
+              {/* Subtle leaf accent */}
+              <div
+                className="absolute bottom-4 right-4 w-10 h-10 rounded-full opacity-10"
+                style={{ backgroundColor: "#7A8C55" }}
+              />
             </motion.div>
           ))}
         </div>
 
         {/* Bottom Quote Banner */}
         <motion.div
-          className="max-w-2xl mx-auto border-t border-b border-gold-light/30 py-8 px-6 text-center"
+          className="max-w-2xl mx-auto py-8 px-6 text-center"
+          style={{ borderTop: "1px solid #D4AF3730", borderBottom: "1px solid #D4AF3730" }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-serif text-lg sm:text-xl italic text-cocoa tracking-wide">
+          <p
+            className="font-serif text-lg sm:text-xl italic tracking-wide"
+            style={{ color: "#5C3A21" }}
+          >
             "When women grow, communities grow stronger."
           </p>
         </motion.div>

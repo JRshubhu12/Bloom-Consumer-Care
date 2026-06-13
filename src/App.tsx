@@ -185,8 +185,10 @@ export default function App() {
 
   const navLinks = [
     { href: "#", label: "Home" },
-    { href: "#featured-products", label: "Collection" },
+    { href: "#featured-products", label: "Products" },
     { href: "#founder-reviews", label: "Our Story" },
+    { href: "#ingredient-highlight", label: "Journey" },
+    { href: "#women-empowerment", label: "Community" },
     { href: "#contact-partners", label: "Contact" },
   ];
 
@@ -227,8 +229,8 @@ export default function App() {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <span className="font-serif text-xl lg:text-2xl font-bold leading-none text-[#2B211B] tracking-wide">BLOOM</span>
-                <span className="font-sans text-[8px] lg:text-[9px] tracking-[0.25em] text-[#B68A35] uppercase font-semibold mt-1">Consumer Care</span>
+                <span className="font-serif text-xl lg:text-2xl font-bold leading-none text-earth tracking-wide">BLOOM</span>
+                <span className="font-sans text-[8px] lg:text-[9px] tracking-[0.25em] text-leaf uppercase font-semibold mt-1">Consumer Care</span>
               </div>
             </a>
 
@@ -243,13 +245,13 @@ export default function App() {
                     className="relative group py-2"
                   >
                     <span className={`font-sans text-[11px] uppercase tracking-[0.15em] font-semibold transition-colors duration-300 ${
-                      isActive ? "text-[#B68A35]" : "text-[#2B211B]/70 group-hover:text-[#2B211B]"
+                      isActive ? "text-leaf" : "text-earth/70 group-hover:text-earth"
                     }`}>
                       {link.label}
                     </span>
                     
                     {/* Gold Dot Indicator */}
-                    <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#B68A35] transition-all duration-300 ${
+                    <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-leaf transition-all duration-300 ${
                       isActive ? "opacity-100 scale-100" : "opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-50"
                     }`} />
                   </a>
@@ -284,7 +286,7 @@ export default function App() {
                   const el = document.getElementById("featured-products");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="hidden md:flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-[#B68A35] bg-[#F8F4EE] text-[#B68A35] hover:bg-[#B68A35] hover:text-white hover:shadow-[0_4px_15px_rgba(182,138,53,0.3)] transition-all duration-300 group cursor-pointer"
+                className="hidden md:flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-leaf bg-bg-primary text-leaf hover:bg-leaf hover:text-white hover:shadow-lg transition-all duration-300 group cursor-pointer"
               >
                 <span className="font-sans text-[10px] lg:text-[11px] font-bold uppercase tracking-widest">Shop Now</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" strokeWidth={2} />
@@ -387,27 +389,27 @@ export default function App() {
           <div className="fixed inset-0 z-50 select-none">
             {/* Dark background canopy overlay */}
             <div 
-              className="absolute inset-0 bg-charcoal/20 backdrop-blur-xs" 
+              className="absolute inset-0 bg-earth/20 backdrop-blur-xs" 
               onClick={() => setIsCartOpen(false)}
             />
 
             {/* Visual sliding tray */}
             <motion.div
-              className="absolute right-0 inset-y-0 w-full sm:w-[420px] bg-white shadow-2xl flex flex-col justify-between border-l border-gold/30 text-left"
+              className="absolute right-0 inset-y-0 w-full sm:w-[420px] bg-white shadow-2xl flex flex-col justify-between border-l border-leaf/30 text-left"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 85, damping: 20 }}
             >
               {/* Drawer Top logo */}
-              <div className="p-6 border-b border-gold-light/20 flex items-center justify-between">
+              <div className="p-6 border-b border-leaf/20 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <ShoppingBag className="w-4 h-4 text-gold" />
-                  <h3 className="font-serif text-base font-semibold text-charcoal">Your Roasting Bag</h3>
+                  <ShoppingBag className="w-4 h-4 text-leaf" />
+                  <h3 className="font-serif text-base font-semibold text-earth">Your Roasting Bag</h3>
                 </div>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="p-1.5 rounded-full bg-bg-primary border border-gold-light/45 text-charcoal/60"
+                  className="p-1.5 rounded-full bg-bg-primary border border-leaf/45 text-earth/60"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -420,27 +422,27 @@ export default function App() {
                     <motion.div key="items-list" className="space-y-4">
                       {cart.length === 0 ? (
                         <div className="py-16 text-center space-y-3">
-                          <ShoppingBag className="w-12 h-12 text-gold-light/60 mx-auto" strokeWidth="1" />
-                          <p className="font-serif text-charcoal/50 italic text-sm">Your roasting bag is empty.</p>
+                          <ShoppingBag className="w-12 h-12 text-leaf/60 mx-auto" strokeWidth="1" />
+                          <p className="font-serif text-earth/50 italic text-sm">Your roasting bag is empty.</p>
                           <button
                             onClick={() => setIsCartOpen(false)}
-                            className="text-xs font-mono uppercase tracking-widest text-gold font-bold hover:underline"
+                            className="text-xs font-mono uppercase tracking-widest text-leaf font-bold hover:underline"
                           >
                             Explore Collection
                           </button>
                         </div>
                       ) : (
                         cart.map((item) => (
-                          <div key={item.id} className="flex items-center justify-between gap-4 p-3 bg-bg-primary border border-gold-light/10 rounded-xl relative overflow-hidden">
+                          <div key={item.id} className="flex items-center justify-between gap-4 p-3 bg-bg-primary border border-leaf/10 rounded-xl relative overflow-hidden">
                             <div className="space-y-0.5">
-                              <h4 className="font-serif text-xs font-semibold text-charcoal max-w-[200px] truncate">{item.name}</h4>
+                              <h4 className="font-serif text-xs font-semibold text-earth max-w-[200px] truncate">{item.name}</h4>
                               <div className="flex items-baseline gap-1.5">
-                                <span className="text-[10px] text-charcoal/60 font-bold">Qty: {item.qty}</span>
+                                <span className="text-[10px] text-earth/60 font-bold">Qty: {item.qty}</span>
                               </div>
                             </div>
                             <button
                               onClick={() => handleRemoveFromCart(item.id)}
-                              className="p-1.5 bg-white border border-gold-light/25 rounded-md text-cocoa/70 hover:text-red-500 hover:border-red-400 transition-colors"
+                              className="p-1.5 bg-white border border-leaf/25 rounded-md text-cocoa/70 hover:text-red-500 hover:border-red-400 transition-colors"
                               title="Delete Item"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -457,14 +459,14 @@ export default function App() {
                       exit={{ opacity: 0 }}
                       className="py-12 flex flex-col items-center justify-center text-center space-y-4"
                     >
-                      <div className="w-16 h-16 rounded-full bg-sage text-white flex items-center justify-center shadow-lg animate-bounce">
+                      <div className="w-16 h-16 rounded-full bg-nature text-white flex items-center justify-center shadow-lg animate-bounce">
                         <Check className="w-8 h-8" />
                       </div>
                       <h4 className="font-serif text-lg font-semibold text-[#6B4A32] uppercase">Roasting Queue Registered!</h4>
-                      <p className="font-sans text-xs text-charcoal/70 max-w-sm leading-relaxed font-light">
+                      <p className="font-sans text-xs text-earth/70 max-w-sm leading-relaxed font-light">
                         Artisans have logged your gourmet snack specifications inside direct village roasting plants. Prepare for warm, pesticide-free clinical crunch soon!
                       </p>
-                      <span className="text-[9px] font-mono text-sage bg-sage/10 px-3 py-1 rounded-full border border-sage/20">
+                      <span className="text-[9px] font-mono text-nature bg-nature/10 px-3 py-1 rounded-full border border-nature/20">
                         DIRECT ACCOUNT BANK PROMPT CREDITED
                       </span>
                     </motion.div>
@@ -474,28 +476,28 @@ export default function App() {
 
               {/* Drawer bottom billing aggregations */}
               {cart.length > 0 && checkoutStep === "cart" && (
-                <div className="p-6 border-t border-gold-light/20 bg-bg-primary space-y-4">
-                  <div className="space-y-2 font-sans text-xs text-charcoal/80">
+                <div className="p-6 border-t border-leaf/20 bg-bg-primary space-y-4">
+                  <div className="space-y-2 font-sans text-xs text-earth/80">
                     <div className="flex justify-between">
                       <span>Total Items:</span>
                       <span className="font-bold">{totalCartCount}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Fresh Roast Shipping:</span>
-                      <span className="text-sage font-bold">FREE COMPLIMENTARY</span>
+                      <span className="text-nature font-bold">FREE COMPLIMENTARY</span>
                     </div>
                   </div>
 
                   <div className="flex gap-2">
                     <button
                       onClick={handleClearCart}
-                      className="py-3 px-4 border border-gold-light/35 text-cocoa rounded-lg font-mono text-[9px] hover:bg-white transition-colors"
+                      className="py-3 px-4 border border-leaf/35 text-cocoa rounded-lg font-mono text-[9px] hover:bg-white transition-colors"
                     >
                       Clear Items
                     </button>
                     <button
                       onClick={triggerCheckout}
-                      className="flex-1 py-3 bg-cocoa text-bg-primary rounded-lg text-xs font-mono font-bold uppercase tracking-widest hover:bg-charcoal transition-colors shadow-lg flex items-center justify-center gap-2 cursor-pointer luxury-glowing-btn"
+                      className="flex-1 py-3 bg-cocoa text-bg-primary rounded-lg text-xs font-mono font-bold uppercase tracking-widest hover:bg-earth transition-colors shadow-lg flex items-center justify-center gap-2 cursor-pointer luxury-glowing-btn"
                     >
                       <span>Checkout & fresh-roast</span>
                       <ChevronRight className="w-3.5 h-3.5" />

@@ -48,14 +48,14 @@ export default function WhatsComingNext() {
         
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-20">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-bold">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-leaf font-bold">
             Roadmap
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-charcoal">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-earth">
             What's Coming Next
           </h2>
-          <div className="w-12 h-[2px] bg-gold mx-auto" />
-          <p className="font-sans text-charcoal/80 max-w-xl mx-auto leading-relaxed text-sm sm:text-base">
+          <div className="w-12 h-[2px] bg-leaf mx-auto" />
+          <p className="font-sans text-earth/80 max-w-xl mx-auto leading-relaxed text-sm sm:text-base">
             We're continuously improving our products, packaging, and customer experience to bring better snacking to more people.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function WhatsComingNext() {
             return (
               <motion.div
                 key={card.id}
-                className="bg-white border-2 border-gold-light/40 rounded-3xl p-8 flex flex-col justify-between text-left relative overflow-hidden transition-all duration-300 min-h-[220px] shadow-sm group"
+                className="bg-white border-2 border-leaf/40 rounded-3xl p-8 flex flex-col justify-between text-left relative overflow-hidden transition-all duration-300 min-h-[220px] shadow-sm group"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
@@ -81,23 +81,23 @@ export default function WhatsComingNext() {
                 <div className="space-y-4">
                   {/* Icon & Emoji Row */}
                   <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/10 flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                      <Icon className="w-6 h-6 text-gold stroke-[2]" />
+                    <div className="w-12 h-12 rounded-xl bg-leaf/10 border border-leaf/10 flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
+                      <Icon className="w-6 h-6 text-leaf stroke-[2]" />
                     </div>
                     
                     {/* Status Pill */}
-                    <span className="font-mono text-[10px] uppercase tracking-widest font-bold text-gold bg-gold/10 px-3 py-1.5 rounded-full">
+                    <span className="font-mono text-[10px] uppercase tracking-widest font-bold text-leaf bg-leaf/10 px-3 py-1.5 rounded-full">
                       {card.status}
                     </span>
                   </div>
 
                   {/* Title and Description */}
                   <div className="space-y-2">
-                    <h3 className="font-serif text-2xl font-bold text-charcoal flex items-center gap-2">
+                    <h3 className="font-serif text-2xl font-bold text-earth flex items-center gap-2">
                       <span className="text-xl">{card.iconEmoji}</span>
                       <span>{card.title}</span>
                     </h3>
-                    <p className="font-sans text-sm text-charcoal/70 leading-relaxed">
+                    <p className="font-sans text-sm text-earth/70 leading-relaxed">
                       {card.description}
                     </p>
                   </div>
@@ -108,10 +108,10 @@ export default function WhatsComingNext() {
         </div>
 
         {/* Bottom Statement */}
-        <div className="py-12 border-t border-gold-light/30 text-center">
+        <div className="py-12 border-t border-leaf/30 text-center">
           <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl italic font-normal text-cocoa tracking-tight leading-relaxed">
             Crafted Today. <br className="sm:hidden" />
-            <span className="font-bold not-italic text-charcoal ml-2 sm:ml-3">Growing Tomorrow.</span>
+            <span className="font-bold not-italic text-earth ml-2 sm:ml-3">Growing Tomorrow.</span>
           </h3>
         </div>
 

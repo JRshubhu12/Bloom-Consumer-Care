@@ -116,7 +116,7 @@ export default function SidebarScroller() {
             </motion.div>
           </AnimatePresence>
           {/* Label tooltip */}
-          <span className="absolute left-10 scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 bg-charcoal text-[#C6A769] text-[8px] font-mono tracking-widest uppercase px-2 py-0.5 rounded-md pointer-events-none whitespace-nowrap border border-[#C6A769]/20 shadow-lg">
+          <span className="absolute left-10 scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 bg-earth text-[#C6A769] text-[8px] font-mono tracking-widest uppercase px-2 py-0.5 rounded-md pointer-events-none whitespace-nowrap border border-[#C6A769]/20 shadow-lg">
             Bloom: {getConceptLabel()}
           </span>
         </div>
@@ -127,7 +127,7 @@ export default function SidebarScroller() {
           {/* Background vertical progress path */}
           <div className="w-[1px] bg-[#C6A769]/15 absolute top-1.5 bottom-1.5 left-1/2 -translate-x-1/2 z-0 rounded-full" />
           
-          {/* Filled golden progress path */}
+          {/* Filled leafen progress path */}
           <div 
             className="w-[1px] bg-gradient-to-b from-[#C6A769] to-[#E5D5B8] absolute top-1.5 left-1/2 -translate-x-1/2 z-10 rounded-full transition-[height] duration-75 ease-out origin-top will-change-[height]"
             style={{ height: `${scrollProgress}%`, maxHeight: "100%" }}
@@ -156,7 +156,7 @@ export default function SidebarScroller() {
                 }`} />
 
                 {/* Apple-style floating text label reveal */}
-                <span className="absolute left-7 scale-95 opacity-0 translate-x-2 group-hover:scale-100 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out bg-white border border-[#C6A769]/25 text-charcoal text-[8px] font-mono tracking-widest uppercase px-2 py-1 rounded-md pointer-events-none whitespace-nowrap shadow-md will-change-[transform,opacity]">
+                <span className="absolute left-7 scale-95 opacity-0 translate-x-2 group-hover:scale-100 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out bg-white border border-[#C6A769]/25 text-earth text-[8px] font-mono tracking-widest uppercase px-2 py-1 rounded-md pointer-events-none whitespace-nowrap shadow-md will-change-[transform,opacity]">
                   {sec.label}
                 </span>
               </button>

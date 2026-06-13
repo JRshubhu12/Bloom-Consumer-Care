@@ -189,7 +189,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
               animate={{ y: 0, opacity: 0.75 }}
               exit={{ y: -8, opacity: 0 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="font-sans text-[11px] text-charcoal tracking-widest font-light uppercase"
+              className="font-sans text-[11px] text-earth tracking-widest font-light uppercase"
             >
               {loadingTexts[textIndex]}
             </motion.p>
@@ -208,7 +208,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
             strokeDasharray="4 4" 
           />
           
-          {/* Growing golden vine */}
+          {/* Growing leafen vine */}
           <path 
             d="M 10 25 Q 75 5, 140 25 T 270 25" 
             stroke="#C6A769" 
@@ -277,7 +277,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
 
       {/* BOTTOM ESTABLISHED STAMP & BRAND SLOGAN */}
       <div className="absolute bottom-8 text-center space-y-1">
-        <span className="font-sans text-[8px] text-charcoal/45 tracking-[0.3em] uppercase block">
+        <span className="font-sans text-[8px] text-earth/45 tracking-[0.3em] uppercase block">
           Purely Natural. Zero Preservatives.
         </span>
         <span className="font-sans text-[7px] text-[#C6A769]/55 tracking-[0.2em] uppercase block">

@@ -60,7 +60,7 @@ const products: Product[] = [
   {
     id: "prod-6",
     name: "Premium Dry Fruit Mix",
-    description: "A perfect premium blend of wholesome California almonds, whole cashews, and golden raisins.",
+    description: "A perfect premium blend of wholesome California almonds, whole cashews, and leafen raisins.",
     image: "https://m.media-amazon.com/images/I/71m18e2dMAL._AC_UF894,1000_QL80_.jpg",
     benefits: ["Mamra Almonds", "Whole Cashews", "Golden Raisins"],
     weight: "150g"
@@ -100,17 +100,26 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
   };
 
   return (
-    <section id="featured-products" className="py-16 px-6 sm:px-12 lg:px-24 bg-bg-primary select-none overflow-hidden">
-      <div className="max-w-[1400px] mx-auto text-center space-y-10 relative">
+    <section id="featured-products" className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-primary select-none overflow-hidden relative">
+      
+      {/* Background Soft Blurs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-nature/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-leaf/5 blur-[120px] pointer-events-none" />
+
+      <div className="max-w-[1400px] mx-auto text-center space-y-12 relative z-10">
         
         {/* Header with Navigation Arrows */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-left">
           <div className="space-y-4 max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal">
+            <span className="font-sans text-xs uppercase tracking-[0.3em] text-leaf font-bold">
+              Pure Offerings
+            </span>
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-earth">
               Our Collection
             </h2>
-            <p className="font-sans text-base sm:text-lg text-charcoal/70">
-              Freshly crafted snacks made with quality ingredients and a commitment to freshness.
+            <div className="w-16 h-[1px] bg-leaf/40 mx-auto md:mx-0 my-6" />
+            <p className="font-sans text-base sm:text-lg text-earth/80 font-light">
+              Freshly crafted foods made with quality ingredients and a commitment to pure goodness.
             </p>
           </div>
         </div>
@@ -125,32 +134,32 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
             {products.map((prod) => (
               <div 
                 key={prod.id}
-                className="group flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] xl:flex-[0_0_23%] snap-start bg-[#F7EFE5] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-250 border border-gold-light/20 flex flex-col"
+                className="group flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] xl:flex-[0_0_23%] snap-start bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-leaf/10 flex flex-col"
               >
               {/* Image Area - 70% visually */}
-              <div className="relative h-64 sm:h-72 w-full bg-[#EBE3D5] overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => setSelectedProduct(prod)}>
+              <div className="relative h-64 sm:h-72 w-full bg-bg-secondary overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => setSelectedProduct(prod)}>
                 <img 
                   src={prod.image} 
                   alt={prod.name} 
-                  className="w-full h-full object-cover transform group-hover:scale-[1.03] transition-transform duration-250"
+                  className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-500"
                 />
                 
                 {/* Product Pouch Representation (Secondary) */}
-                <div className="absolute bottom-4 right-4 w-[25%] aspect-[3/4] bg-white rounded-xl shadow-lg border border-gold-light/20 flex flex-col items-center justify-center p-2 opacity-95">
+                <div className="absolute bottom-4 right-4 w-[25%] aspect-[3/4] bg-white rounded-xl shadow-lg border border-leaf/20 flex flex-col items-center justify-center p-2 opacity-95">
                    <img src="/company-logo.png" alt="Bloom Pouch" className="w-8 h-8 object-contain opacity-50 mb-1" />
-                   <div className="text-[6px] font-sans font-bold text-charcoal uppercase tracking-widest text-center">Bloom</div>
-                   <div className="text-[5px] font-sans text-charcoal/60 uppercase tracking-widest text-center mt-1">{prod.name}</div>
+                   <div className="text-[6px] font-sans font-bold text-earth uppercase tracking-widest text-center">Bloom</div>
+                   <div className="text-[5px] font-sans text-earth/60 uppercase tracking-widest text-center mt-1">{prod.name}</div>
                 </div>
               </div>
 
               {/* Text Area */}
-              <div className="p-6 flex flex-col flex-grow bg-[#F7EFE5]">
+              <div className="p-6 flex flex-col flex-grow bg-white">
                 {/* Title & Desc */}
                 <div className="mb-4">
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-charcoal mb-2 line-clamp-2 min-h-[56px]">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-earth mb-2 line-clamp-2 min-h-[64px]">
                     {prod.name}
                   </h3>
-                  <p className="font-sans text-xs sm:text-sm text-charcoal/70 leading-relaxed min-h-[60px] line-clamp-3">
+                  <p className="font-sans text-xs sm:text-sm text-earth/70 leading-relaxed font-light min-h-[60px] line-clamp-3">
                     {prod.description}
                   </p>
                 </div>
@@ -158,8 +167,8 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 {/* Benefits Row */}
                 <div className="space-y-2 mb-6">
                   {prod.benefits.map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-2 text-charcoal/80 font-medium text-xs">
-                      <Check className="w-3.5 h-3.5 text-sage flex-shrink-0" />
+                    <div key={i} className="flex items-center gap-2 text-earth/80 font-medium text-xs">
+                      <Check className="w-3.5 h-3.5 text-leaf flex-shrink-0" />
                       {benefit}
                     </div>
                   ))}
@@ -168,10 +177,10 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 {/* Bottom Details & Actions */}
                 <div className="mt-auto">
                   {/* Weight */}
-                  <div className="flex items-end justify-between mb-4 pb-4 border-b border-gold-light/35">
+                  <div className="flex items-end justify-between mb-4 pb-4 border-b border-leaf/10">
                     <div>
-                      <span className="text-[9px] font-sans text-charcoal/50 uppercase tracking-wider block font-bold mb-0.5">Net Weight</span>
-                      <span className="font-sans text-xs font-semibold text-charcoal">{prod.weight}</span>
+                      <span className="text-[9px] font-sans text-earth/50 uppercase tracking-wider block font-bold mb-0.5">Net Weight</span>
+                      <span className="font-sans text-xs font-semibold text-earth">{prod.weight}</span>
                     </div>
                   </div>
 
@@ -184,7 +193,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                         }
                         setSelectedProduct(prod);
                       }}
-                      className="w-full py-3 border border-charcoal text-charcoal text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 hover:bg-charcoal hover:text-white"
+                      className="w-full py-3 border border-earth text-earth text-xs font-bold uppercase tracking-wide rounded-xl transition-all flex items-center justify-center gap-2 hover:bg-earth hover:text-white"
                     >
                       <Eye className="w-4 h-4" />
                       View Details
@@ -192,7 +201,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                     <button
                       onClick={() => handleBuy(prod.id, prod.name)}
                       disabled={addingToCartId !== null}
-                      className="w-full py-3 bg-gold text-white hover:bg-[#D47E10] text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="w-full py-3 bg-leaf text-white hover:bg-nature text-xs font-bold uppercase tracking-wide rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
                     >
                       <ShoppingBag className="w-4 h-4" />
                       {addingToCartId === prod.id ? "Adding..." : "Add To Cart"}
@@ -206,19 +215,19 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
         </div>
 
         {/* Bottom Actions & Message */}
-        <div className="pt-8 flex flex-col items-center gap-8 border-t border-gold-light/30">
+        <div className="pt-10 flex flex-col items-center gap-8 border-t border-leaf/10">
           {/* Carousel Arrows */}
           <div className="flex items-center justify-center gap-4">
             <button 
               onClick={() => scroll("left")} 
-              className="p-3 sm:p-4 rounded-full border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-white transition-colors cursor-pointer shadow-sm"
+              className="p-3 sm:p-4 rounded-full border border-earth/20 text-earth hover:bg-earth hover:text-white transition-colors cursor-pointer shadow-sm"
               aria-label="Scroll left"
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
             </button>
             <button 
               onClick={() => scroll("right")} 
-              className="p-3 sm:p-4 rounded-full border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-white transition-colors cursor-pointer shadow-sm"
+              className="p-3 sm:p-4 rounded-full border border-earth/20 text-earth hover:bg-earth hover:text-white transition-colors cursor-pointer shadow-sm"
               aria-label="Scroll right"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
@@ -226,17 +235,16 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
           </div>
 
           <div className="max-w-2xl mx-auto text-center">
-            <p className="font-serif text-xl sm:text-2xl text-charcoal font-semibold mb-2">
+            <p className="font-serif text-xl sm:text-2xl text-earth font-medium mb-2">
               More products coming soon.
             </p>
-            <p className="font-sans text-charcoal/70 text-base">
-              We're focused on perfecting every product before expanding our collection.
+            <p className="font-sans text-earth/70 font-light text-base">
+              We're focused on perfecting every recipe before expanding our collection.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Product Details Modal */}
       {/* Product Details Modal */}
       <AnimatePresence>
         {selectedProduct && (
@@ -244,7 +252,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-charcoal/60 backdrop-blur-md p-4"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-earth/60 backdrop-blur-sm p-4"
             onClick={() => setSelectedProduct(null)}
           >
             <motion.div 
@@ -252,13 +260,13 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="bg-[#F7EFE5] rounded-[24px] max-w-4xl w-full max-h-[90vh] relative shadow-2xl flex flex-col overflow-hidden border border-gold-light/20"
+              className="bg-bg-primary rounded-[24px] max-w-4xl w-full max-h-[90vh] relative shadow-2xl flex flex-col overflow-hidden border border-leaf/20"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button (Fixed relative to modal) */}
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-4 right-4 z-[70] text-charcoal bg-white/80 backdrop-blur-sm p-2 rounded-full hover:bg-white hover:scale-105 transition-all shadow-sm cursor-pointer"
+                className="absolute top-4 right-4 z-[70] text-earth bg-white/80 backdrop-blur-sm p-2 rounded-full hover:bg-white hover:scale-105 transition-all shadow-sm cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -267,7 +275,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto scrollbar-none">
                 
                 {/* Modal Image (Sticky on Desktop) */}
-                <div className="w-full md:w-[45%] bg-[#EBE3D5] flex items-center justify-center p-8 min-h-[300px] sm:min-h-[350px] md:sticky md:top-0 h-auto md:h-[90vh]">
+                <div className="w-full md:w-[45%] bg-bg-secondary flex items-center justify-center p-8 min-h-[300px] sm:min-h-[350px] md:sticky md:top-0 h-auto md:h-[90vh]">
                   <motion.img 
                     src={selectedProduct.image} 
                     alt={selectedProduct.name} 
@@ -278,17 +286,17 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 {/* Modal Content */}
                 <div className="w-full md:w-[55%] p-8 md:p-10 lg:p-12 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-serif font-bold text-3xl sm:text-4xl text-charcoal mb-3">
+                    <h3 className="font-serif font-medium text-3xl sm:text-4xl text-earth mb-3">
                       {selectedProduct.name}
                     </h3>
-                    <p className="text-sm sm:text-base text-charcoal/70 leading-relaxed font-sans mb-8">
+                    <p className="text-sm sm:text-base text-earth/80 leading-relaxed font-sans font-light mb-8">
                       {selectedProduct.description}
                     </p>
 
                     {/* Flavors Selector if available */}
                     {selectedProduct.flavors && (
                       <div className="mb-8">
-                        <span className="block text-[11px] text-charcoal/50 uppercase tracking-widest font-bold mb-3">Select Flavour</span>
+                        <span className="block text-[11px] text-earth/50 uppercase tracking-widest font-bold mb-3">Select Flavour</span>
                         <div className="flex flex-wrap gap-2.5">
                           {selectedProduct.flavors.map((flv) => (
                             <button
@@ -296,8 +304,8 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                               onClick={() => setSelectedFlavor(flv)}
                               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-sans font-bold transition-all border cursor-pointer ${
                                 selectedFlavor === flv
-                                  ? "bg-charcoal border-charcoal text-white shadow-md scale-105"
-                                  : "bg-white border-gold-light/40 text-charcoal hover:border-charcoal/60 hover:bg-[#F2EFE9]"
+                                  ? "bg-earth border-earth text-white shadow-md scale-105"
+                                  : "bg-white border-leaf/30 text-earth hover:border-earth/60 hover:bg-bg-secondary"
                               }`}
                             >
                               {flv}
@@ -307,36 +315,36 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                       </div>
                     )}
 
-                    <h4 className="text-[11px] font-sans tracking-widest text-charcoal/50 uppercase font-bold mb-4">Highlights</h4>
+                    <h4 className="text-[11px] font-sans tracking-widest text-earth/50 uppercase font-bold mb-4">Highlights</h4>
                     <div className="space-y-3 mb-8">
                       {selectedProduct.benefits.map((benefit, i) => (
-                        <div key={i} className="flex items-center gap-3 text-sm font-bold text-charcoal/80">
-                          <div className="w-6 h-6 rounded-full bg-sage/10 flex items-center justify-center flex-shrink-0">
-                            <Check className="w-3.5 h-3.5 text-sage" />
+                        <div key={i} className="flex items-center gap-3 text-sm font-medium text-earth/80">
+                          <div className="w-6 h-6 rounded-full bg-nature/10 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-nature" />
                           </div>
                           {benefit}
                         </div>
                       ))}
                     </div>
 
-                    <div className="bg-white/60 p-5 rounded-2xl border border-gold-light/20 mb-8">
+                    <div className="bg-white/60 p-5 rounded-2xl border border-leaf/20 mb-8">
                       <div className="grid grid-cols-2 gap-6 text-sm font-sans">
                         <div>
-                          <span className="block text-[10px] text-charcoal/50 uppercase tracking-widest font-bold mb-2">Weight Options</span>
-                          <span className="font-bold text-charcoal bg-white px-3 py-1.5 rounded-lg border border-gold-light/30 shadow-sm">{selectedProduct.weight}</span>
+                          <span className="block text-[10px] text-earth/50 uppercase tracking-widest font-bold mb-2">Weight Options</span>
+                          <span className="font-bold text-earth bg-white px-3 py-1.5 rounded-lg border border-leaf/30 shadow-sm">{selectedProduct.weight}</span>
                         </div>
                         <div>
-                          <span className="block text-[10px] text-charcoal/50 uppercase tracking-widest font-bold mb-2">Ingredients</span>
-                          <span className="font-semibold text-charcoal text-xs">Premium natural ingredients.</span>
+                          <span className="block text-[10px] text-earth/50 uppercase tracking-widest font-bold mb-2">Ingredients</span>
+                          <span className="font-medium text-earth text-xs">Premium natural ingredients.</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-8 border-t border-gold-light/30 flex items-center justify-between mt-4">
+                  <div className="pt-8 border-t border-leaf/20 flex items-center justify-between mt-4">
                     <div>
-                      <span className="text-[10px] font-sans text-charcoal/50 uppercase block font-bold mb-1">Package</span>
-                      <span className="text-base font-sans font-semibold text-charcoal">{selectedProduct.weight} pack</span>
+                      <span className="text-[10px] font-sans text-earth/50 uppercase block font-bold mb-1">Package</span>
+                      <span className="text-base font-sans font-semibold text-earth">{selectedProduct.weight} pack</span>
                     </div>
 
                     <button
@@ -344,7 +352,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                         handleBuy(selectedProduct.id, selectedProduct.name);
                         setSelectedProduct(null);
                       }}
-                      className="py-4 px-8 sm:px-10 bg-[#8B5A2B] hover:bg-[#6B4A32] text-white text-sm sm:text-base font-bold rounded-full shadow-lg transition-all flex items-center gap-3 cursor-pointer"
+                      className="py-4 px-8 sm:px-10 bg-leaf hover:bg-nature text-white text-sm sm:text-base font-bold tracking-wide uppercase rounded-full shadow-lg transition-all flex items-center gap-3 cursor-pointer"
                     >
                       <ShoppingBag className="w-5 h-5" />
                       Add To Cart

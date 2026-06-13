@@ -36,15 +36,15 @@ export default function OurImpact() {
         
         {/* Core section copy and luxury tagline */}
         <div className="max-w-3xl mx-auto space-y-4 mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-bold">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-leaf font-bold">
             Our Promise
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-charcoal tracking-tight lg:leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-earth tracking-tight lg:leading-tight">
             Simple ingredients. <br />
             <span className="italic font-normal text-cocoa">Honest snacking. Freshly crafted.</span>
           </h2>
-          <div className="w-12 h-[2px] bg-gold mx-auto" />
-          <p className="font-sans text-charcoal/80 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
+          <div className="w-12 h-[2px] bg-leaf mx-auto" />
+          <p className="font-sans text-earth/80 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
             At Bloom Consumer Care, we believe healthy snacks should be transparent, delicious, and made with care. Our commitment is to provide preservative-free products crafted with quality ingredients and a focus on freshness, nutrition, and trust.
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function OurImpact() {
             return (
               <motion.div
                 key={promise.id}
-                className="bg-white border-2 border-gold-light/30 rounded-[2rem] p-8 transition-all duration-300 flex flex-col items-center justify-start text-center relative group shadow-sm min-h-[260px]"
+                className="bg-white border-2 border-leaf/30 rounded-[2rem] p-8 transition-all duration-300 flex flex-col items-center justify-start text-center relative group shadow-sm min-h-[260px]"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
@@ -67,18 +67,18 @@ export default function OurImpact() {
                   borderColor: "rgba(232, 141, 20, 0.4)" 
                 }}
               >
-                {/* Icon wrapper inside gold base */}
-                <div className="p-4 rounded-full bg-gold/10 text-gold group-hover:scale-105 group-hover:bg-gold group-hover:text-white transition-all duration-300 relative z-10">
+                {/* Icon wrapper inside leaf base */}
+                <div className="p-4 rounded-full bg-leaf/10 text-leaf group-hover:scale-105 group-hover:bg-leaf group-hover:text-white transition-all duration-300 relative z-10">
                   <Icon className="w-6 h-6 stroke-[2]" />
                 </div>
 
                 {/* Subtitle Label */}
-                <h3 className="font-serif text-xl text-charcoal font-bold mt-6 relative z-10">
+                <h3 className="font-serif text-xl text-earth font-bold mt-6 relative z-10">
                   {promise.title}
                 </h3>
 
                 {/* Description summary */}
-                <p className="font-sans text-sm text-charcoal/70 leading-relaxed mt-3 relative z-10">
+                <p className="font-sans text-sm text-earth/70 leading-relaxed mt-3 relative z-10">
                   {promise.description}
                 </p>
               </motion.div>
