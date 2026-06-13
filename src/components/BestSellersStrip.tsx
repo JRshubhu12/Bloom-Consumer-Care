@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Heart, Sparkles, Sprout, Shield, ShoppingBag, Plus, Sparkle, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { ShieldCheck, Heart, Sparkles, Sprout, Shield, ShoppingBag, Plus, Sparkle, Eye, X } from "lucide-react";
 import { PRODUCTS } from "../data";
 
 interface BestSellersStripProps {
@@ -9,14 +9,9 @@ interface BestSellersStripProps {
 
 export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps) {
   const [addingId, setAddingId] = useState<string | null>(null);
+  const [activeDetailsId, setActiveDetailsId] = useState<string | null>(null);
 
-  // Mapped food images from premium workspace assets
-  const productImages: Record<string, string> = {
-    "makhana-pink-salt": "https://i.ibb.co/RTJ9J5BD/spicy-masala-phool-makhana.jpg",
-    "makhana-mint-basil": "https://images.unsplash.com/photo-1599490659213-e2b9527bd08c?auto=format&fit=crop&w=600&q=80",
-    "dryfruit-royal": "https://i.ibb.co/F4g1VSL4/image.png",
-    "namkeen-quinoa": "https://i.ibb.co/XrwZhg76/image.png"
-  };
+
 
   const handleQuickAdd = (name: string, id: string) => {
     setAddingId(id);
@@ -96,18 +91,18 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
           {/* Horizontal Product grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {PRODUCTS.map((prod) => {
-              const image = productImages[prod.id] || "https://i.ibb.co/RTJ9J5BD/spicy-masala-phool-makhana.jpg";
+              const image = prod.imageUrl || "https://i.ibb.co/RTJ9J5BD/spicy-masala-phool-makhana.jpg";
               const isAdding = addingId === prod.id;
 
               return (
                 <motion.div
                   key={prod.id}
                   className="bg-white rounded-2xl border border-[#EAE4DB] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 relative group overflow-hidden h-[380px]"
-                  whileHover={{ y: -6 }}
+                  whileHover={{ y: -3 }}
                 >
                   {/* Preservative Free Badge */}
                   <div className="absolute top-3 left-3 z-10 bg-[#768364]/95 text-white text-[9px] font-semibold tracking-wider px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
-                    <Sparkle className="w-2.5 h-2.5 text-white animate-pulse" />
+                    <Sparkle className="w-2.5 h-2.5 text-white" />
                     <span>Preservative Free</span>
                   </div>
 
@@ -118,13 +113,21 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       alt={prod.name}
                       className="max-h-full max-w-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/3 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
                     
-                    {/* Hover tooltip hint */}
-                    <div className="absolute right-2 bottom-2 bg-charcoal/80 backdrop-blur-xs p-1.5 rounded-full text-white opacity-85 group-hover:opacity-0 transition-opacity">
+                    {/* Hover tooltip hint / Click to toggle on mobile */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveDetailsId(activeDetailsId === prod.id ? null : prod.id);
+                      }}
+                      className="absolute right-2 bottom-2 bg-charcoal/80 hover:bg-charcoal/90 backdrop-blur-xs p-1.5 rounded-full text-white opacity-85 hover:opacity-100 sm:group-hover:opacity-0 transition-all duration-300 z-10 cursor-pointer flex items-center justify-center border border-white/10"
+                      title="View Details"
+                    >
                       <Eye className="w-3.5 h-3.5" />
-                    </div>
+                    </button>
                   </div>
 
                   {/* Core product descriptors */}
@@ -150,7 +153,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       >
                         {isAdding ? (
                           <>
-                            <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                            <span className="w-2 h-2 rounded-full bg-white opacity-75" />
                             <span>Added</span>
                           </>
                         ) : (
@@ -164,7 +167,22 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                   </div>
 
                   {/* ================== PRODUCT HOVER PANEL OVERLAY ================== */}
-                  <div className="absolute inset-0 bg-white/98 p-5 border border-[#C6A769]/30 rounded-2xl translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-out z-20 flex flex-col justify-between h-full select-none text-left">
+                  <div className={`absolute inset-0 bg-white/98 p-5 border border-[#C6A769]/30 rounded-2xl transition-all duration-300 ease-out z-20 flex flex-col justify-between h-full select-none text-left ${
+                    activeDetailsId === prod.id ? "translate-y-0" : "translate-y-full sm:group-hover:translate-y-0"
+                  }`}>
+                    
+                    {/* Close button for mobile details overlay */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveDetailsId(null);
+                      }}
+                      className="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal sm:hidden cursor-pointer p-1 rounded-full hover:bg-black/5"
+                      aria-label="Close Specs"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+
                     <div className="space-y-4">
                       
                       {/* Title Segment */}

@@ -18,6 +18,7 @@ export interface Product {
   };
   healthHighlights: string[];
   rotationDegree?: number;
+  imageUrl?: string;
 }
 
 export interface Ingredient {

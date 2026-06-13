@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, Check, ArrowRight, Leaf, Flame, ShieldCheck, ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
+import { Sparkles, Check, ArrowRight, Leaf, Flame, ShieldCheck, ChevronLeft, ChevronRight, ShoppingBag, X } from "lucide-react";
 
 interface FeaturedProductsProps {
   onAddToCart: (productName: string) => void;
@@ -274,6 +274,7 @@ const FEATURED_ITEMS: ProductItem[] = [
 export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
   const [activeCategory, setActiveCategory] = useState<"makhana" | "dryfruits" | "namkeen">("makhana");
   const [addingToCartId, setAddingToCartId] = useState<string | null>(null);
+  const [selectedProductForModal, setSelectedProductForModal] = useState<ProductItem | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = FEATURED_ITEMS.filter((item) => item.category === activeCategory);
@@ -394,12 +395,12 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.8 }}
-                  whileHover={{ y: -12 }}
-                  className="group relative flex-[0_0_88%] sm:flex-[0_0_46%] md:flex-none snap-start bg-[#FCFBF8]/95 backdrop-blur-md border border-[#C6A769]/30 rounded-[40px] p-6 flex flex-col justify-between shadow-[0_22px_50px_-20px_rgba(198,167,105,0.14)] hover:shadow-[0_40px_70px_-25px_rgba(198,167,105,0.22)] transition-all duration-700 overflow-hidden cursor-default min-h-[620px]"
+                  viewport={{ once: true, margin: "-20px" }}
+                  transition={{ duration: 0.4 }}
+                  whileHover={{ y: -3 }}
+                  className="group relative flex-[0_0_88%] sm:flex-[0_0_46%] md:flex-none snap-start bg-[#FCFBF8] border border-[#C6A769]/15 rounded-[32px] p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden cursor-default min-h-[620px]"
                 >
                   {/* Organic cream-colored shape and Soft golden halo backing depth */}
                   <div className={`absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full filter blur-[32px] opacity-25 group-hover:opacity-35 transition-opacity duration-700 pointer-events-none -z-10 bg-gradient-to-br ${item.colorTheme.glow}`} />
@@ -476,6 +477,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                             src={item.foodImageUrl}
                             alt="Gourmet Bowl View"
                             referrerPolicy="no-referrer"
+                            loading="lazy"
                             className="w-full h-full object-cover rounded-full group-hover:scale-110 group-hover:rotate-6 transition-transform duration-1000 ease-out"
                           />
 
@@ -557,11 +559,8 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                       {/* View Details Secondary Link */}
                       <div className="text-center pt-1">
                         <button
-                          onClick={() => {
-                            const el = document.getElementById("featured-products");
-                            if (el) el.scrollIntoView({ behavior: "smooth" });
-                          }}
-                          className="text-[10px] uppercase tracking-widest text-[#4B3425]/75 hover:text-[#523821] font-mono font-bold underline transition-colors"
+                          onClick={() => setSelectedProductForModal(item)}
+                          className="text-[10px] uppercase tracking-widest text-[#4B3425]/75 hover:text-[#523821] font-mono font-bold underline transition-colors cursor-pointer"
                         >
                           View Details
                         </button>
@@ -588,6 +587,108 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
         </div>
 
       </div>
+
+      {/* ================== PRODUCT DETAILS POP-UP MODAL (NO ANIMATION) ================== */}
+      {selectedProductForModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 select-text"
+          onClick={() => setSelectedProductForModal(null)}
+        >
+          <div 
+            className="bg-[#FAF9F6] rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto relative border border-[#C6A769]/30 shadow-2xl p-6 md:p-8 flex flex-col justify-between"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProductForModal(null)}
+              className="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal cursor-pointer p-1.5 rounded-full hover:bg-black/5 transition-colors"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Content */}
+            <div className="space-y-6">
+              {/* Product Header Info */}
+              <div className="flex gap-4 items-start">
+                <div className="w-24 h-24 bg-white rounded-2xl p-2 border border-[#EAE4DB] flex items-center justify-center shrink-0">
+                  <img 
+                    src={selectedProductForModal.foodImageUrl} 
+                    alt={selectedProductForModal.name} 
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <div className="text-left space-y-1">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-[#C3A77D] font-bold">
+                    {selectedProductForModal.categoryLabel}
+                  </span>
+                  <h3 className="font-serif font-bold text-xl text-charcoal tracking-tight">
+                    {selectedProductForModal.name}
+                  </h3>
+                  <span className="inline-block bg-[#768364]/10 text-[#768364] text-[9px] font-semibold tracking-wider px-2 py-0.5 rounded-full">
+                    {selectedProductForModal.badge}
+                  </span>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="text-left space-y-2">
+                <h4 className="text-[11px] font-mono tracking-widest text-[#768364] uppercase font-bold">About this Blend</h4>
+                <p className="text-xs text-charcoal/80 leading-relaxed font-sans">
+                  {selectedProductForModal.description}
+                </p>
+              </div>
+
+              {/* Nutrition Facts */}
+              <div className="text-left space-y-3">
+                <h4 className="text-[11px] font-mono tracking-widest text-[#C3A77D] uppercase font-bold">🌿 Nutritional Specs (Per Serving)</h4>
+                <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                  <div className="bg-white p-2.5 rounded-xl border border-[#EAE4DB]/60 flex justify-between">
+                    <span className="text-charcoal/60">Calories:</span>
+                    <strong className="text-cocoa">{selectedProductForModal.calories} cal</strong>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-[#EAE4DB]/60 flex justify-between">
+                    <span className="text-charcoal/60">Protein:</span>
+                    <strong className="text-cocoa">{selectedProductForModal.protein}</strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* Product Benefits */}
+              <div className="text-left space-y-2">
+                <h4 className="text-[11px] font-mono tracking-widest text-cocoa uppercase font-bold">✨ Highlights</h4>
+                <div className="flex flex-wrap gap-1.5">
+                  {selectedProductForModal.benefits.map((benefit, i) => (
+                    <span key={i} className="text-[10px] font-sans text-charcoal/70 bg-[#F2EDE4] px-2.5 py-1 rounded-lg border border-[#EAE4DB]/40">
+                      {benefit}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="pt-6 mt-6 border-t border-[#EAE4DB] flex items-center justify-between">
+              <div>
+                <span className="text-[9px] font-mono text-charcoal/40 uppercase block font-bold">Price:</span>
+                <strong className="text-xl font-serif font-bold text-cocoa">₹{selectedProductForModal.price}</strong>
+              </div>
+
+              <button
+                onClick={() => {
+                  handleBuy(selectedProductForModal);
+                  setSelectedProductForModal(null);
+                }}
+                className="py-3 px-6 bg-[#5C3E26] hover:bg-[#392312] text-white text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center gap-2 shadow-md hover:shadow-lg cursor-pointer luxury-glowing-btn"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span>Add To Cart</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
     </section>
   );
 }

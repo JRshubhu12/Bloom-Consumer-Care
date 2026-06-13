@@ -30,6 +30,7 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
 
   return (
     <section 
+      id="hero"
       className="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden bg-[#F9F7F2] select-none font-sans"
     >
       {/* Background Floral/Organic Illustrations (Subtle) */}
@@ -70,29 +71,24 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
           <div className="flex flex-col sm:flex-row gap-5 mb-16">
             <button 
               onClick={() => {
-                const el = document.getElementById("best-sellers");
-                if (el) {
-                  const headerOffset = 90;
-                  const elementPosition = el.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                  });
-                }
+                const el = document.getElementById("featured-products");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="px-8 py-3.5 bg-[#5C3E26] text-white text-sm rounded-full hover:bg-[#392312] transition-all duration-300 flex items-center justify-center gap-3 group shadow-lg hover:shadow-xl cursor-pointer luxury-glowing-btn font-semibold"
+              className="px-8 py-3.5 bg-[#5C3E26] text-white text-sm rounded-full transition-all duration-200 flex items-center justify-center gap-3 group shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer font-semibold"
             >
-              Shop Best Sellers
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              Shop Products
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
             
             <button 
-              onClick={onShopClick}
-              className="px-8 py-3.5 border-2 border-[#6B4A32]/70 text-[#2F2924] text-sm rounded-full hover:bg-[#6B4A32]/5 hover:border-[#6B4A32] transition-all duration-300 flex items-center justify-center gap-3 group cursor-pointer font-bold"
+              onClick={() => {
+                const el = document.getElementById("about-story");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="px-8 py-3.5 border border-[#6B4A32]/50 text-[#2F2924] text-sm rounded-full bg-[#6B4A32]/0 hover:bg-[#6B4A32]/5 hover:border-[#6B4A32] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 group cursor-pointer font-medium"
             >
-              Explore Products
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              Learn More
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
           </div>
 

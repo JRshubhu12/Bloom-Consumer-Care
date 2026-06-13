@@ -74,7 +74,7 @@ export default function WomenEmpowerment() {
                           {milestone.title}
                         </h4>
                         {Selected && (
-                          <CheckCircle className="w-4 h-4 text-sage animate-bounce" />
+                          <CheckCircle className="w-4 h-4 text-sage" />
                         )}
                       </div>
                       
@@ -104,7 +104,7 @@ export default function WomenEmpowerment() {
                     </div>
 
                     {/* Absolute indicator */}
-                    <span className={`absolute right-4 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-gold ${Selected ? "scale-150 animate-ping" : "opacity-0"}`} />
+                    <span className={`absolute right-4 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-gold ${Selected ? "scale-125" : "opacity-0"}`} />
 
                   </div>
                 );
