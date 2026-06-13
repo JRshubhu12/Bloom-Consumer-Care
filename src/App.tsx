@@ -34,7 +34,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const sections = ["featured-products", "founder-reviews", "contact-partners"];
+    const sections = ["featured-products", "why-bloom", "founder-reviews", "contact-partners"];
     
     const observerOptions = {
       root: null,
@@ -185,7 +185,7 @@ export default function App() {
 
   const navLinks = [
     { href: "#", label: "Home" },
-    { href: "#featured-products", label: "Products" },
+    { href: "#featured-products", label: "Collection" },
     { href: "#founder-reviews", label: "Our Story" },
     { href: "#contact-partners", label: "Contact" },
   ];
@@ -208,88 +208,97 @@ export default function App() {
       {/* FLOATING LUXURY APPLE-STYLE SIDEBAR SCROLLER */}
       <SidebarScroller />
 
-      {/* PREMIUM FOOD BRAND HEADER */}
-      <div className={`fixed top-0 left-0 right-0 z-50 w-full select-none pointer-events-none transition-all duration-300 ${
-        scrolled ? "py-3 px-4 sm:px-6 lg:px-8" : "py-5 px-4 sm:px-6 lg:px-8"
-      }`}>
-
-        <header className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 pointer-events-auto bg-[#F7EFE5]/95 backdrop-blur-md border border-charcoal/5 rounded-full ${
-          scrolled 
-            ? "px-4 sm:px-6 py-2 shadow-md" 
-            : "px-5 sm:px-8 py-3 shadow-sm"
+      {/* WORLD-CLASS LUXURY HEADER */}
+      <div className="fixed top-0 left-0 right-0 z-50 w-full select-none pointer-events-none">
+        
+        {/* MAIN HEADER */}
+        <header className={`pointer-events-auto w-full transition-all duration-500 bg-[#F8F4EE]/90 backdrop-blur-md border-b border-[#B68A35]/30 ${
+          scrolled ? "py-3 lg:py-4 shadow-[0_10px_40px_-10px_rgba(43,33,27,0.12)]" : "py-5 lg:py-6 shadow-[0_4px_20px_-10px_rgba(43,33,27,0.05)]"
         }`}>
-          
-          {/* Lotus Brand Logo Title */}
-          <a href="#" className="flex items-center gap-2 lg:gap-3 group text-left">
-            <img 
-              src="/company-logo.png" 
-              alt="BLOOM Logo" 
-              className="h-8 lg:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              loading="eager"
-            />
-            <div className="flex flex-col">
-              <span className="font-serif text-base lg:text-lg font-bold leading-none text-charcoal">BLOOM</span>
-              <span className="font-sans text-[7px] lg:text-[8px] tracking-[0.2em] text-charcoal/70 uppercase font-bold mt-0.5 whitespace-nowrap">Consumer Care</span>
-            </div>
-          </a>
-
-          {/* Premium Desktop Navigation Linkages */}
-          <nav className="hidden md:flex items-center gap-2.5 lg:gap-5 xl:gap-8">
-            {navLinks.map((link) => {
-              const isActive = (link.href === "#" && activeSection === "") || (link.href === `#${activeSection}`);
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={`font-sans text-[10px] lg:text-xs uppercase tracking-widest transition-colors font-bold relative py-1 group whitespace-nowrap ${
-                    isActive ? "text-gold" : "text-charcoal/80 hover:text-charcoal"
-                  }`}
-                >
-                  {link.label}
-                  <span className={`absolute bottom-0 inset-x-0 h-[2px] bg-gold transition-transform origin-left duration-250 ${
-                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`} />
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Premium Cart/Buy Icon Trigger */}
-          <div className="flex items-center gap-3">
+          <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between">
             
-            <button
-              onClick={() => {
-                const el = document.getElementById("featured-products");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="relative px-5 py-2.5 bg-charcoal text-white hover:bg-charcoal/90 rounded-full transition-all duration-250 shadow-sm cursor-pointer flex items-center gap-2 group"
-              title="Shop Collection"
-              id="header-buy-vessel"
-            >
-              <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform duration-250" />
-              <span className="font-sans text-[11px] font-bold uppercase tracking-widest hidden sm:inline-block">Shop</span>
-              {totalCartCount > 0 && (
-                <motion.span 
-                  key={totalCartCount}
-                  initial={{ scale: 0.6, opacity: 0.5 }}
-                  animate={{ scale: [0.6, 1.25, 1], opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 12 }}
-                  className="absolute -top-1 -right-1 min-w-[20px] h-[20px] px-1.5 rounded-full bg-sage text-white text-[10px] font-sans font-bold flex items-center justify-center shadow-sm"
-                >
-                  {totalCartCount}
-                </motion.span>
-              )}
-            </button>
+            {/* LEFT: Brand Identity */}
+            <a href="#" className="flex items-center gap-3 lg:gap-4 group cursor-pointer text-left">
+              <div className="relative flex items-center justify-center">
+                <img 
+                  src="/company-logo.png" 
+                  alt="BLOOM" 
+                  className={`w-auto object-contain transition-all duration-500 origin-left ${scrolled ? 'h-9 lg:h-10' : 'h-11 lg:h-12'}`}
+                />
+              </div>
+              <div className="flex flex-col justify-center">
+                <span className="font-serif text-xl lg:text-2xl font-bold leading-none text-[#2B211B] tracking-wide">BLOOM</span>
+                <span className="font-sans text-[8px] lg:text-[9px] tracking-[0.25em] text-[#B68A35] uppercase font-semibold mt-1">Consumer Care</span>
+              </div>
+            </a>
 
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-full border border-charcoal/10 bg-white text-charcoal hover:bg-[#EBE3D5] transition-colors cursor-pointer"
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            {/* CENTER: Premium Navigation */}
+            <nav className="hidden lg:flex items-center gap-10">
+              {navLinks.map((link) => {
+                const isActive = (link.href === "#" && activeSection === "") || (link.href === `#${activeSection}`);
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="relative group py-2"
+                  >
+                    <span className={`font-sans text-[11px] uppercase tracking-[0.15em] font-semibold transition-colors duration-300 ${
+                      isActive ? "text-[#B68A35]" : "text-[#2B211B]/70 group-hover:text-[#2B211B]"
+                    }`}>
+                      {link.label}
+                    </span>
+                    
+                    {/* Gold Dot Indicator */}
+                    <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#B68A35] transition-all duration-300 ${
+                      isActive ? "opacity-100 scale-100" : "opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-50"
+                    }`} />
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* RIGHT: Actions */}
+            <div className="flex items-center gap-5 sm:gap-6 lg:gap-8">
+
+              {/* Cart Icon */}
+              <button
+                onClick={() => setIsCartOpen(true)}
+                className="relative text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
+              >
+                <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+                {totalCartCount > 0 && (
+                  <motion.span 
+                    key={totalCartCount}
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="absolute -top-1.5 -right-2 min-w-[18px] h-[18px] rounded-full bg-[#B68A35] text-white text-[9px] font-sans font-bold flex items-center justify-center shadow-sm px-1"
+                  >
+                    {totalCartCount}
+                  </motion.span>
+                )}
+              </button>
+
+              {/* Luxury Shop Now Button */}
+              <button
+                onClick={() => {
+                  const el = document.getElementById("featured-products");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="hidden md:flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-[#B68A35] bg-[#F8F4EE] text-[#B68A35] hover:bg-[#B68A35] hover:text-white hover:shadow-[0_4px_15px_rgba(182,138,53,0.3)] transition-all duration-300 group cursor-pointer"
+              >
+                <span className="font-sans text-[10px] lg:text-[11px] font-bold uppercase tracking-widest">Shop Now</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" strokeWidth={2} />
+              </button>
+
+              {/* Mobile Menu Toggle */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden p-2 text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" strokeWidth={1.5} /> : <Menu className="w-6 h-6" strokeWidth={1.5} />}
+              </button>
+            </div>
           </div>
-
         </header>
 
         {/* Mobile Responsive Navigation overlay & menu drawer */}
@@ -301,35 +310,35 @@ export default function App() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-charcoal/40 backdrop-blur-sm z-45 md:hidden pointer-events-auto"
+                className="fixed inset-0 bg-[#2B211B]/80 backdrop-blur-md z-45 lg:hidden pointer-events-auto"
                 onClick={() => setIsMobileMenuOpen(false)}
               />
 
-              {/* Drawer Content */}
+              {/* Premium Drawer Content */}
               <motion.div
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed right-0 top-0 bottom-0 w-80 max-w-full bg-[#FAF8F4] z-50 md:hidden shadow-2xl p-8 flex flex-col justify-between pointer-events-auto border-l border-gold-light/25"
+                className="fixed right-0 top-0 bottom-0 w-[85%] max-w-sm bg-[#F8F4EE] z-50 lg:hidden shadow-2xl p-8 flex flex-col justify-between pointer-events-auto border-l border-[#B68A35]/20"
               >
-                <div className="space-y-8">
+                <div className="space-y-10">
                   {/* Top Bar inside Drawer */}
-                  <div className="flex items-center justify-between pb-6 border-b border-gold-light/20">
+                  <div className="flex items-center justify-between pb-6 border-b border-[#B68A35]/20">
                     <div className="flex flex-col text-left">
-                      <span className="font-serif text-lg font-bold leading-none text-charcoal">BLOOM</span>
-                      <span className="font-sans text-[8px] tracking-[0.2em] text-charcoal/70 uppercase font-bold mt-0.5 whitespace-nowrap">Consumer Care</span>
+                      <span className="font-serif text-xl font-bold leading-none text-[#2B211B]">BLOOM</span>
+                      <span className="font-sans text-[8px] tracking-[0.2em] text-[#B68A35] uppercase font-bold mt-1">Consumer Care</span>
                     </div>
                     <button
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="p-2 rounded-full border border-charcoal/10 hover:bg-[#EBE3D5]"
+                      className="p-2 rounded-full border border-[#B68A35]/30 text-[#2B211B] hover:bg-[#EDE5DA] transition-colors"
                     >
-                      <X className="w-5 h-5 text-charcoal" />
+                      <X className="w-5 h-5" strokeWidth={1.5} />
                     </button>
                   </div>
 
                   {/* Navigation Links */}
-                  <nav className="flex flex-col gap-4 text-left">
+                  <nav className="flex flex-col gap-6 text-left">
                     {navLinks.map((link) => {
                       const isActive = (link.href === "#" && activeSection === "") || (link.href === `#${activeSection}`);
                       return (
@@ -337,10 +346,11 @@ export default function App() {
                           key={link.href}
                           href={link.href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className={`font-sans text-sm uppercase tracking-widest transition-colors py-2 border-b border-charcoal/5 font-bold block ${
-                            isActive ? "text-gold" : "text-charcoal/80 hover:text-charcoal"
+                          className={`font-sans text-lg uppercase tracking-[0.1em] transition-colors py-2 font-medium flex items-center gap-4 ${
+                            isActive ? "text-[#B68A35]" : "text-[#2B211B] hover:text-[#B68A35]"
                           }`}
                         >
+                          {isActive && <div className="w-1.5 h-1.5 rounded-full bg-[#B68A35]" />}
                           {link.label}
                         </a>
                       );
@@ -349,20 +359,20 @@ export default function App() {
                 </div>
 
                 {/* Bottom of Drawer */}
-                <div className="space-y-4 text-left">
+                <div className="space-y-6 text-center">
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       const el = document.getElementById("featured-products");
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="w-full py-4 bg-gold hover:bg-[#D47E10] text-white text-xs font-bold rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-[#B68A35] hover:bg-[#D4AF37] text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-[0_4px_20px_rgba(182,138,53,0.3)] transition-colors flex items-center justify-center gap-3"
                   >
-                    <ShoppingBag className="w-4 h-4" />
-                    Shop Products
+                    <span>Shop Collection</span>
+                    <ArrowRight className="w-4 h-4" />
                   </button>
-                  <p className="text-[10px] text-charcoal/40 font-mono text-center">
-                    Purely Natural. Zero Preservatives.
+                  <p className="text-[10px] text-[#2B211B]/50 font-sans uppercase tracking-[0.2em] font-medium">
+                    100% Natural • Zero Preservatives
                   </p>
                 </div>
               </motion.div>

@@ -22,7 +22,7 @@ export default function WomenEmpowerment() {
 
   return (
     <section id="women-empowerment" className="py-16 px-6 sm:px-12 lg:px-24 bg-[#FAF8F5] relative overflow-hidden select-none">
-      
+
       {/* Background Soft Accents & Elegant Lotus Illustration */}
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[#E88D14]/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-[#5C3A21]/3 blur-[120px] pointer-events-none" />
@@ -39,7 +39,7 @@ export default function WomenEmpowerment() {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10 text-center">
-        
+
         {/* Header */}
         <div className="max-w-3xl mx-auto space-y-4 mb-12">
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-medium bg-[#E88D14]/10 px-4 py-1.5 rounded-full border border-[#E88D14]/15 inline-block">
@@ -70,7 +70,7 @@ export default function WomenEmpowerment() {
         {/* Vision Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left mb-12">
           {cards.map((card, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               className="bg-white border border-gold-light/20 p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden group flex flex-col justify-between min-h-[240px]"
               initial={{ opacity: 0, y: 15 }}

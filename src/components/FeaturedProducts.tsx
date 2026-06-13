@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ShoppingBag, Check, X, Eye } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { ShoppingBag, Check, X, Eye, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface FeaturedProductsProps {
@@ -79,6 +79,16 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
   const [addingToCartId, setAddingToCartId] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedFlavor, setSelectedFlavor] = useState<string>("");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const { current } = scrollContainerRef;
+      // Scroll by one item width + gap approximately, or just 80% of container width
+      const scrollAmount = current.clientWidth > 768 ? current.clientWidth / 3 : current.clientWidth * 0.8;
+      current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+    }
+  };
 
   const handleBuy = (id: string, name: string) => {
     setAddingToCartId(id);
@@ -90,26 +100,33 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
   };
 
   return (
-    <section id="featured-products" className="py-16 px-6 sm:px-12 lg:px-24 bg-bg-primary select-none">
-      <div className="max-w-[1400px] mx-auto text-center space-y-10">
+    <section id="featured-products" className="py-16 px-6 sm:px-12 lg:px-24 bg-bg-primary select-none overflow-hidden">
+      <div className="max-w-[1400px] mx-auto text-center space-y-10 relative">
         
-        {/* Header */}
-        <div className="space-y-4">
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal">
-            Our Collection
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-charcoal/70 max-w-xl mx-auto">
-            Freshly crafted snacks made with quality ingredients and a commitment to freshness.
-          </p>
+        {/* Header with Navigation Arrows */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-left">
+          <div className="space-y-4 max-w-2xl mx-auto md:mx-0 text-center md:text-left">
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal">
+              Our Collection
+            </h2>
+            <p className="font-sans text-base sm:text-lg text-charcoal/70">
+              Freshly crafted snacks made with quality ingredients and a commitment to freshness.
+            </p>
+          </div>
         </div>
 
-        {/* 4 Products Grid (Carousel on Mobile) */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 lg:gap-8 text-left md:overflow-visible">
-          {products.map((prod) => (
-            <div 
-              key={prod.id}
-              className="group flex-[0_0_90%] sm:flex-[0_0_80%] md:flex-none snap-center bg-[#F7EFE5] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-250 border border-gold-light/20 flex flex-col"
-            >
+        {/* Carousel Grid */}
+        <div className="relative">
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 text-left scrollbar-hide"
+            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+          >
+            {products.map((prod) => (
+              <div 
+                key={prod.id}
+                className="group flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] xl:flex-[0_0_23%] snap-start bg-[#F7EFE5] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-250 border border-gold-light/20 flex flex-col"
+              >
               {/* Image Area - 70% visually */}
               <div className="relative h-64 sm:h-72 w-full bg-[#EBE3D5] overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => setSelectedProduct(prod)}>
                 <img 
@@ -185,16 +202,37 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               </div>
             </div>
           ))}
+          </div>
         </div>
 
-        {/* Bottom Message */}
-        <div className="pt-8 max-w-2xl mx-auto border-t border-gold-light/30">
-          <p className="font-serif text-xl sm:text-2xl text-charcoal font-semibold mb-2">
-            More products coming soon.
-          </p>
-          <p className="font-sans text-charcoal/70 text-base">
-            We're focused on perfecting every product before expanding our collection.
-          </p>
+        {/* Bottom Actions & Message */}
+        <div className="pt-8 flex flex-col items-center gap-8 border-t border-gold-light/30">
+          {/* Carousel Arrows */}
+          <div className="flex items-center justify-center gap-4">
+            <button 
+              onClick={() => scroll("left")} 
+              className="p-3 sm:p-4 rounded-full border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-white transition-colors cursor-pointer shadow-sm"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+            </button>
+            <button 
+              onClick={() => scroll("right")} 
+              className="p-3 sm:p-4 rounded-full border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-white transition-colors cursor-pointer shadow-sm"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+            </button>
+          </div>
+
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="font-serif text-xl sm:text-2xl text-charcoal font-semibold mb-2">
+              More products coming soon.
+            </p>
+            <p className="font-sans text-charcoal/70 text-base">
+              We're focused on perfecting every product before expanding our collection.
+            </p>
+          </div>
         </div>
       </div>
 
