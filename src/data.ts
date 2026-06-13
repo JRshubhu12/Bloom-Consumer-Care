@@ -2,16 +2,16 @@ import { Product, Ingredient, Statistics, TimelineMilestone, SubscriptionPlan, T
 
 export const PRODUCTS: Product[] = [
   {
-    id: "makhana-pink-salt",
-    name: "Himalayan Pink Salt Roasted Makhana",
+    id: "makhana-roasted",
+    name: "Roasted Makhana",
     category: "makhana",
-    description: "Handpicked premium Phool Makhana (gorgon nuts) slow-roasted to absolute perfection in light cold-pressed extra virgin olive oil, lightly tossed with micro-ground organic Himalayan pink rock salt.",
-    shortDescription: "Pristine crunch. Finished with mineral-rich Himalayan pink salt.",
-    price: 349,
+    description: "Handpicked premium Phool Makhana slow-roasted to absolute perfection in light cold-pressed oil, tossed with premium spices. Light, crunchy, and freshly prepared.",
+    shortDescription: "Slow-roasted premium lotus seeds available in Mint, Chatpata Masala, Plain Salted, and Magic Masala.",
+    price: 0,
     rating: 4.9,
-    weightOptions: ["120g", "250g"],
-    flavors: ["Pristine Pink Salt", "Cracked Black Pepper", "Smoked Truffle Aura"],
-    originalIngredients: ["Premium Lotus Seeds", "Cold-Pressed Extra Virgin Olive Oil", "Himalayan Pink Salt", "Sea Minerals"],
+    weightOptions: ["100g", "250g"],
+    flavors: ["Mint Flavour", "Chatpata Masala", "Plain Salted", "Magic Masala"],
+    originalIngredients: ["Premium Lotus Seeds", "Cold-Pressed Oil", "Natural Spices", "Organic Salt"],
     calories: 120,
     macros: {
       protein: "4.2g",
@@ -19,71 +19,71 @@ export const PRODUCTS: Product[] = [
       carbs: "18.5g",
       fat: "3.2g"
     },
-    healthHighlights: ["Zero Trans Fats", "Gluten-Free Certified", "Low Glycemic Index", "Rich in Anti-Aging Flavonoids"],
-    imageUrl: "https://i.ibb.co/RTJ9J5BD/spicy-masala-phool-makhana.jpg"
+    healthHighlights: ["100% Preservative-Free", "Zero Trans Fats", "Gluten-Free", "Rich in Antioxidants"],
+    imageUrl: "https://m.media-amazon.com/images/I/71paW2uT-kL.jpg"
   },
   {
-    id: "makhana-mint-basil",
-    name: "Classic Mint & Sweet Basil Roasted Makhana",
-    category: "makhana",
-    description: "An elegant herbal fusion that brings the cool, refreshing breeze of fresh kitchen gardens. Tossed with fine dry organic garden mint sheets and sweet basil flakes for an elite culinary experience.",
-    shortDescription: "A cool garden breeze. Garden mint meets sweet basil leaves.",
-    price: 379,
-    rating: 4.8,
-    weightOptions: ["120g", "250g"],
-    flavors: ["Garden Mint & Basil", "Lemon Pepper Fusion", "Zesty Herbs"],
-    originalIngredients: ["Premium Lotus Seeds", "Cold-Pressed Olive Oil", "Dehydrated Mint Leaves", "Sweet Basil", "Organic Rock Salt"],
-    calories: 118,
-    macros: {
-      protein: "4.1g",
-      fiber: "3.2g",
-      carbs: "18.1g",
-      fat: "3.0g"
-    },
-    healthHighlights: ["Promotes Digestion", "Rich in Antioxidants", "Heart Friendly", "No Added Preservatives"],
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI9SurnUsQhwnAD0rR6zsL4fP3EQiG5ae6xamRyTyLIA&s=10"
-  },
-  {
-    id: "dryfruit-royal",
-    name: "Royal Almond & Golden Saffron Crown Mix",
+    id: "energy-bar",
+    name: "Energy Bar",
     category: "dryfruits",
-    description: "A super-luxury mélange of whole Californian Mamra almonds, rich buttery cashews, and organic raisins infused overnight with real Kashmiri saffron strands and ground green cardamom.",
-    shortDescription: "The sovereign blend of high-energy Mamra nuts with true saffron.",
-    price: 699,
-    rating: 5.0,
-    weightOptions: ["200g", "450g"],
-    flavors: ["Saffron Cardamom", "Vanilla Glaze Essence", "Raw UnSalted Natural"],
-    originalIngredients: ["Mamra Almonds", "Premium Cashews", "Kashmiri Saffron", "Green Cardamom Essence", "Kishmish"],
-    calories: 185,
-    macros: {
-      protein: "6.8g",
-      fiber: "4.5g",
-      carbs: "12.0g",
-      fat: "11.5g"
-    },
-    healthHighlights: ["Brain-Boosting Vitamin E", "High Copper & Zinc", "Immune Strength", "Natural Antioxidant Infusion"],
-    imageUrl: "https://i.ibb.co/F4g1VSL4/image.png"
-  },
-  {
-    id: "namkeen-quinoa",
-    name: "Quinoa Seed & Crisp Amaranth Wellness Namkeen",
-    category: "namkeen",
-    description: "A light, delicious reimagining of traditional namkeen. Popped nutritious quinoa grain, organic amaranth, and healthy watermelon seeds tossed with simple herbs. Completely oil-roasted, not fried.",
-    shortDescription: "A baked, crunch-rich celebration of ancient super-grains and seeds.",
-    price: 299,
-    rating: 4.7,
-    weightOptions: ["150g", "300g"],
-    flavors: ["Spiced Herbs", "Simple Sea Salt", "Tangy Raw Mango Dust"],
-    originalIngredients: ["Popped Quinoa", "Puffed Amaranth", "Pumpkin Seeds", "Watermelon Seeds", "Natural Herb Seasoning"],
-    calories: 110,
+    description: "A premium energy bar made entirely from wholesome dry fruits. Naturally sweetened with zero added sugar or preservatives.",
+    shortDescription: "Wholesome energy bar crafted with premium almonds, cashews, and dates.",
+    price: 0,
+    rating: 4.8,
+    weightOptions: ["40g", "120g"],
+    flavors: ["Premium Dry Fruit Bar"],
+    originalIngredients: ["Premium Almonds", "Rich Cashews", "Soft Dates", "Golden Raisins"],
+    calories: 175,
     macros: {
       protein: "5.5g",
-      fiber: "3.8g",
-      carbs: "15.2g",
-      fat: "2.5g"
+      fiber: "4.0g",
+      carbs: "22.0g",
+      fat: "8.5g"
     },
-    healthHighlights: ["Over 5g complete Protein", "Baked - Zero Frying", "Low Saturated Fats", "High Iron & Magnesium"],
-    imageUrl: "https://i.ibb.co/XrwZhg76/image.png"
+    healthHighlights: ["No Added Sugar", "100% Natural Ingredients", "High Fiber", "Clean Energy"],
+    imageUrl: "https://5.imimg.com/data5/SELLER/Default/2022/6/DA/PX/HQ/64879238/dry-fruit-sweet-500x500.jpeg"
+  },
+  {
+    id: "dryfruit-mix",
+    name: "Premium Dry Fruit Mix",
+    category: "dryfruits",
+    description: "A hand-selected premium blend of California almonds, whole cashews, golden raisins, and choice dry fruits. Packed fresh for maximum flavor and nutrition.",
+    shortDescription: "A premium curated mix of almonds, cashews, raisins, and select dry fruits.",
+    price: 0,
+    rating: 5.0,
+    weightOptions: ["200g", "500g"],
+    flavors: ["Classic Raw Mix", "Lightly Salted"],
+    originalIngredients: ["Mamra Almonds", "Whole Cashews", "Golden Kishmish", "Pistachios"],
+    calories: 180,
+    macros: {
+      protein: "6.5g",
+      fiber: "4.2g",
+      carbs: "14.0g",
+      fat: "11.0g"
+    },
+    healthHighlights: ["Heart Friendly", "Rich in Vitamin E", "High Copper & Zinc", "Ethically Sourced"],
+    imageUrl: "https://m.media-amazon.com/images/I/71m18e2dMAL._AC_UF894,1000_QL80_.jpg"
+  },
+  {
+    id: "makhana-namkeen",
+    name: "Makhana Mix Namkeen",
+    category: "namkeen",
+    description: "A crispy, traditional namkeen blend prepared using premium makhana, puffed amaranth, and seeds. Slow-roasted without frying for guilt-free everyday snacking.",
+    shortDescription: "Traditional crispy namkeen blend featuring slow-roasted premium makhana.",
+    price: 0,
+    rating: 4.7,
+    weightOptions: ["150g", "300g"],
+    flavors: ["Classic Masala", "Tangy Herb"],
+    originalIngredients: ["Slow-Roasted Makhana", "Puffed Amaranth", "Melon Seeds", "Traditional Spices"],
+    calories: 115,
+    macros: {
+      protein: "4.8g",
+      fiber: "3.5g",
+      carbs: "16.5g",
+      fat: "2.8g"
+    },
+    healthHighlights: ["Baked - Zero Frying", "Low Saturated Fats", "High Fiber", "No Artificial Flavours"],
+    imageUrl: "https://myheartbeets.com/wp-content/uploads/2022/02/roasted-makhana-mix.jpg"
   }
 ];
 

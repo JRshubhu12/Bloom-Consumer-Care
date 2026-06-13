@@ -78,9 +78,9 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 font-sans text-sm text-[#5C554D]">
               <li>
-                <a href="#about-story" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
+                <a href="#" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span>About</span>
+                  <span>Home</span>
                 </a>
               </li>
               <li>
@@ -90,21 +90,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#women-empowerment" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
-                  <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span>Women Empowerment</span>
-                </a>
-              </li>
-              <li>
                 <a href="#founder-reviews" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span>Founder Story</span>
-                </a>
-              </li>
-              <li>
-                <a href="#why-bloom" className="hover:text-[#C3A77D] transition-colors flex items-center gap-1.5 group">
-                  <span className="w-1 h-1 rounded-full bg-[#C3A77D] opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span>Future Vision</span>
+                  <span>Our Story</span>
                 </a>
               </li>
               <li>
@@ -190,18 +178,6 @@ export default function Footer() {
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C3A77D] transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C3A77D]" />
                   <span>Facebook</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C3A77D] transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C3A77D]" />
-                  <span>LinkedIn</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C3A77D] transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C3A77D]" />
-                  <span>YouTube</span>
                 </a>
               </li>
             </ul>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ShieldCheck, Heart, Sparkles, Sprout, Shield, ShoppingBag, Plus, Sparkle, Eye, X } from "lucide-react";
+import { ShieldCheck, Heart, Sparkles, Sprout, Shield, ShoppingBag, Plus, Sparkle, Eye, X, Globe } from "lucide-react";
 import { PRODUCTS } from "../data";
 
 interface BestSellersStripProps {
@@ -64,13 +64,13 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
             <span className="text-[10px] text-[#847D75] mt-1">Ready Roasted On-Order</span>
           </div>
 
-          {/* Trust 5 - FSSAI */}
+          {/* Trust 5 - Ethically Sourced */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-center text-center p-4 rounded-2xl hover:bg-white transition-all duration-300 group">
             <div className="w-12 h-12 rounded-full bg-[#C3A77D]/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-              <Shield className="w-6 h-6 text-[#C3A77D]" />
+              <Globe className="w-6 h-6 text-[#C3A77D]" />
             </div>
-            <span className="text-sm font-semibold text-[#2F2924] leading-tight block">FSSAI Certified</span>
-            <span className="text-[10px] text-[#847D75] mt-1">Clinical Safety Assured</span>
+            <span className="text-sm font-semibold text-[#2F2924] leading-tight block">Ethically Sourced</span>
+            <span className="text-[10px] text-[#847D75] mt-1">Direct From Farms</span>
           </div>
 
         </div>
@@ -91,7 +91,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
           {/* Horizontal Product grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {PRODUCTS.map((prod) => {
-              const image = prod.imageUrl || "https://i.ibb.co/RTJ9J5BD/spicy-masala-phool-makhana.jpg";
+              const image = prod.imageUrl;
               const isAdding = addingId === prod.id;
 
               return (
@@ -142,8 +142,8 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-[#F4EFE8]">
-                      <span className="font-serif text-base font-bold text-[#4B3425]">
-                        ₹{prod.price}
+                      <span className="text-[10px] font-mono text-[#847D75] uppercase tracking-wider font-semibold">
+                        {prod.weightOptions?.[0] || "Premium Pack"}
                       </span>
                       
                       <button
@@ -215,8 +215,8 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                     {/* Price and Add button footer */}
                     <div className="pt-3 border-t border-[#F4EFE8] flex items-center justify-between">
                       <div>
-                        <span className="text-[7.5px] font-mono text-charcoal/40 uppercase block font-bold">Price value:</span>
-                        <strong className="text-base font-serif font-bold text-cocoa">₹{prod.price}</strong>
+                        <span className="text-[7.5px] font-mono text-charcoal/40 uppercase block font-bold">Pack Options:</span>
+                        <strong className="text-xs font-mono font-bold text-cocoa">{prod.weightOptions?.join(" / ") || "120g"}</strong>
                       </div>
 
                       <button

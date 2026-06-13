@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageSquare, MapPin, Phone, Mail, Check, MessageCircleOff, Send, HelpCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Check, Send, MessageCircle } from "lucide-react";
 
 export default function ContactSection() {
   const [sentMessage, setSentMessage] = useState(false);
@@ -28,36 +28,50 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact-partners" className="py-24 px-6 sm:px-12 lg:px-24 bg-white relative overflow-hidden">
-      
-      {/* Decorative backing frames */}
-      <div className="absolute top-0 right-0 w-[550px] h-[550px] rounded-full bg-gold/5 blur-[120px] pointer-events-none" />
-
+    <section id="contact-partners" className="py-20 px-6 sm:px-12 lg:px-24 bg-[#FAF8F5] relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header content styling */}
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-20">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-semibold">Join the Restorations Circle</span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-charcoal">
-            Connect With Our Desk <br />
-            <span className="italic font-normal text-cocoa">Purely Natural. Zero Preservatives.</span>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto text-center space-y-6 mb-16"
+        >
+          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-900">
+            Let's Connect
           </h2>
-          <div className="w-12 h-[1px] bg-gold mx-auto" />
-        </div>
+          <p className="text-xl sm:text-2xl font-serif text-[#8B5A2B]">
+            Questions, feedback, or product inquiries?<br/>
+            We're always happy to hear from you.
+          </p>
+          <p className="font-sans text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+            Whether you're curious about our products, need assistance, or simply want to learn more about Bloom Consumer Care, our team is here to help.
+          </p>
+        </motion.div>
 
         {/* Master layout grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           
-          {/* LEFT COLUMN (Lg: 7 columns): Interactive Large luxury form switcher */}
-          <div className="lg:col-span-7 bg-bg-primary/55 border border-gold-light/35 rounded-3xl p-8 sm:p-10 shadow-[0_20px_50px_rgba(107,74,50,0.06)] relative text-left">
-            
-            <div className="space-y-6">
+          {/* LEFT COLUMN: Contact Form */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-white rounded-[24px] p-8 sm:p-10 shadow-sm border border-neutral-100 h-full flex flex-col justify-center"
+          >
+            <div className="space-y-8">
               
-              <div className="space-y-1">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-gold font-bold">Proposal Lodging Registry</span>
-                <h3 className="font-serif text-lg font-semibold text-charcoal">
-                  Write to Customer Care Desks
+              <div className="space-y-2">
+                <h3 className="font-serif text-2xl font-semibold text-neutral-900">
+                  Send Us A Message
                 </h3>
+                <p className="font-sans text-sm text-neutral-600 leading-relaxed">
+                  Have a question about our products or need assistance?<br/>
+                  Fill out the form below and we'll get back to you soon.
+                </p>
               </div>
 
               {/* Real form rendering */}
@@ -66,66 +80,61 @@ export default function ContactSection() {
                   <motion.form
                     key="active-contact-form"
                     onSubmit={handleSubmit}
-                    className="space-y-4 mt-2"
+                    className="space-y-5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="font-sans text-xs text-charcoal/70 font-semibold block">Full Name</label>
-                        <input
-                          type="text"
-                          required
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="e.g. Anandita Choudhary"
-                          className="w-full bg-white border border-gold-light/35 rounded-lg p-3 text-xs focus:border-gold outline-none"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="font-sans text-xs text-charcoal/70 font-semibold block">Contact Number</label>
-                        <input
-                          type="text"
-                          required
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="+91 80054..."
-                          className="w-full bg-white border border-gold-light/35 rounded-lg p-3 text-xs focus:border-gold outline-none"
-                        />
-                      </div>
+                    <div className="space-y-1.5">
+                      <label className="font-sans text-sm text-neutral-700 font-medium block">Full Name</label>
+                      <input
+                        type="text"
+                        required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full bg-neutral-50/50 border border-neutral-200 rounded-xl p-3.5 text-sm focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] transition-colors outline-none"
+                      />
+                    </div>
+                    
+                    <div className="space-y-1.5">
+                      <label className="font-sans text-sm text-neutral-700 font-medium block">Phone Number</label>
+                      <input
+                        type="tel"
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="w-full bg-neutral-50/50 border border-neutral-200 rounded-xl p-3.5 text-sm focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] transition-colors outline-none"
+                      />
                     </div>
 
-                    <div className="space-y-1">
-                      <label className="font-sans text-xs text-charcoal/70 font-semibold block">Email Address</label>
+                    <div className="space-y-1.5">
+                      <label className="font-sans text-sm text-neutral-700 font-medium block">Email Address</label>
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="yourname@gmail.com"
-                        className="w-full bg-white border border-gold-light/35 rounded-lg p-3 text-xs focus:border-gold outline-none"
+                        className="w-full bg-neutral-50/50 border border-neutral-200 rounded-xl p-3.5 text-sm focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] transition-colors outline-none"
                       />
                     </div>
 
-                    <div className="space-y-1">
-                      <label className="font-sans text-xs text-charcoal/70 font-semibold block font-light">Describe details of inquiry</label>
+                    <div className="space-y-1.5">
+                      <label className="font-sans text-sm text-neutral-700 font-medium block">Your Message</label>
                       <textarea
-                        rows={3}
+                        rows={4}
                         required
                         value={desc}
                         onChange={(e) => setDesc(e.target.value)}
-                        placeholder="Type your questions or inquiries here..."
-                        className="w-full bg-white border border-gold-light/35 rounded-lg p-3 text-xs focus:border-gold outline-none resize-none"
+                        className="w-full bg-neutral-50/50 border border-neutral-200 rounded-xl p-3.5 text-sm focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] transition-colors outline-none resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full mt-4 py-4 bg-cocoa text-bg-primary font-medium tracking-wide text-xs uppercase rounded-lg hover:bg-charcoal transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                      className="w-full mt-2 py-4 bg-[#8B5A2B] text-white font-medium text-base rounded-xl hover:bg-[#6B4A32] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow group"
                     >
-                      <Send className="w-4 h-4" />
-                      <span>Send General Inquiry</span>
+                      <Send className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <span>Send Message</span>
                     </button>
                   </motion.form>
                 ) : (
@@ -134,103 +143,125 @@ export default function ContactSection() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="py-12 flex flex-col items-center justify-center text-center space-y-4"
+                    className="py-16 flex flex-col items-center justify-center text-center space-y-4 bg-neutral-50/50 rounded-2xl border border-neutral-100"
                   >
-                    <div className="w-14 h-14 rounded-full bg-sage text-white flex items-center justify-center shadow-md">
-                      <Check className="w-6 h-6" />
+                    <div className="w-16 h-16 rounded-full bg-[#8B5A2B]/10 text-[#8B5A2B] flex items-center justify-center mb-2">
+                      <Check className="w-8 h-8" />
                     </div>
-                    <h4 className="font-serif text-lg font-semibold text-charcoal">Enquiry Proposal Lodged!</h4>
-                    <p className="font-sans text-xs text-charcoal/70 max-w-sm leading-relaxed font-light">
-                      Thank you for trusting Bloom. Our dedicated customer desk will review details and respond back to your email: <strong className="text-cocoa font-semibold">{email}</strong>.
+                    <h4 className="font-serif text-2xl font-semibold text-neutral-900">Thank You!</h4>
+                    <p className="font-sans text-base text-neutral-600 max-w-sm leading-relaxed">
+                      We've received your message and will get back to you as soon as possible.
                     </p>
                   </motion.div>
                 )}
               </AnimatePresence>
 
             </div>
+          </motion.div>
 
-          </div>
-
-          {/* RIGHT COLUMN (Lg: 5 columns): WhatsApp integration and Aesthetic Maps */}
-          <div className="lg:col-span-5 space-y-6 flex flex-col justify-between text-left h-full">
+          {/* RIGHT COLUMN: Info + WhatsApp + Promise + Image */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="space-y-6 flex flex-col h-full"
+          >
             
-            {/* Direct WhatsApp trigger */}
-            <div className="bg-bg-secondary/45 border border-gold-light/40 rounded-2xl p-6 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="p-2 bg-sage/10 rounded-full text-sage">
-                  <MessageSquare className="w-5 h-5" />
-                </span>
-                <div className="space-y-0.5">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#B39359] font-bold block">Connoisseurs live link</span>
-                  <h4 className="font-serif text-base font-semibold text-charcoal">WhatsApp Support Available</h4>
+            {/* Card 1: WhatsApp Support */}
+            <div className="bg-white border border-neutral-100 rounded-[24px] p-8 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex flex-col sm:flex-row items-start gap-5">
+                <div className="p-3.5 bg-[#25D366]/10 rounded-2xl text-[#25D366] shrink-0">
+                  <MessageCircle className="w-7 h-7" />
                 </div>
-              </div>
-              <p className="font-sans text-xs text-charcoal/70 font-light leading-relaxed">
-                Connect instantly with our customer care and product desk on WhatsApp for zero-wait guidance, custom gifting support, or general help.
-              </p>
-              <button
-                onClick={() => window.open(`https://wa.me/918005484365?text=Hello%20Bloom%20Care%20representative`)}
-                className="w-full py-2.5 bg-sage text-white font-mono text-[10px] uppercase font-bold rounded-lg hover:bg-cocoa transition-colors tracking-widest flex items-center justify-center gap-2"
-              >
-                <span>Initiate WhatsApp Chat</span>
-              </button>
-            </div>
-
-            {/* Aesthetic luxury map showcase */}
-            <div className="bg-bg-primary/55 border border-gold-light/35 rounded-2xl p-4 space-y-3 relative overflow-hidden shadow-sm">
-              <div className="flex items-center gap-1.5 border-b border-gold-light/20 pb-2">
-                <MapPin className="w-4 h-4 text-gold" />
-                <span className="font-mono text-[9px] tracking-widest text-gold uppercase font-bold">Our Headquarters & Origins</span>
-              </div>
-
-              {/* Beautiful interactive SVG/vector canvas representing map coordinate */}
-              <div className="h-44 bg-white rounded-lg border border-gold-light/10 relative overflow-hidden flex items-center justify-center">
-                {/* Simulated clean cartography lines */}
-                <div className="absolute inset-0 opacity-15 pointer-events-none">
-                  <svg className="w-full h-full text-gold-light" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <line x1="0" y1="20" x2="100" y2="20" stroke="currentColor" strokeWidth="0.5" />
-                    <line x1="0" y1="60" x2="100" y2="60" stroke="currentColor" strokeWidth="0.5" />
-                    <line x1="30" y1="0" x2="30" y2="100" stroke="currentColor" strokeWidth="0.5" />
-                    <line x1="70" y1="0" x2="70" y2="100" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-                  </svg>
-                </div>
-
-                {/* Simulated Pin Locations */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                  <div
-                    className="w-4 h-4 rounded-full bg-cocoa border-2 border-white mx-auto shadow flex items-center justify-center"
-                    title="Varanasi Head Office"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-gold" />
+                <div className="space-y-4 w-full">
+                  <div>
+                    <h4 className="font-serif text-xl font-semibold text-neutral-900">WhatsApp Support</h4>
+                    <p className="font-sans text-sm text-neutral-600 mt-1.5 leading-relaxed">
+                      Need a quick response?<br className="hidden sm:block" /> Connect with us directly on WhatsApp.
+                    </p>
                   </div>
-                  <span className="font-mono text-[8px] text-charcoal bg-white border border-gold-light/35 px-1.5 py-0.5 rounded shadow-sm mt-1 block leading-none font-bold">Varanasi HQ</span>
-                </div>
-
-                <span className="font-serif text-[10px] text-charcoal/40 select-none tracking-widest italic uppercase">Bloom Sourcing & Admin Map</span>
-
-              </div>
-
-              {/* List details below */}
-              <div className="space-y-1.5 text-xs text-charcoal/70 font-sans font-light">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
-                  <span>Varanasi, Uttar Pradesh, India</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
-                  <span>+91 8005484365</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-gold shrink-0" />
-                  <span>deep131281@gmail.com</span>
+                  <button
+                    onClick={() => window.open(`https://wa.me/918005484365?text=Hello%20Bloom%20Consumer%20Care`)}
+                    className="w-full sm:w-auto px-6 py-3 bg-[#25D366] text-white font-medium text-sm rounded-xl hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Chat On WhatsApp</span>
+                  </button>
                 </div>
               </div>
-
             </div>
 
-          </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Card 2: Contact Information */}
+              <div className="bg-white border border-neutral-100 rounded-[24px] p-8 shadow-sm hover:shadow-md transition-shadow">
+                <h4 className="font-serif text-lg font-semibold text-neutral-900 mb-6">Contact Information</h4>
+                <div className="space-y-5 text-sm text-neutral-600 font-sans">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 p-1.5 bg-[#8B5A2B]/10 rounded-lg text-[#8B5A2B] shrink-0">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <span className="leading-relaxed">Varanasi, Uttar Pradesh, India</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="p-1.5 bg-[#8B5A2B]/10 rounded-lg text-[#8B5A2B] shrink-0">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <span>+91 8005484365</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="p-1.5 bg-[#8B5A2B]/10 rounded-lg text-[#8B5A2B] shrink-0">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <a href="mailto:deep131281@gmail.com" className="hover:text-[#8B5A2B] transition-colors">deep131281@gmail.com</a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Map Interface replacing Our Promise */}
+              <div className="bg-white border border-neutral-100 rounded-[24px] p-2 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.0979822606!2d82.90870635489721!3d25.320739744673898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2db76febcf4d%3A0x68131710853ff0b5!2sVaranasi%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  className="min-h-[220px]"
+                  style={{ border: 0, borderRadius: '18px' }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Bloom Consumer Care Location"
+                ></iframe>
+              </div>
+            </div>
+
+            {/* Replace Map Section: Premium Food-Inspired Visual Card */}
+            <div className="relative rounded-[24px] overflow-hidden shadow-sm h-56 sm:flex-1 mt-6 border border-neutral-100 bg-[#FAF8F5] group">
+              <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                <img 
+                  src="https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Premium Assorted Dry Fruits" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+              </div>
+              
+              <div className="absolute bottom-0 left-0 p-8 w-full">
+                <div className="flex flex-col gap-2">
+                  <h4 className="font-serif text-3xl font-semibold text-white tracking-wide">Bloom</h4>
+                  <div className="w-10 h-0.5 bg-[#8B5A2B] rounded-full"></div>
+                  <p className="font-sans text-sm text-white/90 font-medium leading-relaxed mt-2 tracking-wide uppercase">
+                    Purely Natural.<br/>
+                    Zero Preservatives.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </motion.div>
 
         </div>
+
+
 
       </div>
     </section>

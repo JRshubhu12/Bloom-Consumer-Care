@@ -5,31 +5,31 @@ export default function IngredientHighlight() {
   const ingredientsList = [
     {
       id: "makhana",
-      name: "Roasted Makhana",
-      image: "/food-macro/makhana.png",
-      description: "Light, crunchy, and naturally satisfying. Known for its balanced nutritional profile and delicious texture, makhana forms the heart of many Bloom products.",
-      highlights: ["Naturally Light", "Source of Protein", "Rich in Nutrients", "Perfect Everyday Snack"]
+      name: "Roasted Makhana (Mint Flavour)",
+      image: "https://m.media-amazon.com/images/I/71paW2uT-kL.jpg",
+      description: "Wholesome popped lotus seeds, slow-roasted to crispy perfection and seasoned naturally with garden mint and salt.",
+      highlights: ["Naturally Light", "Zero Preservatives", "Slow-Roasted", "Crispy & Wholesome"]
     },
     {
-      id: "almonds",
-      name: "Premium Almonds",
-      image: "/food-macro/almonds.png",
-      description: "Carefully selected almonds that add crunch, flavor, and nutritional goodness.",
-      highlights: ["Protein Rich", "Naturally Nutritious", "Premium Quality Selection", "Delicious Crunch"]
+      id: "energy-bar",
+      name: "Energy Bar",
+      image: "https://5.imimg.com/data5/SELLER/Default/2022/6/DA/PX/HQ/64879238/dry-fruit-sweet-500x500.jpeg",
+      description: "Wholesome energy bar made entirely from premium dates, whole almonds, cashews, and golden raisins.",
+      highlights: ["No Added Sugar", "Rich in Fiber", "Premium Dry Fruits", "Naturally Energizing"]
     },
     {
-      id: "cashews",
-      name: "Whole Cashews",
-      image: "/food-macro/cashews.png",
-      description: "Smooth, creamy, and naturally satisfying. Selected for consistency, freshness, and premium taste.",
-      highlights: ["Rich Taste", "Quality Sourced", "Carefully Selected", "Freshly Packed"]
+      id: "dryfruit-mix",
+      name: "Premium Dry Fruit Mix",
+      image: "https://m.media-amazon.com/images/I/71m18e2dMAL._AC_UF894,1000_QL80_.jpg",
+      description: "A hand-selected curated premium blend of California almonds, whole cashews, and golden raisins.",
+      highlights: ["Mamra Almonds", "Choice Cashews", "Golden Kishmish", "Packed Fresh"]
     },
     {
-      id: "raisins",
-      name: "Golden Raisins",
-      image: "/food-macro/dry_fruits.png",
-      description: "Naturally sweet and flavorful. Added to create a balanced blend of taste and texture.",
-      highlights: ["Naturally Sweet", "Soft Texture", "Quality Selected", "Great Snacking Companion"]
+      id: "namkeen",
+      name: "Makhana Mix Namkeen",
+      image: "https://myheartbeets.com/wp-content/uploads/2022/02/roasted-makhana-mix.jpg",
+      description: "A traditional crispy snack mix prepared using premium slow-roasted makhana and healthy grain seeds.",
+      highlights: ["Baked - Zero Frying", "Spiced Naturally", "Ancient Grains", "High Fiber Crunch"]
     }
   ];
 
@@ -42,12 +42,12 @@ export default function IngredientHighlight() {
   ];
 
   return (
-    <section id="inside-pack" className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-primary relative overflow-hidden">
+    <section id="inside-pack" className="py-16 px-6 sm:px-12 lg:px-24 bg-bg-primary relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Editorial Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-20">
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-bold">
             Inside Every Pack
           </span>

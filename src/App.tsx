@@ -6,16 +6,12 @@ import Lenis from "lenis";
 
 // Component imports
 import Hero from "./components/Hero";
-import BestSellersStrip from "./components/BestSellersStrip";
-import AboutBloom from "./components/AboutBloom";
+import WomenEmpowerment from "./components/WomenEmpowerment";
 import OurImpact from "./components/OurImpact";
 import IngredientHighlight from "./components/IngredientHighlight";
-import WomenEmpowerment from "./components/WomenEmpowerment";
-import HealthBenefits from "./components/HealthBenefits";
 import FeaturedProducts from "./components/FeaturedProducts";
 import SidebarScroller from "./components/SidebarScroller";
 import LuxuryLoader from "./components/LuxuryLoader";
-import WhatsComingNext from "./components/WhatsComingNext";
 import FounderTestimonials from "./components/FounderTestimonials";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
@@ -35,6 +31,42 @@ export default function App() {
 
   const [scrolled, setScrolled] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const sections = ["featured-products", "founder-reviews", "contact-partners"];
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: "-25% 0px -55% 0px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    const handleHomeScroll = () => {
+      if (window.scrollY < 300) {
+        setActiveSection("");
+      }
+    };
+    window.addEventListener("scroll", handleHomeScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleHomeScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (isLoading) {
@@ -152,9 +184,9 @@ export default function App() {
   };
 
   const navLinks = [
-    { href: "#about-story", label: "Story" },
-    { href: "#featured-products", label: "Shop" },
-    { href: "#our-promise", label: "Impact" },
+    { href: "#", label: "Home" },
+    { href: "#featured-products", label: "Products" },
+    { href: "#founder-reviews", label: "Our Story" },
     { href: "#contact-partners", label: "Contact" },
   ];
 
@@ -181,38 +213,45 @@ export default function App() {
         scrolled ? "py-3 px-4 sm:px-6 lg:px-8" : "py-5 px-4 sm:px-6 lg:px-8"
       }`}>
 
-        <header className={`max-w-5xl mx-auto flex items-center justify-between transition-all duration-300 pointer-events-auto bg-[#F7EFE5]/95 backdrop-blur-md border border-charcoal/5 rounded-full ${
+        <header className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 pointer-events-auto bg-[#F7EFE5]/95 backdrop-blur-md border border-charcoal/5 rounded-full ${
           scrolled 
-            ? "px-5 sm:px-6 py-2.5 shadow-md" 
-            : "px-6 sm:px-8 py-3.5 shadow-sm"
+            ? "px-4 sm:px-6 py-2 shadow-md" 
+            : "px-5 sm:px-8 py-3 shadow-sm"
         }`}>
           
           {/* Lotus Brand Logo Title */}
-          <a href="#" className="flex items-center gap-3 group text-left">
+          <a href="#" className="flex items-center gap-2 lg:gap-3 group text-left">
             <img 
               src="/company-logo.png" 
               alt="BLOOM Logo" 
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-8 lg:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               loading="eager"
             />
             <div className="flex flex-col">
-              <span className="font-serif text-lg font-bold leading-none text-charcoal">BLOOM</span>
-              <span className="font-sans text-[8px] tracking-[0.2em] text-charcoal/70 uppercase font-bold mt-0.5 whitespace-nowrap">Consumer Care</span>
+              <span className="font-serif text-base lg:text-lg font-bold leading-none text-charcoal">BLOOM</span>
+              <span className="font-sans text-[7px] lg:text-[8px] tracking-[0.2em] text-charcoal/70 uppercase font-bold mt-0.5 whitespace-nowrap">Consumer Care</span>
             </div>
           </a>
 
           {/* Premium Desktop Navigation Linkages */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="font-sans text-xs uppercase tracking-widest text-charcoal/80 hover:text-charcoal transition-colors font-bold relative py-1 group whitespace-nowrap"
-              >
-                {link.label}
-                <span className="absolute bottom-0 inset-x-0 h-[2px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-250" />
-              </a>
-            ))}
+          <nav className="hidden md:flex items-center gap-2.5 lg:gap-5 xl:gap-8">
+            {navLinks.map((link) => {
+              const isActive = (link.href === "#" && activeSection === "") || (link.href === `#${activeSection}`);
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`font-sans text-[10px] lg:text-xs uppercase tracking-widest transition-colors font-bold relative py-1 group whitespace-nowrap ${
+                    isActive ? "text-gold" : "text-charcoal/80 hover:text-charcoal"
+                  }`}
+                >
+                  {link.label}
+                  <span className={`absolute bottom-0 inset-x-0 h-[2px] bg-gold transition-transform origin-left duration-250 ${
+                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`} />
+                </a>
+              );
+            })}
           </nav>
 
           {/* Premium Cart/Buy Icon Trigger */}
@@ -253,26 +292,81 @@ export default function App() {
 
         </header>
 
-        {/* Mobile Responsive Navigation menu drawer */}
+        {/* Mobile Responsive Navigation overlay & menu drawer */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="lg:hidden mt-2 bg-[#FAF8F4] border border-[#C6A769]/25 shadow-xl rounded-2xl p-4 space-y-2 text-left"
-            >
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 px-3 font-sans text-[11px] uppercase tracking-widest text-[#222222] hover:text-[#C6A769] rounded-lg hover:bg-white/60 transition-all font-medium border-b border-[#C6A769]/10"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </motion.div>
+            <>
+              {/* Overlay Background */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-charcoal/40 backdrop-blur-sm z-45 md:hidden pointer-events-auto"
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
+
+              {/* Drawer Content */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed right-0 top-0 bottom-0 w-80 max-w-full bg-[#FAF8F4] z-50 md:hidden shadow-2xl p-8 flex flex-col justify-between pointer-events-auto border-l border-gold-light/25"
+              >
+                <div className="space-y-8">
+                  {/* Top Bar inside Drawer */}
+                  <div className="flex items-center justify-between pb-6 border-b border-gold-light/20">
+                    <div className="flex flex-col text-left">
+                      <span className="font-serif text-lg font-bold leading-none text-charcoal">BLOOM</span>
+                      <span className="font-sans text-[8px] tracking-[0.2em] text-charcoal/70 uppercase font-bold mt-0.5 whitespace-nowrap">Consumer Care</span>
+                    </div>
+                    <button
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="p-2 rounded-full border border-charcoal/10 hover:bg-[#EBE3D5]"
+                    >
+                      <X className="w-5 h-5 text-charcoal" />
+                    </button>
+                  </div>
+
+                  {/* Navigation Links */}
+                  <nav className="flex flex-col gap-4 text-left">
+                    {navLinks.map((link) => {
+                      const isActive = (link.href === "#" && activeSection === "") || (link.href === `#${activeSection}`);
+                      return (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`font-sans text-sm uppercase tracking-widest transition-colors py-2 border-b border-charcoal/5 font-bold block ${
+                            isActive ? "text-gold" : "text-charcoal/80 hover:text-charcoal"
+                          }`}
+                        >
+                          {link.label}
+                        </a>
+                      );
+                    })}
+                  </nav>
+                </div>
+
+                {/* Bottom of Drawer */}
+                <div className="space-y-4 text-left">
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      const el = document.getElementById("featured-products");
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="w-full py-4 bg-gold hover:bg-[#D47E10] text-white text-xs font-bold rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2"
+                  >
+                    <ShoppingBag className="w-4 h-4" />
+                    Shop Products
+                  </button>
+                  <p className="text-[10px] text-charcoal/40 font-mono text-center">
+                    Purely Natural. Zero Preservatives.
+                  </p>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>
@@ -331,8 +425,7 @@ export default function App() {
                             <div className="space-y-0.5">
                               <h4 className="font-serif text-xs font-semibold text-charcoal max-w-[200px] truncate">{item.name}</h4>
                               <div className="flex items-baseline gap-1.5">
-                                <span className="font-mono text-xs text-cocoa">₹{item.price * item.qty}</span>
-                                <span className="text-[10px] text-charcoal/40 font-light">Qty: {item.qty}</span>
+                                <span className="text-[10px] text-charcoal/60 font-bold">Qty: {item.qty}</span>
                               </div>
                             </div>
                             <button
@@ -372,18 +465,14 @@ export default function App() {
               {/* Drawer bottom billing aggregations */}
               {cart.length > 0 && checkoutStep === "cart" && (
                 <div className="p-6 border-t border-gold-light/20 bg-bg-primary space-y-4">
-                  <div className="space-y-2 font-mono text-xs text-charcoal/80">
+                  <div className="space-y-2 font-sans text-xs text-charcoal/80">
                     <div className="flex justify-between">
-                      <span>Subtotal value:</span>
-                      <span>₹{totalCartPrice}</span>
+                      <span>Total Items:</span>
+                      <span className="font-bold">{totalCartCount}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Fresh Roast Shipping:</span>
                       <span className="text-sage font-bold">FREE COMPLIMENTARY</span>
-                    </div>
-                    <div className="flex justify-between border-t border-gold-light/15 pt-2 text-sm sm:text-base text-cocoa">
-                      <span className="font-serif font-bold">Total price:</span>
-                      <strong className="font-serif font-bold">₹{totalCartPrice}</strong>
                     </div>
                   </div>
 
@@ -413,41 +502,29 @@ export default function App() {
       {/* CORE EXPERIENCE PAGES */}
       <main>
         
-        {/* HERO SECTION */}
+         {/* HERO SECTION */}
         <Hero 
           onShopClick={() => {
             const el = document.getElementById("featured-products");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
           onStoryClick={() => {
-            const el = document.getElementById("about-story");
+            const el = document.getElementById("founder-reviews");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
-        />
+         />
 
-        {/* PRODUCTS QUICK BUY STRIP & TRUST SEGMENT */}
-        <BestSellersStrip onAddToCart={handleAddToCart} />
+         <WomenEmpowerment />
 
-        {/* ABOUT STORY PATHS */}
-        <AboutBloom />
-
-        {/* METRICS COUNT UP */}
-        <OurImpact />
+         {/* METRICS COUNT UP */}
+         <OurImpact />
 
         {/* ORGANIC INGREDIENTS HOVER PROFILES */}
         <IngredientHighlight />
 
-        {/* WOMEN ARTISANS SIGNATURE CYCLE TIMELINE */}
-        <WomenEmpowerment />
-
-        {/* APPLE HEALTH SCIENCE METHOLOGY */}
-        <HealthBenefits />
-
         {/* LUXURY FLOATING FeaturedProducts INSPIRED BY COHESIVE FMCG BRAND */}
         <FeaturedProducts onAddToCart={handleAddToCart} />
 
-        {/* WHAT'S COMING NEXT PRODUCT ROADMAP */}
-        <WhatsComingNext />
 
         {/* CUSTOMERS ORAL HISTORY & FOUNDER GROWTH SAGA */}
         <FounderTestimonials />

@@ -30,12 +30,12 @@ export default function OurImpact() {
   ];
 
   return (
-    <section id="our-promise" className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-secondary relative overflow-hidden">
+    <section id="our-promise" className="py-16 px-6 sm:px-12 lg:px-24 bg-bg-secondary relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto relative z-10 text-center">
         
         {/* Core section copy and luxury tagline */}
-        <div className="max-w-3xl mx-auto space-y-4 mb-20">
+        <div className="max-w-3xl mx-auto space-y-4 mb-12">
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold font-bold">
             Our Promise
           </span>

@@ -6,11 +6,33 @@ interface HeroProps {
   onStoryClick: () => void;
 }
 
-const CAROUSEL_IMAGES = [
-  "/makhana.png",
-  "/almonds.png",
-  "/cashews.png",
-  "/raisins.png",
+interface CarouselItem {
+  src: string;
+  flavor: string;
+  description: string;
+}
+
+const CAROUSEL_IMAGES: CarouselItem[] = [
+  {
+    src: "https://m.media-amazon.com/images/I/71paW2uT-kL.jpg",
+    flavor: "Mint Flavour",
+    description: "Fresh garden mint meets slow-roasted premium lotus seeds."
+  },
+  {
+    src: "https://img1.exportersindia.com/product_images/bc-full/2025/10/14951820/chatpata-masala-makhana-1761546855-8402310.jpeg",
+    flavor: "Chatpata Masala",
+    description: "A tangy, appetizing blend of classic spices."
+  },
+  {
+    src: "https://5.imimg.com/data5/SELLER/Default/2025/9/545694968/TX/LZ/SH/99605915/plain-salted-roasted-makhana.jpeg",
+    flavor: "Plain Salted",
+    description: "Crispy perfection finished with a touch of mineral rock salt."
+  },
+  {
+    src: "https://cdn2.foodviva.com/static-content/food-images/snacks-recipes/roasted-makhana-masala/roasted-makhana-masala.jpg",
+    flavor: "Magic Masala",
+    description: "A premium aromatic blend of roasted makhana and magic spices."
+  }
 ];
 
 export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
@@ -19,7 +41,7 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
-    }, 5000);
+    }, 4500);
     return () => clearInterval(timer);
   }, []);
 
@@ -114,39 +136,52 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
               className="flex transition-transform duration-700 ease-in-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
-              {CAROUSEL_IMAGES.map((src, index) => (
+              {CAROUSEL_IMAGES.map((item, index) => (
                 <img
                   key={index}
-                  src={src}
-                  alt={`Premium healthy snack - ${index + 1}`}
+                  src={item.src}
+                  alt={`Roasted Makhana - ${item.flavor}`}
                   className="w-full h-full object-cover shrink-0"
                   fetchPriority={index === 0 ? "high" : "auto"}
                 />
               ))}
             </div>
 
+            {/* Caption Overlay */}
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-6 pt-16 flex flex-col justify-end text-left pointer-events-none select-none text-white z-10">
+              <span className="text-[10px] font-mono tracking-widest text-[#E88D14] uppercase font-bold block mb-1">
+                Roasted Makhana Collection
+              </span>
+              <h3 className="font-serif text-xl sm:text-2xl font-bold tracking-tight">
+                {CAROUSEL_IMAGES[currentSlide].flavor}
+              </h3>
+              <p className="font-sans text-xs text-white/80 mt-1 max-w-[85%] leading-relaxed">
+                {CAROUSEL_IMAGES[currentSlide].description}
+              </p>
+            </div>
+
             {/* Navigation Arrows */}
             <button 
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white text-charcoal"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white text-charcoal z-10"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button 
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white text-charcoal"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white text-charcoal z-10"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            {/* Dots */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+            {/* Dots (Translucent Top-Right Pill) */}
+            <div className="absolute top-6 right-6 flex gap-2 z-10 bg-black/30 backdrop-blur-md px-3 py-2 rounded-full border border-white/10">
               {CAROUSEL_IMAGES.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    currentSlide === index ? "bg-white scale-125" : "bg-white/50 hover:bg-white/75"
+                  className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    currentSlide === index ? "bg-white scale-125" : "bg-white/40 hover:bg-white/70"
                   }`}
                 />
               ))}
@@ -157,7 +192,7 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
           </div>
 
           {/* Floating freshness badge */}
-          <div className="absolute -bottom-6 -left-6 sm:bottom-10 sm:-left-10 bg-white p-4 rounded-2xl shadow-xl border border-gold/20 flex items-center gap-4 transition-transform hover:-translate-y-1">
+          <div className="absolute -bottom-6 -right-4 sm:bottom-8 sm:-right-8 bg-white p-4 rounded-2xl shadow-xl border border-gold/20 flex items-center gap-4 transition-transform hover:-translate-y-1 z-20">
             <div className="w-12 h-12 bg-sage/10 rounded-full flex items-center justify-center">
               <ShieldCheck className="w-6 h-6 text-sage" />
             </div>

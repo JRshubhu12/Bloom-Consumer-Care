@@ -3,12 +3,10 @@ import { motion, AnimatePresence } from "motion/react";
 
 const SECTIONS = [
   { id: "hero", label: "Home" },
-  { id: "about-story", label: "Our Story" },
-  { id: "best-sellers", label: "Products" },
+  { id: "women-empowerment", label: "Empowerment" },
   { id: "our-promise", label: "Our Promise" },
-  { id: "women-empowerment", label: "Women Empowerment" },
-  { id: "whats-next", label: "Coming Next" },
-  { id: "founder-reviews", label: "Founder Story" },
+  { id: "featured-products", label: "Our Collection" },
+  { id: "founder-reviews", label: "Our Story" },
   { id: "contact-partners", label: "Contact" },
 ];
 
