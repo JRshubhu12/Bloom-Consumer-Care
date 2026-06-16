@@ -47,7 +47,7 @@ export default function ContactSection() {
             We're always happy to hear from you.
           </p>
           <p className="font-sans text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-            Whether you're curious about our products, need assistance, or simply want to learn more about Bloom Consumer Care, our team is here to help.
+            Whether you're curious about our products, need assistance, or simply want to learn more about Bloom Purely Natural, our team is here to help.
           </p>
         </motion.div>
 
@@ -182,7 +182,7 @@ export default function ContactSection() {
                     </p>
                   </div>
                   <button
-                    onClick={() => window.open(`https://wa.me/918005484365?text=Hello%20Bloom%20Consumer%20Care`)}
+                    onClick={() => window.open(`https://wa.me/918005484365?text=Hello%20Bloom%20Purely%20Natural`)}
                     className="w-full sm:w-auto px-6 py-3 bg-[#25D366] text-white font-medium text-sm rounded-xl hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow"
                   >
                     <MessageCircle className="w-4 h-4" />
@@ -229,7 +229,7 @@ export default function ContactSection() {
                   allowFullScreen={false}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Bloom Consumer Care Location"
+                  title="Bloom Purely Natural Location"
                 ></iframe>
               </div>
             </div>

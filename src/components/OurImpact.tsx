@@ -45,7 +45,7 @@ export default function OurImpact() {
           </h2>
           <div className="w-12 h-[2px] bg-leaf mx-auto" />
           <p className="font-sans text-earth/80 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
-            At Bloom Consumer Care, we believe healthy snacks should be transparent, delicious, and made with care. Our commitment is to provide preservative-free products crafted with quality ingredients and a focus on freshness, nutrition, and trust.
+            At Bloom Purely Natural, we believe healthy snacks should be transparent, delicious, and made with care. Our commitment is to provide preservative-free products crafted with quality ingredients and a focus on freshness, nutrition, and trust.
           </p>
         </div>
 
@@ -56,19 +56,14 @@ export default function OurImpact() {
             return (
               <motion.div
                 key={promise.id}
-                className="bg-white border-2 border-leaf/30 rounded-[2rem] p-8 transition-all duration-300 flex flex-col items-center justify-start text-center relative group shadow-sm min-h-[260px]"
-                initial={{ opacity: 0, y: 15 }}
+                className="bg-white rounded-[2rem] p-8 flex flex-col items-center justify-start text-center relative group premium-card feature-card min-h-[260px]"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                whileHover={{ 
-                  y: -4, 
-                  boxShadow: "0 15px 30px -10px rgba(92, 58, 33, 0.1)",
-                  borderColor: "rgba(232, 141, 20, 0.4)" 
-                }}
+                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
                 {/* Icon wrapper inside leaf base */}
-                <div className="p-4 rounded-full bg-leaf/10 text-leaf group-hover:scale-105 group-hover:bg-leaf group-hover:text-white transition-all duration-300 relative z-10">
+                <div className="p-4 rounded-full bg-leaf/10 text-leaf transition-colors duration-300 relative z-10 feature-icon">
                   <Icon className="w-6 h-6 stroke-[2]" />
                 </div>
 

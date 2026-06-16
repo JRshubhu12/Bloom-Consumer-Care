@@ -137,7 +137,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
             animate={{ scale: 1.05, opacity: 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             src="/company-logo.png"
-            alt="Bloom Consumer Care Logo"
+            alt="Bloom Purely Natural Logo"
             className="w-24 h-24 object-contain filter drop-shadow-[0_4px_12px_rgba(198,167,105,0.15)]"
           />
         );
@@ -174,10 +174,10 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
       {/* LUXURY EDITORIAL BRAND DISPLAY */}
       <div className="text-center space-y-2 max-w-sm px-4">
         <h1 className="font-serif text-[#4B3425] text-3xl sm:text-4xl tracking-[0.25em] uppercase font-semibold leading-none pl-[0.25em]">
-          BLOOM<span className="text-xs align-super text-[#C6A769]">™</span>
+          BLOOM
         </h1>
         <p className="font-mono text-[#C6A769] text-[9px] uppercase tracking-[0.4em] font-medium pl-[0.4em]">
-          Consumer Care
+          Purely Natural
         </p>
 
         {/* Dynamic Tagline Rotator */}

@@ -39,7 +39,7 @@ export default function WomenEmpowerment() {
 
       {/* Decorative Lotus Illustration */}
       <div
-        className="absolute right-4 bottom-4 w-48 h-48 pointer-events-none"
+        className="absolute right-4 bottom-4 w-48 h-48 pointer-events-none ambient-float"
         style={{ color: "#5C3A21", opacity: 0.04 }}
       >
         <svg viewBox="0 0 100 100" fill="currentColor">
@@ -89,7 +89,7 @@ export default function WomenEmpowerment() {
             className="font-sans text-base sm:text-lg leading-relaxed font-light"
             style={{ color: "#3A2A1FCC" }}
           >
-            At Bloom Consumer Care, we believe that meaningful change begins with opportunity.
+            At Bloom Purely Natural, we believe that meaningful change begins with opportunity.
           </p>
           <p
             className="font-sans text-base sm:text-lg leading-relaxed font-light"
@@ -110,23 +110,14 @@ export default function WomenEmpowerment() {
           {cards.map((card, idx) => (
             <motion.div
               key={idx}
-              className="p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden group flex flex-col justify-between min-h-[240px]"
-              style={{
-                backgroundColor: "#F5EFE8",
-                border: "1px solid #EFE6D820"
-              }}
-              initial={{ opacity: 0, y: 15 }}
+              className="p-8 rounded-2xl relative overflow-hidden group flex flex-col justify-between min-h-[240px] premium-card feature-card bg-bg-secondary border border-bg-tertiary/20"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              whileHover={{
-                y: -4,
-                borderColor: "#D4AF3740",
-                boxShadow: "0 12px 24px rgba(92, 58, 33, 0.08)"
-              }}
+              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <div>
-                <div className="text-3xl mb-5 transition-transform group-hover:scale-110 duration-300 inline-block">
+                <div className="text-3xl mb-5 inline-block feature-icon">
                   {card.icon}
                 </div>
                 <h4
@@ -136,7 +127,7 @@ export default function WomenEmpowerment() {
                   {card.title}
                 </h4>
                 <p
-                  className="font-sans text-sm leading-relaxed font-light"
+                  className="font-sans text-sm leading-relaxed font-light relative z-10"
                   style={{ color: "#5C3A21B3" }}
                 >
                   {card.desc}

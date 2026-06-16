@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { Calendar } from "lucide-react";
 
 export default function FounderTestimonials() {
@@ -23,8 +24,14 @@ export default function FounderTestimonials() {
         </div>
 
         {/* Journey Card */}
-        <div className="bg-white/80 border border-leaf/20 rounded-3xl p-8 sm:p-12 text-left shadow-sm relative overflow-hidden max-w-3xl mx-auto backdrop-blur-md">
-          <div className="flex items-center gap-3 mb-6 text-leaf">
+        <motion.div 
+          className="bg-white/80 border border-[#EFE6D8]/80 rounded-3xl p-8 sm:p-12 text-left relative overflow-hidden max-w-3xl mx-auto backdrop-blur-md premium-card feature-card"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="flex items-center gap-3 mb-6 text-leaf feature-icon">
             <Calendar className="w-5 h-5" />
             <h4 className="font-serif text-2xl font-semibold text-earth">
               2026: The Beginning of Bloom
@@ -33,7 +40,7 @@ export default function FounderTestimonials() {
 
           <div className="space-y-4 font-sans text-sm sm:text-base text-earth/80 leading-relaxed font-light mb-8">
             <p>
-              Bloom Consumer Care was founded with a simple vision:
+              Bloom Purely Natural was founded with a simple vision:
             </p>
             <p className="font-semibold text-earth text-lg">
               To create fresh, preservative-free foods made with quality ingredients and a commitment to better everyday living.
@@ -58,7 +65,7 @@ export default function FounderTestimonials() {
               Crafted With Care.
             </span>
           </div>
-        </div>
+        </motion.div>
 
       </div>
 

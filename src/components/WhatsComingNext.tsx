@@ -67,21 +67,16 @@ export default function WhatsComingNext() {
             return (
               <motion.div
                 key={card.id}
-                className="bg-white border-2 border-leaf/40 rounded-3xl p-8 flex flex-col justify-between text-left relative overflow-hidden transition-all duration-300 min-h-[220px] shadow-sm group"
-                initial={{ opacity: 0, y: 15 }}
+                className="bg-white rounded-3xl p-8 flex flex-col justify-between text-left relative overflow-hidden min-h-[220px] premium-card feature-card border border-[#EFE6D8]/80"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                whileHover={{
-                  y: -4,
-                  borderColor: "rgba(232, 141, 20, 0.4)",
-                  boxShadow: "0 15px 30px -10px rgba(92, 58, 33, 0.1)"
-                }}
+                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="space-y-4">
                   {/* Icon & Emoji Row */}
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-leaf/10 border border-leaf/10 flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
+                  <div className="flex items-center justify-between relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-leaf/10 border border-leaf/10 flex items-center justify-center text-xl feature-icon">
                       <Icon className="w-6 h-6 text-leaf stroke-[2]" />
                     </div>
                     
@@ -92,7 +87,7 @@ export default function WhatsComingNext() {
                   </div>
 
                   {/* Title and Description */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 relative z-10">
                     <h3 className="font-serif text-2xl font-bold text-earth flex items-center gap-2">
                       <span className="text-xl">{card.iconEmoji}</span>
                       <span>{card.title}</span>

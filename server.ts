@@ -37,7 +37,7 @@ async function startServer() {
     try {
       const { preferences, healthGoals, ageGroup, dietType } = req.body;
       
-      const prompt = `You are the premium nutrition chef & empowerment advisor at Bloom Consumer Care.
+      const prompt = `You are the premium nutrition chef & empowerment advisor at Bloom Purely Natural.
 Based on the customer's profile:
 - Diet Type: ${dietType || "General / Organic"}
 - Primary Health/Wellness Goals: ${healthGoals || "Healthy snacking, higher energy, weight management"}

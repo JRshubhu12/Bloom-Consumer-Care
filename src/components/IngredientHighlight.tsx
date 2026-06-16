@@ -39,7 +39,7 @@ export default function IngredientHighlight() {
     <section id="ingredient-highlight" className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-primary relative overflow-hidden">
       
       {/* Botanical Background Textures */}
-      <div className="absolute top-0 right-0 opacity-[0.03] pointer-events-none text-nature">
+      <div className="absolute top-0 right-0 opacity-[0.03] pointer-events-none text-nature ambient-float">
         <svg width="400" height="400" viewBox="0 0 100 100">
           <path d="M10,90 Q50,10 90,90" stroke="currentColor" strokeWidth="2" fill="none"/>
           <path d="M30,50 Q50,30 70,50" stroke="currentColor" strokeWidth="2" fill="none"/>
@@ -75,12 +75,12 @@ export default function IngredientHighlight() {
                 <motion.div
                   key={step.id}
                   className="flex flex-col items-center text-center group"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.15 }}
+                  transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="w-24 h-24 rounded-full bg-white border border-leaf/30 shadow-sm flex items-center justify-center mb-6 relative group-hover:scale-105 transition-transform duration-300">
+                  <div className="w-24 h-24 rounded-full bg-white border border-leaf/30 shadow-xs flex items-center justify-center mb-6 relative transition-transform duration-300 feature-icon">
                     <div className="absolute inset-0 rounded-full border-2 border-dashed border-nature/20 animate-[spin_20s_linear_infinite]" />
                     <Icon className="w-8 h-8 text-leaf stroke-[1.5]" />
                   </div>

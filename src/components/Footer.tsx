@@ -23,7 +23,7 @@ export default function Footer() {
     <footer className="bg-bg-secondary text-earth border-t-2 border-leaf/10 py-24 px-6 sm:px-12 lg:px-24 relative overflow-hidden select-none">
       
       {/* Exquisite Subtle Botanical Backdrop Watermark Graphics */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.05] select-none flex items-center justify-center">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.05] select-none flex items-center justify-center ambient-float">
         <svg width="100%" height="100%" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[600px] h-[600px] text-nature">
           <path d="M400 100 C350 250 200 400 100 400 C200 400 350 550 400 700 C450 550 600 400 700 400 C600 400 450 250 400 100 Z" stroke="currentColor" strokeWidth="2" strokeDasharray="10 10" />
           <circle cx="400" cy="400" r="150" stroke="currentColor" strokeWidth="1" />
@@ -48,10 +48,10 @@ export default function Footer() {
 
           <div className="space-y-3 max-w-2xl">
             <h3 className="font-serif text-3xl sm:text-4xl tracking-[0.2em] font-medium text-earth uppercase">
-              BLOOM<span className="text-xs align-super text-leaf font-mono font-bold">TM</span>
+              BLOOM
             </h3>
             <span className="text-[11px] font-sans tracking-[0.4em] text-nature font-bold uppercase block">
-              Consumer Care
+              Purely Natural
             </span>
             <span className="text-xs font-semibold bg-leaf/10 text-leaf px-4 py-1 rounded-full border border-leaf/15 inline-block font-sans tracking-wider">
               🌿 Purely Natural • Farm Fresh
@@ -151,7 +151,7 @@ export default function Footer() {
         {/* ==================== BOTTOM STATUS BAR ==================== */}
         <div className="border-t border-leaf/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-[10px] sm:text-xs font-sans text-earth/60 text-center md:text-left space-y-1">
-            <p>© 2026 Bloom Consumer Care. All rights reserved.</p>
+            <p>© 2026 Bloom Purely Natural. All rights reserved.</p>
             <p className="text-leaf">Sourced by hand from village wetland clusters.</p>
           </div>
 

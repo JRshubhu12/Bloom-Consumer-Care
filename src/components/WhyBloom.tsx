@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Leaf, Sprout, ShieldCheck, Sparkles, Wheat, Heart } from "lucide-react";
 
 interface WhyCard {
@@ -78,7 +78,7 @@ export default function WhyBloom() {
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-earth">
             Why Choose <br />
-            <span className="italic font-normal text-cocoa">Bloom Consumer Care</span>
+            <span className="italic font-normal text-cocoa">Bloom Purely Natural</span>
           </h2>
           <div className="w-12 h-[1px] bg-leaf mx-auto" />
           <p className="font-sans text-earth/80 max-w-lg mx-auto font-light leading-relaxed text-sm sm:text-base">
@@ -91,18 +91,13 @@ export default function WhyBloom() {
           {cards.map((card, index) => {
             const CardIcon = card.icon;
             return (
-              <motion.div
+              <m.div
                 key={card.id}
-                className="group relative bg-white rounded-2xl border border-leaf/20 p-8 lg:p-10 flex flex-col justify-between text-left transition-all duration-300 shadow-sm"
-                initial={{ opacity: 0, y: 15 }}
+                className="group relative bg-white rounded-2xl border border-[#EFE6D8]/80 p-8 lg:p-10 flex flex-col justify-between text-left premium-card feature-card"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                whileHover={{
-                  y: -3,
-                  borderColor: "rgba(122, 140, 85, 0.4)",
-                  boxShadow: "0 10px 30px -10px rgba(92,58,33,0.08)",
-                }}
+                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
                 {/* Floating soft green background light bubble */}
                 <span className="absolute inset-x-12 top-12 bottom-12 bg-leaf/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -111,7 +106,7 @@ export default function WhyBloom() {
                 <div className="space-y-6 relative z-10">
                   <div className="flex items-center justify-between">
                     {/* Outline icon inside simple nature base */}
-                    <div className="p-3.5 rounded-xl bg-bg-primary border border-leaf/30 text-leaf group-hover:bg-leaf group-hover:text-white transition-colors duration-300 shadow-xs">
+                    <div className="p-3.5 rounded-xl bg-bg-primary border border-leaf/30 text-leaf group-hover:bg-leaf group-hover:text-white transition-colors duration-300 shadow-xs feature-icon">
                       <CardIcon className="w-6 h-6 stroke-[1.5]" />
                     </div>
                   </div>
@@ -141,10 +136,7 @@ export default function WhyBloom() {
                     ))}
                   </ul>
                 </div>
-
-                {/* Subtle bottom decorative line */}
-                <div className="absolute bottom-0 inset-x-10 h-[1.5px] bg-gradient-to-r from-transparent via-leaf/40 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

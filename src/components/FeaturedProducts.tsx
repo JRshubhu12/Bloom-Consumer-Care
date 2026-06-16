@@ -109,7 +109,13 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
       <div className="max-w-[1400px] mx-auto text-center space-y-12 relative z-10">
         
         {/* Header with Navigation Arrows */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-left">
+        <motion.div 
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-left"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="space-y-4 max-w-2xl mx-auto md:mx-0 text-center md:text-left">
             <span className="font-sans text-xs uppercase tracking-[0.3em] text-leaf font-bold">
               Pure Offerings
@@ -122,7 +128,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               Freshly crafted foods made with quality ingredients and a commitment to pure goodness.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Carousel Grid */}
         <div className="relative">
@@ -134,15 +140,22 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
             {products.map((prod) => (
               <div 
                 key={prod.id}
-                className="group flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] xl:flex-[0_0_23%] snap-start bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-leaf/10 flex flex-col"
+                className="group flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] xl:flex-[0_0_23%] snap-start bg-white rounded-3xl overflow-hidden border border-[#EFE6D8]/80 flex flex-col premium-card product-card"
               >
               {/* Image Area - 70% visually */}
               <div className="relative h-64 sm:h-72 w-full bg-bg-secondary overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => setSelectedProduct(prod)}>
                 <img 
                   src={prod.image} 
                   alt={prod.name} 
-                  className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-500"
+                  className="w-full h-full object-cover product-image"
                 />
+                
+                {/* Explore Product overlay */}
+                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <span className="hover-action-btn bg-white/95 text-earth text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full shadow-md">
+                    Explore Product
+                  </span>
+                </div>
                 
                 {/* Product Pouch Representation (Secondary) */}
                 <div className="absolute bottom-4 right-4 w-[25%] aspect-[3/4] bg-white rounded-xl shadow-lg border border-leaf/20 flex flex-col items-center justify-center p-2 opacity-95">
@@ -153,7 +166,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               </div>
 
               {/* Text Area */}
-              <div className="p-6 flex flex-col flex-grow bg-white">
+              <div className="p-6 flex flex-col flex-grow bg-white relative z-10">
                 {/* Title & Desc */}
                 <div className="mb-4">
                   <h3 className="font-serif text-xl sm:text-2xl font-bold text-earth mb-2 line-clamp-2 min-h-[64px]">
@@ -167,7 +180,11 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 {/* Benefits Row */}
                 <div className="space-y-2 mb-6">
                   {prod.benefits.map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-2 text-earth/80 font-medium text-xs">
+                    <div 
+                      key={i} 
+                      className="flex items-center gap-2 text-earth/80 font-medium text-xs transition-all duration-500 group-hover:translate-x-1.5"
+                      style={{ transitionDelay: `${i * 75}ms` }}
+                    >
                       <Check className="w-3.5 h-3.5 text-leaf flex-shrink-0" />
                       {benefit}
                     </div>
@@ -193,7 +210,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                         }
                         setSelectedProduct(prod);
                       }}
-                      className="w-full py-3 border border-earth text-earth text-xs font-bold uppercase tracking-wide rounded-xl transition-all flex items-center justify-center gap-2 hover:bg-earth hover:text-white"
+                      className="w-full py-3 border border-earth text-earth text-xs font-bold uppercase tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow premium-btn"
                     >
                       <Eye className="w-4 h-4" />
                       View Details
@@ -201,7 +218,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                     <button
                       onClick={() => handleBuy(prod.id, prod.name)}
                       disabled={addingToCartId !== null}
-                      className="w-full py-3 bg-leaf text-white hover:bg-nature text-xs font-bold uppercase tracking-wide rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="w-full py-3 bg-leaf text-white hover:bg-nature text-xs font-bold uppercase tracking-wide rounded-xl flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer shadow-sm hover:shadow premium-btn"
                     >
                       <ShoppingBag className="w-4 h-4" />
                       {addingToCartId === prod.id ? "Adding..." : "Add To Cart"}

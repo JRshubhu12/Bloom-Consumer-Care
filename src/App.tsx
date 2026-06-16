@@ -1,11 +1,12 @@
 import { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence, MotionConfig } from "motion/react";
+import { LazyMotion, domAnimation, m, AnimatePresence, MotionConfig } from "motion/react";
 import { ShoppingBag, ChevronRight, Check, Trash2, Menu, X, ArrowRight } from "lucide-react";
 
 import Lenis from "lenis";
 
 // Component imports
 import Hero from "./components/Hero";
+import AboutStory from "./components/AboutStory";
 import WomenEmpowerment from "./components/WomenEmpowerment";
 import OurImpact from "./components/OurImpact";
 import IngredientHighlight from "./components/IngredientHighlight";
@@ -15,6 +16,7 @@ import LuxuryLoader from "./components/LuxuryLoader";
 import FounderTestimonials from "./components/FounderTestimonials";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import FloatingParticles from "./components/FloatingParticles";
 
 interface CartItem {
   id: string;
@@ -186,26 +188,30 @@ export default function App() {
   const navLinks = [
     { href: "#", label: "Home" },
     { href: "#featured-products", label: "Products" },
-    { href: "#founder-reviews", label: "Our Story" },
+    { href: "#our-story", label: "Our Story" },
     { href: "#ingredient-highlight", label: "Journey" },
     { href: "#women-empowerment", label: "Community" },
     { href: "#contact-partners", label: "Contact" },
   ];
 
   return (
-    <MotionConfig reducedMotion="user">
-      <AnimatePresence>
-        {isLoading && (
-          <LuxuryLoader onComplete={() => setIsLoading(false)} />
-        )}
-      </AnimatePresence>
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion="user">
+        <AnimatePresence>
+          {isLoading && (
+            <LuxuryLoader onComplete={() => setIsLoading(false)} />
+          )}
+        </AnimatePresence>
 
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative min-h-screen bg-bg-primary overflow-x-hidden scroll-smooth"
-      >
+        <m.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isLoading ? 0 : 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative min-h-screen bg-bg-primary overflow-x-hidden scroll-smooth"
+        >
+      
+      {/* Floating background leaf and seed graphics */}
+      <FloatingParticles />
       
       {/* FLOATING LUXURY APPLE-STYLE SIDEBAR SCROLLER */}
       <SidebarScroller />
@@ -230,7 +236,7 @@ export default function App() {
               </div>
               <div className="flex flex-col justify-center">
                 <span className="font-serif text-xl lg:text-2xl font-bold leading-none text-earth tracking-wide">BLOOM</span>
-                <span className="font-sans text-[8px] lg:text-[9px] tracking-[0.25em] text-leaf uppercase font-semibold mt-1">Consumer Care</span>
+                <span className="font-sans text-[8px] lg:text-[9px] tracking-[0.25em] text-leaf uppercase font-semibold mt-1">Purely Natural</span>
               </div>
             </a>
 
@@ -269,14 +275,14 @@ export default function App() {
               >
                 <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
                 {totalCartCount > 0 && (
-                  <motion.span 
+                  <m.span 
                     key={totalCartCount}
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     className="absolute -top-1.5 -right-2 min-w-[18px] h-[18px] rounded-full bg-[#B68A35] text-white text-[9px] font-sans font-bold flex items-center justify-center shadow-sm px-1"
                   >
                     {totalCartCount}
-                  </motion.span>
+                  </m.span>
                 )}
               </button>
 
@@ -308,7 +314,7 @@ export default function App() {
           {isMobileMenuOpen && (
             <>
               {/* Overlay Background */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -317,7 +323,7 @@ export default function App() {
               />
 
               {/* Premium Drawer Content */}
-              <motion.div
+              <m.div
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
@@ -329,7 +335,7 @@ export default function App() {
                   <div className="flex items-center justify-between pb-6 border-b border-[#B68A35]/20">
                     <div className="flex flex-col text-left">
                       <span className="font-serif text-xl font-bold leading-none text-[#2B211B]">BLOOM</span>
-                      <span className="font-sans text-[8px] tracking-[0.2em] text-[#B68A35] uppercase font-bold mt-1">Consumer Care</span>
+                      <span className="font-sans text-[8px] tracking-[0.2em] text-[#B68A35] uppercase font-bold mt-1">Purely Natural</span>
                     </div>
                     <button
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -377,7 +383,7 @@ export default function App() {
                     100% Natural • Zero Preservatives
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
             </>
           )}
         </AnimatePresence>
@@ -394,7 +400,7 @@ export default function App() {
             />
 
             {/* Visual sliding tray */}
-            <motion.div
+            <m.div
               className="absolute right-0 inset-y-0 w-full sm:w-[420px] bg-white shadow-2xl flex flex-col justify-between border-l border-leaf/30 text-left"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -419,7 +425,7 @@ export default function App() {
               <div className="flex-1 overflow-y-auto p-6 space-y-4">
                 <AnimatePresence mode="wait">
                   {checkoutStep === "cart" ? (
-                    <motion.div key="items-list" className="space-y-4">
+                    <m.div key="items-list" className="space-y-4">
                       {cart.length === 0 ? (
                         <div className="py-16 text-center space-y-3">
                           <ShoppingBag className="w-12 h-12 text-leaf/60 mx-auto" strokeWidth="1" />
@@ -450,9 +456,9 @@ export default function App() {
                           </div>
                         ))
                       )}
-                    </motion.div>
+                    </m.div>
                   ) : (
-                    <motion.div
+                    <m.div
                       key="checkout-success"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -469,7 +475,7 @@ export default function App() {
                       <span className="text-[9px] font-mono text-nature bg-nature/10 px-3 py-1 rounded-full border border-nature/20">
                         DIRECT ACCOUNT BANK PROMPT CREDITED
                       </span>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </div>
@@ -506,7 +512,7 @@ export default function App() {
                 </div>
               )}
 
-            </motion.div>
+            </m.div>
           </div>
         )}
       </AnimatePresence>
@@ -521,10 +527,12 @@ export default function App() {
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
           onStoryClick={() => {
-            const el = document.getElementById("founder-reviews");
+            const el = document.getElementById("our-story");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
          />
+
+         <AboutStory />
 
          <WomenEmpowerment />
 
@@ -576,7 +584,8 @@ export default function App() {
         </button>
       </div>
 
-      </motion.div>
+      </m.div>
     </MotionConfig>
+  </LazyMotion>
   );
 }

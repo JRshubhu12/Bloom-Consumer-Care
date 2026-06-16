@@ -85,7 +85,7 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
                 const el = document.getElementById("featured-products");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="px-8 py-4 bg-leaf text-white text-sm sm:text-base rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 font-semibold w-full sm:w-auto"
+              className="px-8 py-4 bg-leaf text-white text-sm sm:text-base rounded-xl flex items-center justify-center gap-3 shadow-md hover:shadow-lg font-semibold w-full sm:w-auto premium-btn cursor-pointer"
             >
               Explore Collection
               <ArrowRight className="w-5 h-5" />
@@ -93,10 +93,10 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
             
             <button 
               onClick={() => {
-                const el = document.getElementById("founder-reviews");
+                const el = document.getElementById("our-story");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="px-8 py-4 border-2 border-leaf/30 text-earth text-sm sm:text-base rounded-xl bg-transparent hover:bg-leaf/5 hover:border-leaf transition-all duration-300 flex items-center justify-center gap-3 font-semibold w-full sm:w-auto"
+              className="px-8 py-4 border border-leaf/30 text-earth text-sm sm:text-base rounded-xl bg-transparent hover:bg-leaf/5 hover:border-leaf transition-all duration-300 flex items-center justify-center gap-3 font-semibold w-full sm:w-auto premium-btn cursor-pointer"
             >
               Our Story
             </button>
@@ -104,23 +104,23 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
 
           {/* Trust Bar Features */}
           <div className="flex gap-x-6 gap-y-4 flex-wrap">
-            <div className="flex items-center gap-3 bg-white/60 px-4 py-2.5 rounded-lg border border-leaf/20 shadow-sm">
-              <Leaf className="w-6 h-6 text-nature" />
-              <div className="flex flex-col">
+            <div className="flex items-center gap-3 bg-white/60 px-4 py-2.5 rounded-lg border border-[#EFE6D8]/80 premium-card feature-card shadow-xs group">
+              <Leaf className="w-6 h-6 text-nature feature-icon" />
+              <div className="flex flex-col relative z-10">
                 <span className="text-earth font-bold text-sm leading-none mb-1">Natural</span>
                 <span className="text-earth/60 text-[10px] uppercase font-bold tracking-wider">Ingredients</span>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-white/60 px-4 py-2.5 rounded-lg border border-leaf/20 shadow-sm">
-              <Heart className="w-6 h-6 text-[#E46B6B]" />
-              <div className="flex flex-col">
+            <div className="flex items-center gap-3 bg-white/60 px-4 py-2.5 rounded-lg border border-[#EFE6D8]/80 premium-card feature-card shadow-xs group">
+              <Heart className="w-6 h-6 text-[#E46B6B] feature-icon" />
+              <div className="flex flex-col relative z-10">
                 <span className="text-earth font-bold text-sm leading-none mb-1">Crafted</span>
                 <span className="text-earth/60 text-[10px] uppercase font-bold tracking-wider">With Care</span>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-white/60 px-4 py-2.5 rounded-lg border border-leaf/20 shadow-sm">
-              <Sparkles className="w-6 h-6 text-leaf" />
-              <div className="flex flex-col">
+            <div className="flex items-center gap-3 bg-white/60 px-4 py-2.5 rounded-lg border border-[#EFE6D8]/80 premium-card feature-card shadow-xs group">
+              <Sparkles className="w-6 h-6 text-leaf feature-icon" />
+              <div className="flex flex-col relative z-10">
                 <span className="text-earth font-bold text-sm leading-none mb-1">Premium</span>
                 <span className="text-earth/60 text-[10px] uppercase font-bold tracking-wider">Quality</span>
               </div>

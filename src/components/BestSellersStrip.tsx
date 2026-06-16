@@ -29,8 +29,8 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6 lg:gap-8 bg-white/60 p-8 rounded-3xl border border-[#EAE4DB] shadow-xs">
           
           {/* Trust 1 */}
-          <div className="flex flex-col items-center text-center p-4 rounded-2xl hover:bg-white transition-all duration-300 group">
-            <div className="w-12 h-12 rounded-full bg-[#768364]/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+          <div className="flex flex-col items-center text-center p-4 rounded-2xl group premium-card feature-card border border-[#EAE4DB]/30 bg-white/40">
+            <div className="w-12 h-12 rounded-full bg-[#768364]/10 flex items-center justify-center mb-3 feature-icon">
               <ShieldCheck className="w-6 h-6 text-[#768364]" />
             </div>
             <span className="text-sm font-semibold text-[#2F2924] leading-tight block">100% Preservative Free</span>
@@ -38,8 +38,8 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
           </div>
 
           {/* Trust 2 */}
-          <div className="flex flex-col items-center text-center p-4 rounded-2xl hover:bg-white transition-all duration-300 group">
-            <div className="w-12 h-12 rounded-full bg-[#C3A77D]/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+          <div className="flex flex-col items-center text-center p-4 rounded-2xl group premium-card feature-card border border-[#EAE4DB]/30 bg-white/40">
+            <div className="w-12 h-12 rounded-full bg-[#C3A77D]/10 flex items-center justify-center mb-3 feature-icon">
               <Heart className="w-6 h-6 text-[#C3A77D]" />
             </div>
             <span className="text-sm font-semibold text-[#2F2924] leading-tight block">Made By Women</span>
@@ -47,8 +47,8 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
           </div>
 
           {/* Trust 3 */}
-          <div className="flex flex-col items-center text-center p-4 rounded-2xl hover:bg-white transition-all duration-300 group">
-            <div className="w-12 h-12 rounded-full bg-[#C3A77D]/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+          <div className="flex flex-col items-center text-center p-4 rounded-2xl group premium-card feature-card border border-[#EAE4DB]/30 bg-white/40">
+            <div className="w-12 h-12 rounded-full bg-[#C3A77D]/10 flex items-center justify-center mb-3 feature-icon">
               <Sparkles className="w-6 h-6 text-[#C3A77D]" />
             </div>
             <span className="text-sm font-semibold text-[#2F2924] leading-tight block">Premium Ingredients</span>
@@ -56,8 +56,8 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
           </div>
 
           {/* Trust 4 */}
-          <div className="flex flex-col items-center text-center p-4 rounded-2xl hover:bg-white transition-all duration-300 group">
-            <div className="w-12 h-12 rounded-full bg-[#768364]/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+          <div className="flex flex-col items-center text-center p-4 rounded-2xl group premium-card feature-card border border-[#EAE4DB]/30 bg-white/40">
+            <div className="w-12 h-12 rounded-full bg-[#768364]/10 flex items-center justify-center mb-3 feature-icon">
               <Sprout className="w-6 h-6 text-[#768364]" />
             </div>
             <span className="text-sm font-semibold text-[#2F2924] leading-tight block">Small Batch Freshness</span>
@@ -65,8 +65,8 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
           </div>
 
           {/* Trust 5 - Ethically Sourced */}
-          <div className="col-span-2 md:col-span-1 flex flex-col items-center text-center p-4 rounded-2xl hover:bg-white transition-all duration-300 group">
-            <div className="w-12 h-12 rounded-full bg-[#C3A77D]/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+          <div className="col-span-2 md:col-span-1 flex flex-col items-center text-center p-4 rounded-2xl group premium-card feature-card border border-[#EAE4DB]/30 bg-white/40">
+            <div className="w-12 h-12 rounded-full bg-[#C3A77D]/10 flex items-center justify-center mb-3 feature-icon">
               <Globe className="w-6 h-6 text-[#C3A77D]" />
             </div>
             <span className="text-sm font-semibold text-[#2F2924] leading-tight block">Ethically Sourced</span>
@@ -90,15 +90,18 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
 
           {/* Horizontal Product grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {PRODUCTS.map((prod) => {
+            {PRODUCTS.map((prod, idx) => {
               const image = prod.imageUrl;
               const isAdding = addingId === prod.id;
 
               return (
                 <motion.div
                   key={prod.id}
-                  className="bg-white rounded-2xl border border-[#EAE4DB] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 relative group overflow-hidden h-[380px]"
-                  whileHover={{ y: -3 }}
+                  className="bg-white rounded-2xl border border-[#EAE4DB] p-4 flex flex-col justify-between relative group overflow-hidden h-[380px] premium-card product-card"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {/* Preservative Free Badge */}
                   <div className="absolute top-3 left-3 z-10 bg-[#768364]/95 text-white text-[9px] font-semibold tracking-wider px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
@@ -111,7 +114,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                     <img
                       src={image}
                       alt={prod.name}
-                      className="max-h-full max-w-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
+                      className="max-h-full max-w-full object-contain rounded-lg product-image"
                       referrerPolicy="no-referrer"
                       loading="lazy"
                     />
@@ -131,7 +134,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                   </div>
 
                   {/* Core product descriptors */}
-                  <div className="flex-1 flex flex-col justify-between space-y-2">
+                  <div className="flex-1 flex flex-col justify-between space-y-2 relative z-10">
                     <div className="space-y-1 text-left">
                       <span className="text-[9px] uppercase tracking-wider text-[#C3A77D] font-bold font-mono">
                         {prod.category === "makhana" ? "Roasted Makhana" : prod.category === "dryfruits" ? "Gourmet Dry Fruit" : "Healthy Namkeen"}
@@ -149,7 +152,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       <button
                         onClick={() => handleQuickAdd(prod.name, prod.id)}
                         disabled={isAdding}
-                        className="py-2 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-sm hover:shadow-md cursor-pointer disabled:opacity-80"
+                        className="py-2 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[10px] font-bold uppercase tracking-widest rounded-full flex items-center gap-1.5 shadow-sm hover:shadow-md cursor-pointer disabled:opacity-80 premium-btn"
                       >
                         {isAdding ? (
                           <>
@@ -159,7 +162,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                         ) : (
                           <>
                             <Plus className="w-3.5 h-3.5" />
-                            <span>Add To Cart</span>
+                            <span>Add</span>
                           </>
                         )}
                       </button>
@@ -167,7 +170,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                   </div>
 
                   {/* ================== PRODUCT HOVER PANEL OVERLAY ================== */}
-                  <div className={`absolute inset-0 bg-white/98 p-5 border border-[#C6A769]/30 rounded-2xl transition-all duration-300 ease-out z-20 flex flex-col justify-between h-full select-none text-left ${
+                  <div className={`absolute inset-0 bg-white/98 p-5 border border-[#C6A769]/30 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] z-20 flex flex-col justify-between h-full select-none text-left ${
                     activeDetailsId === prod.id ? "translate-y-0" : "translate-y-full sm:group-hover:translate-y-0"
                   }`}>
                     
@@ -183,7 +186,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       <X className="w-4 h-4" />
                     </button>
 
-                    <div className="space-y-4">
+                    <div className="space-y-4 relative z-10">
                       
                       {/* Title Segment */}
                       <div>
@@ -213,7 +216,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                     </div>
 
                     {/* Price and Add button footer */}
-                    <div className="pt-3 border-t border-[#F4EFE8] flex items-center justify-between">
+                    <div className="pt-3 border-t border-[#F4EFE8] flex items-center justify-between relative z-10">
                       <div>
                         <span className="text-[7.5px] font-mono text-earth/40 uppercase block font-bold">Pack Options:</span>
                         <strong className="text-xs font-mono font-bold text-cocoa">{prod.weightOptions?.join(" / ") || "120g"}</strong>
@@ -222,7 +225,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       <button
                         onClick={() => handleQuickAdd(prod.name, prod.id)}
                         disabled={isAdding}
-                        className="py-2.5 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[9.5px] font-bold uppercase tracking-widest rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        className="py-2.5 px-4 bg-[#5C3E26] hover:bg-[#392312] text-white text-[9.5px] font-bold uppercase tracking-widest rounded-full flex items-center gap-1.5 shadow-sm cursor-pointer premium-btn"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
                         <span>Quick Add</span>
