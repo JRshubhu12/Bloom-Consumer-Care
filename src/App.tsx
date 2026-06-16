@@ -323,7 +323,7 @@ export default function App() {
           initial={{ opacity: 0 }}
           animate={{ opacity: isLoading ? 0 : 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative min-h-screen bg-bg-primary overflow-x-hidden scroll-smooth"
+          className="relative min-h-screen bg-bg-primary overflow-x-hidden"
         >
       
       {/* Floating background leaf and seed graphics */}
