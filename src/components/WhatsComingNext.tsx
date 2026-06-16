@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Flame, Package, Store, Sparkles } from "lucide-react";
 
 export default function WhatsComingNext() {
@@ -65,7 +65,7 @@ export default function WhatsComingNext() {
           {cards.map((card, idx) => {
             const Icon = card.icon;
             return (
-              <motion.div
+              <m.div
                 key={card.id}
                 className="bg-white rounded-3xl p-8 flex flex-col justify-between text-left relative overflow-hidden min-h-[220px] premium-card feature-card border border-[#EFE6D8]/80"
                 initial={{ opacity: 0, y: 30 }}
@@ -97,7 +97,7 @@ export default function WhatsComingNext() {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

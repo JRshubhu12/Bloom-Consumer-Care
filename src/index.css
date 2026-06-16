@@ -206,3 +206,42 @@
   animation-delay: -5s;
 }
 
+/* Content Visibility Optimizations for below-the-fold sections */
+#about-story,
+#trust-transparency,
+#women-empowerment,
+#our-promise,
+#ingredient-highlight,
+#featured-products,
+#product-comparison,
+#best-sellers,
+#founder-reviews,
+#faq-section,
+#contact-partners {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* Accessibility: Prefers Reduced Motion CSS Overrides */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-infinite-scroll {
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  .ambient-float, 
+  .ambient-float-delayed {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+

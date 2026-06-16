@@ -1,22 +1,29 @@
 import { useState, useMemo, useEffect } from "react";
 import { LazyMotion, domAnimation, m, AnimatePresence, MotionConfig } from "motion/react";
-import { ShoppingBag, ChevronRight, Check, Trash2, Menu, X, ArrowRight } from "lucide-react";
+import { ShoppingBag, ChevronRight, Check, Trash2, Menu, X, ArrowRight, Volume2, VolumeX } from "lucide-react";
 
 import Lenis from "lenis";
 
 // Component imports
 import Hero from "./components/Hero";
 import AboutStory from "./components/AboutStory";
+import TrustTransparency from "./components/TrustTransparency";
 import WomenEmpowerment from "./components/WomenEmpowerment";
 import OurImpact from "./components/OurImpact";
 import IngredientHighlight from "./components/IngredientHighlight";
 import FeaturedProducts from "./components/FeaturedProducts";
+import ProductComparison from "./components/ProductComparison";
+import BestSellersStrip from "./components/BestSellersStrip";
 import SidebarScroller from "./components/SidebarScroller";
 import LuxuryLoader from "./components/LuxuryLoader";
 import FounderTestimonials from "./components/FounderTestimonials";
+import FAQSection from "./components/FAQSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import FloatingParticles from "./components/FloatingParticles";
+import PremiumCursor from "./components/PremiumCursor";
+
+import { playWoodClick, playPaperRustle, playSeedDrop } from "./utils/audioUtils";
 
 interface CartItem {
   id: string;
@@ -35,8 +42,145 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("");
 
+  // Sound Toggle State
+  const [natureSounds, setNatureSounds] = useState(() => {
+    try {
+      return localStorage.getItem("bloom_nature_sounds") === "true";
+    } catch {
+      return false;
+    }
+  });
+
+  // Prefers Reduced Motion State
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
   useEffect(() => {
-    const sections = ["featured-products", "why-bloom", "founder-reviews", "contact-partners"];
+    try {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      setPrefersReducedMotion(mediaQuery.matches);
+      
+      const handleChange = (e: MediaQueryListEvent) => {
+        setPrefersReducedMotion(e.matches);
+      };
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    } catch (e) {
+      console.warn("Media query reduced motion not supported", e);
+    }
+  }, []);
+
+  const handleToggleSounds = () => {
+    const next = !natureSounds;
+    setNatureSounds(next);
+    try {
+      localStorage.setItem("bloom_nature_sounds", String(next));
+    } catch (e) {
+      console.warn("localStorage save block", e);
+    }
+    if (next) {
+      // Temporarily set value so that the synthesis function starts immediately
+      localStorage.setItem("bloom_nature_sounds", "true");
+      playWoodClick();
+    }
+  };
+
+  // SEO Schema Injection
+  useEffect(() => {
+    try {
+      // FAQ Schema
+      const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is Bloom preservative free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, 100%. Bloom snacks are completely free from artificial preservatives, MSG, synthetic colorants, and BHA/BHT stabilizers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is the makhana sourced?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our Phool Makhana is sourced directly from certified organic wetlands of the Mithila region in Bihar, India."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does freshness last?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sealed bags maintain their crisp crunch for up to 90 days. Once opened, we recommend sealing in an airtight container."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are products vegan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our Mint, Chatpata Masala, Plain Salted, and Magic Masala Makhana varieties, alongside the Energy Bar, are 100% vegan."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do purchases support women employment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Sourcing, sorting, and roasting facilities are operated exclusively by rural women, paying wages up to 4x the regional average."
+            }
+          }
+        ]
+      };
+
+      // Organization Schema
+      const orgSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Bloom Purely Natural",
+        "url": window.location.origin,
+        "logo": `${window.location.origin}/company-logo.png`,
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-8005484365",
+          "contactType": "customer service"
+        }
+      };
+
+      const sOrg = document.createElement("script");
+      sOrg.type = "application/ld+json";
+      sOrg.id = "jsonld-org";
+      sOrg.innerHTML = JSON.stringify(orgSchema);
+      document.head.appendChild(sOrg);
+
+      const sFaq = document.createElement("script");
+      sFaq.type = "application/ld+json";
+      sFaq.id = "jsonld-faq";
+      sFaq.innerHTML = JSON.stringify(faqSchema);
+      document.head.appendChild(sFaq);
+
+      return () => {
+        document.getElementById("jsonld-org")?.remove();
+        document.getElementById("jsonld-faq")?.remove();
+      };
+    } catch (e) {
+      console.warn("JSON-LD Injection failed", e);
+    }
+  }, []);
+
+  useEffect(() => {
+    const sections = [
+      "featured-products", 
+      "why-bloom", 
+      "founder-reviews", 
+      "contact-partners", 
+      "trust-transparency", 
+      "product-comparison", 
+      "best-sellers",
+      "faq-section"
+    ];
     
     const observerOptions = {
       root: null,
@@ -84,9 +228,9 @@ export default function App() {
   useEffect(() => {
     if (isLoading) return;
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: prefersReducedMotion ? 0 : 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like easeOutExpo
-      smoothWheel: true,
+      smoothWheel: !prefersReducedMotion,
     });
 
     let rafId: number;
@@ -102,6 +246,7 @@ export default function App() {
       const anchor = target.closest("a");
       if (anchor && anchor.hash && anchor.hash.startsWith("#")) {
         const targetId = anchor.hash;
+        playWoodClick();
         if (targetId === "#") {
           e.preventDefault();
           lenis.scrollTo(0);
@@ -122,7 +267,7 @@ export default function App() {
       document.removeEventListener("click", handleAnchorClick);
       lenis.destroy();
     };
-  }, [isLoading]);
+  }, [isLoading, prefersReducedMotion]);
 
   useEffect(() => {
     let lastScrolled = false;
@@ -146,7 +291,6 @@ export default function App() {
   }, [cart]);
 
   const handleAddToCart = (productName: string) => {
-    // Standard mapping prices for cart selections
     let price = 349;
     if (productName.includes("Saffron")) price = 699;
     if (productName.includes("Namkeen") || productName.includes("Amaranth")) price = 299;
@@ -164,19 +308,24 @@ export default function App() {
       return [...prev, { id: itemId, name: productName, price, qty: 1 }];
     });
 
-    // Auto open drawer to fast track checkout conversion
+    playWoodClick();
+    playSeedDrop();
     setIsCartOpen(true);
   };
 
   const handleRemoveFromCart = (itemId: string) => {
+    playWoodClick();
     setCart((prev) => prev.filter((item) => item.id !== itemId));
   };
 
   const handleClearCart = () => {
+    playWoodClick();
     setCart([]);
   };
 
   const triggerCheckout = () => {
+    playWoodClick();
+    playSeedDrop();
     setCheckoutStep("success");
     setTimeout(() => {
       setCart([]);
@@ -189,6 +338,7 @@ export default function App() {
     { href: "#", label: "Home" },
     { href: "#featured-products", label: "Products" },
     { href: "#our-story", label: "Our Story" },
+    { href: "#trust-transparency", label: "Trust" },
     { href: "#ingredient-highlight", label: "Journey" },
     { href: "#women-empowerment", label: "Community" },
     { href: "#contact-partners", label: "Contact" },
@@ -196,12 +346,14 @@ export default function App() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <MotionConfig reducedMotion="user">
+      <MotionConfig reducedMotion={prefersReducedMotion ? "always" : "user"}>
         <AnimatePresence>
           {isLoading && (
             <LuxuryLoader onComplete={() => setIsLoading(false)} />
           )}
         </AnimatePresence>
+
+        <PremiumCursor />
 
         <m.div 
           initial={{ opacity: 0 }}
@@ -232,6 +384,7 @@ export default function App() {
                   src="/company-logo.png" 
                   alt="BLOOM" 
                   className={`w-auto object-contain transition-all duration-500 origin-left ${scrolled ? 'h-9 lg:h-10' : 'h-11 lg:h-12'}`}
+                  decoding="async"
                 />
               </div>
               <div className="flex flex-col justify-center">
@@ -266,11 +419,27 @@ export default function App() {
             </nav>
 
             {/* RIGHT: Actions */}
-            <div className="flex items-center gap-5 sm:gap-6 lg:gap-8">
+            <div className="flex items-center gap-5 sm:gap-6 lg:gap-8 pointer-events-auto">
+
+              {/* Nature Sounds Toggle */}
+              <button
+                onClick={handleToggleSounds}
+                className="text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
+                title={natureSounds ? "Disable Nature Sounds" : "Enable Nature Sounds"}
+              >
+                {natureSounds ? (
+                  <Volume2 className="w-5 h-5 text-[#768364] animate-pulse" />
+                ) : (
+                  <VolumeX className="w-5 h-5 text-earth/50" />
+                )}
+              </button>
 
               {/* Cart Icon */}
               <button
-                onClick={() => setIsCartOpen(true)}
+                onClick={() => {
+                  playPaperRustle();
+                  setIsCartOpen(true);
+                }}
                 className="relative text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
               >
                 <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
@@ -289,6 +458,7 @@ export default function App() {
               {/* Luxury Shop Now Button */}
               <button
                 onClick={() => {
+                  playWoodClick();
                   const el = document.getElementById("featured-products");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
@@ -300,7 +470,10 @@ export default function App() {
 
               {/* Mobile Menu Toggle */}
               <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => {
+                  playWoodClick();
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                }}
                 className="lg:hidden p-2 text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
               >
                 {isMobileMenuOpen ? <X className="w-6 h-6" strokeWidth={1.5} /> : <Menu className="w-6 h-6" strokeWidth={1.5} />}
@@ -319,7 +492,10 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 bg-[#2B211B]/80 backdrop-blur-md z-45 lg:hidden pointer-events-auto"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  playWoodClick();
+                  setIsMobileMenuOpen(false);
+                }}
               />
 
               {/* Premium Drawer Content */}
@@ -338,7 +514,10 @@ export default function App() {
                       <span className="font-sans text-[8px] tracking-[0.2em] text-[#B68A35] uppercase font-bold mt-1">Purely Natural</span>
                     </div>
                     <button
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        playWoodClick();
+                        setIsMobileMenuOpen(false);
+                      }}
                       className="p-2 rounded-full border border-[#B68A35]/30 text-[#2B211B] hover:bg-[#EDE5DA] transition-colors"
                     >
                       <X className="w-5 h-5" strokeWidth={1.5} />
@@ -353,7 +532,10 @@ export default function App() {
                         <a
                           key={link.href}
                           href={link.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={() => {
+                            playWoodClick();
+                            setIsMobileMenuOpen(false);
+                          }}
                           className={`font-sans text-lg uppercase tracking-[0.1em] transition-colors py-2 font-medium flex items-center gap-4 ${
                             isActive ? "text-[#B68A35]" : "text-[#2B211B] hover:text-[#B68A35]"
                           }`}
@@ -370,6 +552,7 @@ export default function App() {
                 <div className="space-y-6 text-center">
                   <button
                     onClick={() => {
+                      playWoodClick();
                       setIsMobileMenuOpen(false);
                       const el = document.getElementById("featured-products");
                       if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -396,7 +579,10 @@ export default function App() {
             {/* Dark background canopy overlay */}
             <div 
               className="absolute inset-0 bg-earth/20 backdrop-blur-xs" 
-              onClick={() => setIsCartOpen(false)}
+              onClick={() => {
+                playWoodClick();
+                setIsCartOpen(false);
+              }}
             />
 
             {/* Visual sliding tray */}
@@ -414,7 +600,10 @@ export default function App() {
                   <h3 className="font-serif text-base font-semibold text-earth">Your Roasting Bag</h3>
                 </div>
                 <button
-                  onClick={() => setIsCartOpen(false)}
+                  onClick={() => {
+                    playWoodClick();
+                    setIsCartOpen(false);
+                  }}
                   className="p-1.5 rounded-full bg-bg-primary border border-leaf/45 text-earth/60"
                 >
                   <X className="w-4 h-4" />
@@ -431,7 +620,10 @@ export default function App() {
                           <ShoppingBag className="w-12 h-12 text-leaf/60 mx-auto" strokeWidth="1" />
                           <p className="font-serif text-earth/50 italic text-sm">Your roasting bag is empty.</p>
                           <button
-                            onClick={() => setIsCartOpen(false)}
+                            onClick={() => {
+                              playWoodClick();
+                              setIsCartOpen(false);
+                            }}
                             className="text-xs font-mono uppercase tracking-widest text-leaf font-bold hover:underline"
                           >
                             Explore Collection
@@ -499,14 +691,13 @@ export default function App() {
                       onClick={handleClearCart}
                       className="py-3 px-4 border border-leaf/35 text-cocoa rounded-lg font-mono text-[9px] hover:bg-white transition-colors"
                     >
-                      Clear Items
+                      Clear All
                     </button>
                     <button
                       onClick={triggerCheckout}
-                      className="flex-1 py-3 bg-cocoa text-bg-primary rounded-lg text-xs font-mono font-bold uppercase tracking-widest hover:bg-earth transition-colors shadow-lg flex items-center justify-center gap-2 cursor-pointer luxury-glowing-btn"
+                      className="flex-1 py-3 bg-[#5C3E26] hover:bg-[#392312] text-white text-xs font-bold uppercase tracking-wider rounded-lg text-center transition-colors shadow-xs"
                     >
-                      <span>Checkout & fresh-roast</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
+                      Process Fresh Roasts
                     </button>
                   </div>
                 </div>
@@ -523,10 +714,12 @@ export default function App() {
          {/* HERO SECTION */}
         <Hero 
           onShopClick={() => {
+            playWoodClick();
             const el = document.getElementById("featured-products");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
           onStoryClick={() => {
+            playWoodClick();
             const el = document.getElementById("our-story");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
@@ -534,10 +727,14 @@ export default function App() {
 
          <AboutStory />
 
+         <TrustTransparency />
+
          <WomenEmpowerment />
 
          {/* METRICS COUNT UP */}
-         <OurImpact />
+         <m.div id="our-promise">
+           <OurImpact />
+         </m.div>
 
         {/* ORGANIC INGREDIENTS HOVER PROFILES */}
         <IngredientHighlight />
@@ -545,9 +742,17 @@ export default function App() {
         {/* LUXURY FLOATING FeaturedProducts INSPIRED BY COHESIVE FMCG BRAND */}
         <FeaturedProducts onAddToCart={handleAddToCart} />
 
+        {/* PRODUCT FLAVORS COMPARISON */}
+        <ProductComparison />
+
+        {/* BEST SELLERS STRIP */}
+        <BestSellersStrip onAddToCart={handleAddToCart} />
 
         {/* CUSTOMERS ORAL HISTORY & FOUNDER GROWTH SAGA */}
         <FounderTestimonials />
+
+        {/* FREQUENTLY ASKED QUESTIONS SECTION */}
+        <FAQSection />
 
         {/* SUPPORT TOUCHPOINTS CONTACT PARTNERS FORMS */}
         <ContactSection />
@@ -558,10 +763,13 @@ export default function App() {
       <Footer />
 
       {/* PERSISTENT FLOATING STICKY BUY BAR COHESION */}
-      <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3 select-none">
+      <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3 select-none pointer-events-auto">
         {cart.length > 0 && (
           <button
-            onClick={() => setIsCartOpen(true)}
+            onClick={() => {
+              playPaperRustle();
+              setIsCartOpen(true);
+            }}
             className="w-12 h-12 rounded-full bg-white border border-[#C6A769]/30 shadow-lg flex items-center justify-center relative text-[#4B3425] hover:bg-[#FAF8F4] transition-all cursor-pointer"
             title="Open Roasting Bag"
           >
@@ -574,6 +782,7 @@ export default function App() {
 
         <button
           onClick={() => {
+            playWoodClick();
             const el = document.getElementById("featured-products");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}

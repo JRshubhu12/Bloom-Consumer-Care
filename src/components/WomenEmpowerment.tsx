@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 export default function WomenEmpowerment() {
   const cards = [
@@ -108,7 +108,7 @@ export default function WomenEmpowerment() {
         {/* Vision Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left mb-12">
           {cards.map((card, idx) => (
-            <motion.div
+            <m.div
               key={idx}
               className="p-8 rounded-2xl relative overflow-hidden group flex flex-col justify-between min-h-[240px] premium-card feature-card bg-bg-secondary border border-bg-tertiary/20"
               initial={{ opacity: 0, y: 30 }}
@@ -139,12 +139,12 @@ export default function WomenEmpowerment() {
                 className="absolute bottom-4 right-4 w-10 h-10 rounded-full opacity-10"
                 style={{ backgroundColor: "#7A8C55" }}
               />
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Bottom Quote Banner */}
-        <motion.div
+        <m.div
           className="max-w-2xl mx-auto py-8 px-6 text-center"
           style={{ borderTop: "1px solid #D4AF3730", borderBottom: "1px solid #D4AF3730" }}
           initial={{ opacity: 0 }}
@@ -158,7 +158,7 @@ export default function WomenEmpowerment() {
           >
             "When women grow, communities grow stronger."
           </p>
-        </motion.div>
+        </m.div>
 
       </div>
     </section>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 
 // Stage Definitions for the morphing center icon
 type LoadingStage = "seed" | "sprout" | "leaf" | "lotus" | "logo";
@@ -30,18 +30,15 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          // Allow the final animation sequence to finish, then trigger complete callback
           setTimeout(() => {
             onComplete();
           }, 800);
           return 100;
         }
         
-        // Random organic increment sizes for realism
         const increment = Math.random() > 0.7 ? Math.floor(Math.random() * 4) + 1 : 1;
         const next = Math.min(prev + increment, 100);
 
-        // Update visual stage based on progress
         if (next < 20) setStage("seed");
         else if (next < 45) setStage("sprout");
         else if (next < 70) setStage("leaf");
@@ -52,12 +49,11 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
       });
     };
 
-    // Fast-paced but natural intervals
     timer = setInterval(updateProgress, 35);
     return () => clearInterval(timer);
   }, [onComplete]);
 
-  // Rotate tagline text with smooth transitions
+  // Rotate tagline text
   useEffect(() => {
     const textInterval = setInterval(() => {
       setTextIndex((prev) => (prev + 1) % loadingTexts.length);
@@ -70,7 +66,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
     switch (stage) {
       case "seed":
         return (
-          <motion.svg
+          <m.svg
             key="seed"
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -81,11 +77,11 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
             stroke="currentColor"
           >
             <path d="M12 3C12 3 6 8.5 6 13.5C6 16.8 8.7 19.5 12 19.5C15.3 19.5 18 16.8 18 13.5C18 8.5 12 3 12 3Z" />
-          </motion.svg>
+          </m.svg>
         );
       case "sprout":
         return (
-          <motion.svg
+          <m.svg
             key="sprout"
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -96,11 +92,11 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
             stroke="currentColor"
           >
             <path d="M12 22V12M12 12C12 9.5 10.5 7.5 7.5 7.5M12 12C13.5 10.5 15.5 10.5 17 12" strokeLinecap="round" />
-          </motion.svg>
+          </m.svg>
         );
       case "leaf":
         return (
-          <motion.svg
+          <m.svg
             key="leaf"
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -111,11 +107,11 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
             stroke="currentColor"
           >
             <path d="M12 21V10M12 10C12 7.5 9.5 5.5 6.5 5.5C4 5.5 4 10 12 10ZM12 10C12 7.5 14.5 5.5 17.5 5.5C20 5.5 20 10 12 10Z" />
-          </motion.svg>
+          </m.svg>
         );
       case "lotus":
         return (
-          <motion.svg
+          <m.svg
             key="lotus"
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1.1, opacity: 1 }}
@@ -127,11 +123,11 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
           >
             <path d="M12 22C17.5 22 21 17.5 21 14C17.5 14 14.5 16 12 20C9.5 16 6.5 14 2 14C2 17.5 5.5 22 12 22Z" />
             <path d="M12 3C13.5 7 17 9 20 9C17 11 15 15 12 21C9 15 7 11 4 9C7 9 10.5 7 12 3Z" opacity="0.8" />
-          </motion.svg>
+          </m.svg>
         );
       case "logo":
         return (
-          <motion.img
+          <m.img
             key="logo"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1.05, opacity: 1 }}
@@ -139,6 +135,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
             src="/company-logo.png"
             alt="Bloom Purely Natural Logo"
             className="w-24 h-24 object-contain filter drop-shadow-[0_4px_12px_rgba(198,167,105,0.15)]"
+            decoding="async"
           />
         );
     }
@@ -183,7 +180,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
         {/* Dynamic Tagline Rotator */}
         <div className="h-6 flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
-            <motion.p
+            <m.p
               key={textIndex}
               initial={{ y: 8, opacity: 0 }}
               animate={{ y: 0, opacity: 0.75 }}
@@ -192,7 +189,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
               className="font-sans text-[11px] text-earth tracking-widest font-light uppercase"
             >
               {loadingTexts[textIndex]}
-            </motion.p>
+            </m.p>
           </AnimatePresence>
         </div>
       </div>
@@ -221,7 +218,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
 
           {/* Leaf 1 sprout at 25% */}
           {progress > 25 && (
-            <motion.path 
+            <m.path 
               initial={{ scale: 0 }} 
               animate={{ scale: 1 }} 
               d="M 75 14 Q 65 2, 80 2 Q 85 14 75 14" 
@@ -232,7 +229,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
 
           {/* Leaf 2 sprout at 55% */}
           {progress > 55 && (
-            <motion.path 
+            <m.path 
               initial={{ scale: 0 }} 
               animate={{ scale: 1 }} 
               d="M 140 25 Q 150 13, 140 7 Q 130 17 140 25" 
@@ -243,7 +240,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
 
           {/* Leaf 3 sprout at 80% */}
           {progress > 80 && (
-            <motion.path 
+            <m.path 
               initial={{ scale: 0 }} 
               animate={{ scale: 1 }} 
               d="M 205 27 Q 215 15, 208 9 Q 198 21 205 27" 
@@ -254,7 +251,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
 
           {/* Lotus blooming at 100% */}
           {progress === 100 ? (
-            <motion.g 
+            <m.g 
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 0.85, opacity: 1 }}
               transition={{ type: "spring", stiffness: 100, damping: 10 }}
@@ -263,7 +260,7 @@ export default function LuxuryLoader({ onComplete }: LuxuryLoaderProps) {
               <path d="M 0 -8 Q -10 -22 0 -30 Q 10 -22 0 -8" fill="#C6A769" />
               <path d="M 0 -8 Q -20 -16 -24 -8 Q -16 0 0 -8" fill="#C6A769" opacity="0.85" />
               <path d="M 0 -8 Q 20 -16 24 -8 Q 16 0 0 -8" fill="#C6A769" opacity="0.85" />
-            </motion.g>
+            </m.g>
           ) : (
             <circle cx={10 + (progress / 100) * 260} cy={25} r="3" fill="#C6A769" className="transition-all duration-100 ease-out" />
           )}

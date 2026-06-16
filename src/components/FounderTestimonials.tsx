@@ -1,5 +1,4 @@
-import React from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Calendar } from "lucide-react";
 
 export default function FounderTestimonials() {
@@ -24,7 +23,7 @@ export default function FounderTestimonials() {
         </div>
 
         {/* Journey Card */}
-        <motion.div 
+        <m.div 
           className="bg-white/80 border border-[#EFE6D8]/80 rounded-3xl p-8 sm:p-12 text-left relative overflow-hidden max-w-3xl mx-auto backdrop-blur-md premium-card feature-card"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +64,7 @@ export default function FounderTestimonials() {
               Crafted With Care.
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
       </div>
 

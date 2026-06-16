@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState } from "react";
+import { m } from "motion/react";
 import { ShieldCheck, Heart, Sparkles, Sprout, Shield, ShoppingBag, Plus, Sparkle, Eye, X, Globe } from "lucide-react";
 import { PRODUCTS } from "../data";
 
@@ -95,7 +95,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
               const isAdding = addingId === prod.id;
 
               return (
-                <motion.div
+                <m.div
                   key={prod.id}
                   className="bg-white rounded-2xl border border-[#EAE4DB] p-4 flex flex-col justify-between relative group overflow-hidden h-[380px] premium-card product-card"
                   initial={{ opacity: 0, y: 30 }}
@@ -117,6 +117,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
                       className="max-h-full max-w-full object-contain rounded-lg product-image"
                       referrerPolicy="no-referrer"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-black/3 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
                     
@@ -234,7 +235,7 @@ export default function BestSellersStrip({ onAddToCart }: BestSellersStripProps)
 
                   </div>
 
-                </motion.div>
+                </m.div>
               );
             })}
           </div>

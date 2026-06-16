@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { MapPin, Phone, Mail, Check, Send, MessageCircle } from "lucide-react";
 
 export default function ContactSection() {
@@ -32,7 +32,7 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header content styling */}
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -49,13 +49,13 @@ export default function ContactSection() {
           <p className="font-sans text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
             Whether you're curious about our products, need assistance, or simply want to learn more about Bloom Purely Natural, our team is here to help.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Master layout grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           
           {/* LEFT COLUMN: Contact Form */}
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -77,7 +77,7 @@ export default function ContactSection() {
               {/* Real form rendering */}
               <AnimatePresence mode="wait">
                 {!sentMessage ? (
-                  <motion.form
+                  <m.form
                     key="active-contact-form"
                     onSubmit={handleSubmit}
                     className="space-y-5"
@@ -136,9 +136,9 @@ export default function ContactSection() {
                       <Send className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       <span>Send Message</span>
                     </button>
-                  </motion.form>
+                  </m.form>
                 ) : (
-                  <motion.div
+                  <m.div
                     key="contact-success"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -152,15 +152,15 @@ export default function ContactSection() {
                     <p className="font-sans text-base text-neutral-600 max-w-sm leading-relaxed">
                       We've received your message and will get back to you as soon as possible.
                     </p>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
 
             </div>
-          </motion.div>
+          </m.div>
 
           {/* RIGHT COLUMN: Info + WhatsApp + Promise + Image */}
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -241,6 +241,8 @@ export default function ContactSection() {
                   src="https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?q=80&w=1000&auto=format&fit=crop" 
                   alt="Premium Assorted Dry Fruits" 
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
               </div>
@@ -257,7 +259,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-          </motion.div>
+          </m.div>
 
         </div>
 

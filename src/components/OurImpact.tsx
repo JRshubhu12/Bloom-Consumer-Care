@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Sprout, Award, Sparkles, Heart } from "lucide-react";
 
 export default function OurImpact() {
@@ -54,7 +54,7 @@ export default function OurImpact() {
           {promises.map((promise, idx) => {
             const Icon = promise.icon;
             return (
-              <motion.div
+              <m.div
                 key={promise.id}
                 className="bg-white rounded-[2rem] p-8 flex flex-col items-center justify-start text-center relative group premium-card feature-card min-h-[260px]"
                 initial={{ opacity: 0, y: 30 }}
@@ -76,7 +76,7 @@ export default function OurImpact() {
                 <p className="font-sans text-sm text-earth/70 leading-relaxed mt-3 relative z-10">
                   {promise.description}
                 </p>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

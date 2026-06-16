@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 
 const SECTIONS = [
   { id: "hero", label: "Home" },
   { id: "our-story", label: "Our Story" },
-  { id: "women-empowerment", label: "Empowerment" },
+  { id: "trust-transparency", label: "Trust" },
+  { id: "women-empowerment", label: "Community" },
   { id: "our-promise", label: "Our Promise" },
-  { id: "featured-products", label: "Our Collection" },
+  { id: "featured-products", label: "Collection" },
+  { id: "product-comparison", label: "Flavor Match" },
+  { id: "best-sellers", label: "Best Sellers" },
   { id: "founder-reviews", label: "Founder Story" },
+  { id: "faq-section", label: "FAQ" },
   { id: "contact-partners", label: "Contact" },
 ];
 
@@ -105,7 +109,7 @@ export default function SidebarScroller() {
         {/* Metaphor Concept Icon Header */}
         <div className="relative flex flex-col items-center group cursor-help mb-0.5">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={getConceptLabel()}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -114,7 +118,7 @@ export default function SidebarScroller() {
               className="p-1.5 rounded-full bg-white border border-[#C6A769]/20 shadow-xs flex items-center justify-center will-change-transform"
             >
               {getConceptIcon()}
-            </motion.div>
+            </m.div>
           </AnimatePresence>
           {/* Label tooltip */}
           <span className="absolute left-10 scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 bg-earth text-[#C6A769] text-[8px] font-mono tracking-widest uppercase px-2 py-0.5 rounded-md pointer-events-none whitespace-nowrap border border-[#C6A769]/20 shadow-lg">

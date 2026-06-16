@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ShoppingBag, Check, X, Eye, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
+import { playWoodClick, playPaperRustle, playSeedDrop } from "../utils/audioUtils";
 
 interface FeaturedProductsProps {
   onAddToCart: (productName: string) => void;
@@ -81,10 +82,34 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
   const [selectedFlavor, setSelectedFlavor] = useState<string>("");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  // Caching State
+  const [recentlyViewedIds, setRecentlyViewedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("bloom_recently_viewed");
+      if (saved) {
+        setRecentlyViewedIds(JSON.parse(saved));
+      }
+    } catch (e) {
+      console.warn("localStorage block", e);
+    }
+  }, []);
+
+  const addToRecentlyViewed = (id: string) => {
+    try {
+      const next = [id, ...recentlyViewedIds.filter((x) => x !== id)].slice(0, 4);
+      setRecentlyViewedIds(next);
+      localStorage.setItem("bloom_recently_viewed", JSON.stringify(next));
+    } catch (e) {
+      console.warn("localStorage save block", e);
+    }
+  };
+
   const scroll = (direction: "left" | "right") => {
+    playWoodClick();
     if (scrollContainerRef.current) {
       const { current } = scrollContainerRef;
-      // Scroll by one item width + gap approximately, or just 80% of container width
       const scrollAmount = current.clientWidth > 768 ? current.clientWidth / 3 : current.clientWidth * 0.8;
       current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
     }
@@ -92,11 +117,22 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
 
   const handleBuy = (id: string, name: string) => {
     setAddingToCartId(id);
+    playWoodClick();
+    playSeedDrop();
     const displayName = selectedFlavor && id === "prod-1" ? `${name} (${selectedFlavor})` : name;
     onAddToCart(displayName);
     setTimeout(() => {
       setAddingToCartId(null);
     }, 1200);
+  };
+
+  const handleOpenDetails = (prod: Product) => {
+    if (prod.flavors) {
+      setSelectedFlavor(prod.flavors[0]);
+    }
+    setSelectedProduct(prod);
+    addToRecentlyViewed(prod.id);
+    playPaperRustle();
   };
 
   return (
@@ -109,7 +145,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
       <div className="max-w-[1400px] mx-auto text-center space-y-12 relative z-10">
         
         {/* Header with Navigation Arrows */}
-        <motion.div 
+        <m.div 
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-left"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +164,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
               Freshly crafted foods made with quality ingredients and a commitment to pure goodness.
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Carousel Grid */}
         <div className="relative">
@@ -143,11 +179,13 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 className="group flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] xl:flex-[0_0_23%] snap-start bg-white rounded-3xl overflow-hidden border border-[#EFE6D8]/80 flex flex-col premium-card product-card"
               >
               {/* Image Area - 70% visually */}
-              <div className="relative h-64 sm:h-72 w-full bg-bg-secondary overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => setSelectedProduct(prod)}>
+              <div className="relative h-64 sm:h-72 w-full bg-bg-secondary overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => handleOpenDetails(prod)}>
                 <img 
                   src={prod.image} 
                   alt={prod.name} 
                   className="w-full h-full object-cover product-image"
+                  decoding="async"
+                  loading="lazy"
                 />
                 
                 {/* Explore Product overlay */}
@@ -159,7 +197,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 
                 {/* Product Pouch Representation (Secondary) */}
                 <div className="absolute bottom-4 right-4 w-[25%] aspect-[3/4] bg-white rounded-xl shadow-lg border border-leaf/20 flex flex-col items-center justify-center p-2 opacity-95">
-                   <img src="/company-logo.png" alt="Bloom Pouch" className="w-8 h-8 object-contain opacity-50 mb-1" />
+                   <img src="/company-logo.png" alt="Bloom Pouch" className="w-8 h-8 object-contain opacity-50 mb-1" decoding="async" />
                    <div className="text-[6px] font-sans font-bold text-earth uppercase tracking-widest text-center">Bloom</div>
                    <div className="text-[5px] font-sans text-earth/60 uppercase tracking-widest text-center mt-1">{prod.name}</div>
                 </div>
@@ -204,12 +242,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                   {/* Buttons */}
                   <div className="flex flex-col gap-2.5">
                     <button
-                      onClick={() => {
-                        if (prod.flavors) {
-                          setSelectedFlavor(prod.flavors[0]);
-                        }
-                        setSelectedProduct(prod);
-                      }}
+                      onClick={() => handleOpenDetails(prod)}
                       className="w-full py-3 border border-earth text-earth text-xs font-bold uppercase tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow premium-btn"
                     >
                       <Eye className="w-4 h-4" />
@@ -227,7 +260,7 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 </div>
               </div>
             </div>
-          ))}
+            ))}
           </div>
         </div>
 
@@ -262,17 +295,60 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
         </div>
       </div>
 
+      {/* Recently Viewed Products */}
+      {recentlyViewedIds.length > 0 && (
+        <div className="max-w-[1400px] mx-auto pt-16 mt-16 border-t border-leaf/10 text-left relative z-10">
+          <span className="font-mono text-[9px] tracking-[0.25em] text-[#C6A769] font-bold uppercase block mb-3">
+            Your Journey History
+          </span>
+          <h3 className="font-serif text-2xl font-bold text-earth mb-8">
+            Recently Viewed Snacks
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            {recentlyViewedIds.map((id) => {
+              const prod = products.find((p) => p.id === id);
+              if (!prod) return null;
+              return (
+                <div 
+                  key={prod.id} 
+                  onClick={() => handleOpenDetails(prod)}
+                  className="bg-white rounded-2xl border border-[#EFE6D8]/80 p-4 flex flex-col gap-3 cursor-pointer hover:border-[#C6A769] transition-all duration-300 shadow-2xs hover:shadow-xs group"
+                >
+                  <div className="w-full aspect-[4/3] bg-bg-secondary rounded-xl overflow-hidden flex items-center justify-center p-2">
+                    <img 
+                      src={prod.image} 
+                      alt={prod.name} 
+                      className="max-h-full max-w-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
+                      decoding="async"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-sm font-bold text-earth line-clamp-1 group-hover:text-leaf transition-colors">
+                      {prod.name}
+                    </h4>
+                    <span className="text-[10px] text-earth/50 font-sans font-semibold uppercase tracking-wider block mt-0.5">
+                      {prod.weight}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Product Details Modal */}
       <AnimatePresence>
         {selectedProduct && (
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[60] flex items-center justify-center bg-earth/60 backdrop-blur-sm p-4"
             onClick={() => setSelectedProduct(null)}
           >
-            <motion.div 
+            <m.div 
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -293,10 +369,12 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                 
                 {/* Modal Image (Sticky on Desktop) */}
                 <div className="w-full md:w-[45%] bg-bg-secondary flex items-center justify-center p-8 min-h-[300px] sm:min-h-[350px] md:sticky md:top-0 h-auto md:h-[90vh]">
-                  <motion.img 
+                  <m.img 
                     src={selectedProduct.image} 
                     alt={selectedProduct.name} 
                     className="w-full h-full max-h-[400px] md:max-h-none object-cover rounded-2xl shadow-xl"
+                    decoding="async"
+                    loading="lazy"
                   />
                 </div>
                 
@@ -377,8 +455,8 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>
