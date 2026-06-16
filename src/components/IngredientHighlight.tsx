@@ -1,6 +1,6 @@
-import React from "react";
-import { m } from "motion/react";
-import { Sun, Search, Flame, ShieldCheck, Package, Truck } from "lucide-react";
+import React, { useRef } from "react";
+import { m, useScroll, useSpring, useTransform } from "motion/react";
+import { Sun, Flame, ShieldCheck, Package, Truck, Sprout, Leaf } from "lucide-react";
 
 interface JourneyStep {
   id: string;
@@ -9,41 +9,31 @@ interface JourneyStep {
 }
 
 export default function IngredientHighlight() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll progress through this specific section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const scaleProgress = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 20,
+    restDelta: 0.001
+  });
+
   const journey: JourneyStep[] = [
-    {
-      id: "farm",
-      title: "Farm Cultivation",
-      icon: Sun
-    },
-    {
-      id: "selection",
-      title: "Hand Selection",
-      icon: Search
-    },
-    {
-      id: "roasting",
-      title: "Clean Roasting",
-      icon: Flame
-    },
-    {
-      id: "quality",
-      title: "Quality Auditing",
-      icon: ShieldCheck
-    },
-    {
-      id: "packaging",
-      title: "Airtight Packaging",
-      icon: Package
-    },
-    {
-      id: "delivery",
-      title: "Direct Delivery",
-      icon: Truck
-    }
+    { id: "farm", title: "Seed Sourcing", icon: Sprout },
+    { id: "selection", title: "Hand Selection", icon: Leaf },
+    { id: "roasting", title: "Clean Roasting", icon: Flame },
+    { id: "quality", title: "Quality Auditing", icon: ShieldCheck },
+    { id: "packaging", title: "Airtight Packaging", icon: Package },
+    { id: "delivery", title: "Direct Delivery", icon: Truck }
   ];
 
   return (
-    <section id="ingredient-highlight" className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-primary relative overflow-hidden select-none">
+    <section ref={containerRef} id="ingredient-highlight" className="py-24 px-6 sm:px-12 lg:px-24 bg-bg-primary relative overflow-hidden select-none">
       
       {/* Botanical Background Textures */}
       <div className="absolute top-0 right-0 opacity-[0.03] pointer-events-none text-nature ambient-float">
@@ -72,8 +62,14 @@ export default function IngredientHighlight() {
 
         {/* Curved Timeline */}
         <div className="relative max-w-[1300px] mx-auto">
-          {/* Timeline Line (Desktop) */}
-          <div className="hidden lg:block absolute top-[32px] left-[8%] right-[8%] h-[2px] bg-gradient-to-r from-transparent via-[#C6A769]/30 to-transparent" />
+          {/* Timeline Line Base (Desktop) */}
+          <div className="hidden lg:block absolute top-[32px] left-[8%] right-[8%] h-[2px] bg-gradient-to-r from-transparent via-[#C6A769]/10 to-transparent overflow-hidden rounded-full">
+            {/* Animated Growing Vine */}
+            <m.div 
+              className="w-full h-full bg-gold origin-left"
+              style={{ scaleX: scaleProgress }}
+            />
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6 relative z-10">
             {journey.map((step, idx) => {
@@ -88,9 +84,9 @@ export default function IngredientHighlight() {
                   transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {/* Stage Circle Icon */}
-                  <div className="w-16 h-16 rounded-full bg-white border border-leaf/30 shadow-xs flex items-center justify-center mb-4 relative transition-transform duration-300 feature-icon z-20">
+                  <div className="w-16 h-16 rounded-full bg-white border border-leaf/30 shadow-xs flex items-center justify-center mb-4 relative transition-transform duration-500 feature-icon z-20 group-hover:border-gold">
                     <div className="absolute inset-0 rounded-full border-2 border-dashed border-nature/20 animate-[spin_20s_linear_infinite]" />
-                    <Icon className="w-6 h-6 text-leaf stroke-[1.5]" />
+                    <Icon className="w-6 h-6 text-leaf stroke-[1.5] group-hover:text-gold transition-colors duration-500" />
                   </div>
 
                   <div className="space-y-1 w-full">

@@ -26,12 +26,47 @@ export default function AboutStory() {
     }
   ];
 
+  const PETALS = Array.from({ length: 6 }).map((_, i) => ({
+    id: i,
+    left: `${10 + i * 16}%`,
+    delay: i * 1.5,
+    duration: 14 + (i % 3) * 4,
+    scale: 0.5 + (i % 3) * 0.3
+  }));
+
   return (
     <section id="our-story" className="py-24 px-6 sm:px-12 lg:px-24 bg-[#FAF8F5] relative overflow-hidden select-none">
       
       {/* Premium ambient backdrop lighting */}
       <div className="absolute top-0 right-1/4 w-[400px] h-[400px] rounded-full bg-leaf/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] rounded-full bg-gold/5 blur-[100px] pointer-events-none" />
+
+      {/* Floating Lotus Petals */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 hidden sm:block">
+        {PETALS.map((petal) => (
+          <m.div
+            key={petal.id}
+            className="absolute top-[-10%] text-leaf opacity-[0.06]"
+            initial={{ y: "-10vh", x: 0, rotate: 0 }}
+            animate={{ 
+              y: "110vh", 
+              x: (petal.id % 2 === 0 ? 1 : -1) * 60,
+              rotate: 200 
+            }}
+            transition={{
+              duration: petal.duration,
+              delay: petal.delay,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            style={{ left: petal.left, scale: petal.scale }}
+          >
+            <svg viewBox="0 0 100 100" fill="currentColor" className="w-16 h-16">
+              <path d="M50 15C50 15 42 32 42 45C42 58 50 65 50 65C50 65 58 58 58 45C58 32 50 15 50 15Z" />
+            </svg>
+          </m.div>
+        ))}
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         

@@ -53,6 +53,14 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
       id="hero"
       className="relative min-h-screen flex items-center justify-center pt-24 pb-20 overflow-hidden bg-bg-primary select-none"
     >
+      {/* Sun Through Leaves Canopy Shadow */}
+      <div className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-[0.04] animate-sun-ray" 
+           style={{ background: 'radial-gradient(circle at 20% 30%, #5C3A21 0%, transparent 50%), radial-gradient(circle at 80% 70%, #5C3A21 0%, transparent 60%)' }} />
+
+      {/* Morning Mist (Subtle Golden/Beige Tint) */}
+      <div className="absolute top-1/4 left-[-20%] w-[150%] h-[400px] bg-white/40 blur-[100px] rounded-[100%] pointer-events-none animate-golden-dust opacity-40 mix-blend-screen" />
+      <div className="absolute bottom-1/4 right-[-20%] w-[150%] h-[400px] bg-[#EADFCB]/40 blur-[120px] rounded-[100%] pointer-events-none animate-golden-dust-alt opacity-40 mix-blend-screen" />
+
       <div className="max-w-[1400px] mx-auto w-full px-6 sm:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         
         {/* Left Side (Text & CTA) */}
