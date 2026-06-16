@@ -5,10 +5,6 @@ import { Sun, Search, Flame, ShieldCheck, Package, Truck } from "lucide-react";
 interface JourneyStep {
   id: string;
   title: string;
-  desc: string;
-  timeSpent: string;
-  involvement: string;
-  imageUrl: string;
   icon: React.ComponentType<any>;
 }
 
@@ -17,55 +13,31 @@ export default function IngredientHighlight() {
     {
       id: "farm",
       title: "Farm Cultivation",
-      desc: "Harvested in organic wetlands, respecting age-old biological methods.",
-      timeSpent: "2-3 Days Harvest",
-      involvement: "Local Mithila Farmers",
-      imageUrl: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=400&auto=format&fit=crop",
       icon: Sun
     },
     {
       id: "selection",
       title: "Hand Selection",
-      desc: "Seeds are hand-graded to separate uniform pops and discard immature kernels.",
-      timeSpent: "4-6 Hours Sifting",
-      involvement: "Artisanal Women Sorters",
-      imageUrl: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?q=80&w=400&auto=format&fit=crop",
       icon: Search
     },
     {
       id: "roasting",
       title: "Clean Roasting",
-      desc: "Slow-roasted to crispy perfection in small batches under 25kg.",
-      timeSpent: "30 Minutes Roast",
-      involvement: "Master Roaster Collective",
-      imageUrl: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop",
       icon: Flame
     },
     {
       id: "quality",
       title: "Quality Auditing",
-      desc: "3-tier validation ensuring moisture levels stay strictly below 3%.",
-      timeSpent: "1 Hour Audit",
-      involvement: "QA Testing Team",
-      imageUrl: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=400&auto=format&fit=crop",
       icon: ShieldCheck
     },
     {
       id: "packaging",
       title: "Airtight Packaging",
-      desc: "Sealed in multi-layer barrier foil pouches to naturally lock in crispness.",
-      timeSpent: "2 Hours Packing",
-      involvement: "Packaging Specialists",
-      imageUrl: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=400&auto=format&fit=crop",
       icon: Package
     },
     {
       id: "delivery",
       title: "Direct Delivery",
-      desc: "Shipped from dry storage to your doorstep for maximum freshness.",
-      timeSpent: "24-48 Hours Transit",
-      involvement: "Direct Delivery Network",
-      imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=400&auto=format&fit=crop",
       icon: Truck
     }
   ];
@@ -101,7 +73,7 @@ export default function IngredientHighlight() {
         {/* Curved Timeline */}
         <div className="relative max-w-[1300px] mx-auto">
           {/* Timeline Line (Desktop) */}
-          <div className="hidden lg:block absolute top-[148px] left-[8%] right-[8%] h-[2px] bg-gradient-to-r from-transparent via-[#C6A769]/30 to-transparent" />
+          <div className="hidden lg:block absolute top-[32px] left-[8%] right-[8%] h-[2px] bg-gradient-to-r from-transparent via-[#C6A769]/30 to-transparent" />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6 relative z-10">
             {journey.map((step, idx) => {
@@ -115,47 +87,19 @@ export default function IngredientHighlight() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {/* Stage Image Visual Card */}
-                  <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-6 border border-[#EFE6D8] shadow-xs group-hover:shadow-md transition-shadow">
-                    <img 
-                      src={step.imageUrl} 
-                      alt={step.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/5" />
-                  </div>
-
                   {/* Stage Circle Icon */}
                   <div className="w-16 h-16 rounded-full bg-white border border-leaf/30 shadow-xs flex items-center justify-center mb-4 relative transition-transform duration-300 feature-icon z-20">
                     <div className="absolute inset-0 rounded-full border-2 border-dashed border-nature/20 animate-[spin_20s_linear_infinite]" />
                     <Icon className="w-6 h-6 text-leaf stroke-[1.5]" />
                   </div>
 
-                  <div className="space-y-2.5 w-full">
-                    <div className="flex flex-col items-center">
-                      <span className="font-mono text-[9px] tracking-widest text-nature font-bold uppercase">
-                        Stage 0{idx + 1}
-                      </span>
-                      <h3 className="font-serif text-lg font-bold text-earth leading-tight mt-0.5">
-                        {step.title}
-                      </h3>
-                    </div>
-                    
-                    <p className="font-sans text-xs text-earth/70 leading-relaxed font-light min-h-[48px] px-1">
-                      {step.desc}
-                    </p>
-
-                    {/* Metadata Badges */}
-                    <div className="pt-2 border-t border-leaf/10 space-y-1.5 w-full text-[10px] font-mono">
-                      <div className="bg-[#FAF8F4] py-1 px-2.5 rounded-md border border-[#EAE4DB]/50 text-[#8B5A2B] font-bold">
-                        🕒 {step.timeSpent}
-                      </div>
-                      <div className="bg-[#FAF8F4] py-1 px-2.5 rounded-md border border-[#EAE4DB]/50 text-leaf font-bold">
-                        👤 {step.involvement}
-                      </div>
-                    </div>
+                  <div className="space-y-1 w-full">
+                    <span className="font-mono text-[9px] tracking-widest text-nature font-bold uppercase block">
+                      Stage 0{idx + 1}
+                    </span>
+                    <h3 className="font-serif text-lg font-bold text-earth leading-tight">
+                      {step.title}
+                    </h3>
                   </div>
                 </m.div>
               );

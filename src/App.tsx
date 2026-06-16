@@ -1,13 +1,12 @@
 import { useState, useMemo, useEffect } from "react";
 import { LazyMotion, domAnimation, m, AnimatePresence, MotionConfig } from "motion/react";
-import { ShoppingBag, ChevronRight, Check, Trash2, Menu, X, ArrowRight, Volume2, VolumeX } from "lucide-react";
+import { ShoppingBag, ChevronRight, Check, Trash2, Menu, X, ArrowRight } from "lucide-react";
 
 import Lenis from "lenis";
 
 // Component imports
 import Hero from "./components/Hero";
 import AboutStory from "./components/AboutStory";
-import TrustTransparency from "./components/TrustTransparency";
 import WomenEmpowerment from "./components/WomenEmpowerment";
 import OurImpact from "./components/OurImpact";
 import IngredientHighlight from "./components/IngredientHighlight";
@@ -22,8 +21,6 @@ import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import FloatingParticles from "./components/FloatingParticles";
 import PremiumCursor from "./components/PremiumCursor";
-
-import { playWoodClick, playPaperRustle, playSeedDrop } from "./utils/audioUtils";
 
 interface CartItem {
   id: string;
@@ -42,15 +39,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("");
 
-  // Sound Toggle State
-  const [natureSounds, setNatureSounds] = useState(() => {
-    try {
-      return localStorage.getItem("bloom_nature_sounds") === "true";
-    } catch {
-      return false;
-    }
-  });
-
   // Prefers Reduced Motion State
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -68,21 +56,6 @@ export default function App() {
       console.warn("Media query reduced motion not supported", e);
     }
   }, []);
-
-  const handleToggleSounds = () => {
-    const next = !natureSounds;
-    setNatureSounds(next);
-    try {
-      localStorage.setItem("bloom_nature_sounds", String(next));
-    } catch (e) {
-      console.warn("localStorage save block", e);
-    }
-    if (next) {
-      // Temporarily set value so that the synthesis function starts immediately
-      localStorage.setItem("bloom_nature_sounds", "true");
-      playWoodClick();
-    }
-  };
 
   // SEO Schema Injection
   useEffect(() => {
@@ -176,7 +149,6 @@ export default function App() {
       "why-bloom", 
       "founder-reviews", 
       "contact-partners", 
-      "trust-transparency", 
       "product-comparison", 
       "best-sellers",
       "faq-section"
@@ -246,7 +218,6 @@ export default function App() {
       const anchor = target.closest("a");
       if (anchor && anchor.hash && anchor.hash.startsWith("#")) {
         const targetId = anchor.hash;
-        playWoodClick();
         if (targetId === "#") {
           e.preventDefault();
           lenis.scrollTo(0);
@@ -308,24 +279,18 @@ export default function App() {
       return [...prev, { id: itemId, name: productName, price, qty: 1 }];
     });
 
-    playWoodClick();
-    playSeedDrop();
     setIsCartOpen(true);
   };
 
   const handleRemoveFromCart = (itemId: string) => {
-    playWoodClick();
     setCart((prev) => prev.filter((item) => item.id !== itemId));
   };
 
   const handleClearCart = () => {
-    playWoodClick();
     setCart([]);
   };
 
   const triggerCheckout = () => {
-    playWoodClick();
-    playSeedDrop();
     setCheckoutStep("success");
     setTimeout(() => {
       setCart([]);
@@ -338,7 +303,6 @@ export default function App() {
     { href: "#", label: "Home" },
     { href: "#featured-products", label: "Products" },
     { href: "#our-story", label: "Our Story" },
-    { href: "#trust-transparency", label: "Trust" },
     { href: "#ingredient-highlight", label: "Journey" },
     { href: "#women-empowerment", label: "Community" },
     { href: "#contact-partners", label: "Contact" },
@@ -421,23 +385,9 @@ export default function App() {
             {/* RIGHT: Actions */}
             <div className="flex items-center gap-5 sm:gap-6 lg:gap-8 pointer-events-auto">
 
-              {/* Nature Sounds Toggle */}
-              <button
-                onClick={handleToggleSounds}
-                className="text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
-                title={natureSounds ? "Disable Nature Sounds" : "Enable Nature Sounds"}
-              >
-                {natureSounds ? (
-                  <Volume2 className="w-5 h-5 text-[#768364] animate-pulse" />
-                ) : (
-                  <VolumeX className="w-5 h-5 text-earth/50" />
-                )}
-              </button>
-
               {/* Cart Icon */}
               <button
                 onClick={() => {
-                  playPaperRustle();
                   setIsCartOpen(true);
                 }}
                 className="relative text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
@@ -458,7 +408,6 @@ export default function App() {
               {/* Luxury Shop Now Button */}
               <button
                 onClick={() => {
-                  playWoodClick();
                   const el = document.getElementById("featured-products");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
@@ -471,7 +420,6 @@ export default function App() {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => {
-                  playWoodClick();
                   setIsMobileMenuOpen(!isMobileMenuOpen);
                 }}
                 className="lg:hidden p-2 text-[#2B211B] hover:text-[#B68A35] transition-colors cursor-pointer"
@@ -493,7 +441,6 @@ export default function App() {
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 bg-[#2B211B]/80 backdrop-blur-md z-45 lg:hidden pointer-events-auto"
                 onClick={() => {
-                  playWoodClick();
                   setIsMobileMenuOpen(false);
                 }}
               />
@@ -515,7 +462,6 @@ export default function App() {
                     </div>
                     <button
                       onClick={() => {
-                        playWoodClick();
                         setIsMobileMenuOpen(false);
                       }}
                       className="p-2 rounded-full border border-[#B68A35]/30 text-[#2B211B] hover:bg-[#EDE5DA] transition-colors"
@@ -533,7 +479,6 @@ export default function App() {
                           key={link.href}
                           href={link.href}
                           onClick={() => {
-                            playWoodClick();
                             setIsMobileMenuOpen(false);
                           }}
                           className={`font-sans text-lg uppercase tracking-[0.1em] transition-colors py-2 font-medium flex items-center gap-4 ${
@@ -552,7 +497,6 @@ export default function App() {
                 <div className="space-y-6 text-center">
                   <button
                     onClick={() => {
-                      playWoodClick();
                       setIsMobileMenuOpen(false);
                       const el = document.getElementById("featured-products");
                       if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -580,7 +524,6 @@ export default function App() {
             <div 
               className="absolute inset-0 bg-earth/20 backdrop-blur-xs" 
               onClick={() => {
-                playWoodClick();
                 setIsCartOpen(false);
               }}
             />
@@ -601,7 +544,6 @@ export default function App() {
                 </div>
                 <button
                   onClick={() => {
-                    playWoodClick();
                     setIsCartOpen(false);
                   }}
                   className="p-1.5 rounded-full bg-bg-primary border border-leaf/45 text-earth/60"
@@ -621,7 +563,6 @@ export default function App() {
                           <p className="font-serif text-earth/50 italic text-sm">Your roasting bag is empty.</p>
                           <button
                             onClick={() => {
-                              playWoodClick();
                               setIsCartOpen(false);
                             }}
                             className="text-xs font-mono uppercase tracking-widest text-leaf font-bold hover:underline"
@@ -714,20 +655,16 @@ export default function App() {
          {/* HERO SECTION */}
         <Hero 
           onShopClick={() => {
-            playWoodClick();
             const el = document.getElementById("featured-products");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
           onStoryClick={() => {
-            playWoodClick();
             const el = document.getElementById("our-story");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
          />
 
          <AboutStory />
-
-         <TrustTransparency />
 
          <WomenEmpowerment />
 
@@ -767,7 +704,6 @@ export default function App() {
         {cart.length > 0 && (
           <button
             onClick={() => {
-              playPaperRustle();
               setIsCartOpen(true);
             }}
             className="w-12 h-12 rounded-full bg-white border border-[#C6A769]/30 shadow-lg flex items-center justify-center relative text-[#4B3425] hover:bg-[#FAF8F4] transition-all cursor-pointer"
@@ -782,7 +718,6 @@ export default function App() {
 
         <button
           onClick={() => {
-            playWoodClick();
             const el = document.getElementById("featured-products");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}

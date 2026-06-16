@@ -1,61 +1,133 @@
 import React from "react";
 
+// Beautiful premium botanical leaf silhouettes
+const LEAF_SHAPES = [
+  // Silhouette A: Sage leaf (classic, elegant)
+  <path d="M12,2 C16,6 20,12 18,17 C16.5,20.5 12,22 12,22 C12,22 7.5,20.5 6,17 C4,12 8,6 12,2 Z" />,
+  // Silhouette B: Olive leaf (slender, tapered)
+  <path d="M12,2 C14,6 17,13 14,18 C12,21 12,22 12,22 C12,22 12,21 10,18 C7,13 10,6 12,2 Z" />,
+  // Silhouette C: Willow leaf (gently curved crescent)
+  <path d="M2,22 C8,18 18,12 22,2 C18,6 10,12 2,22 Z" />,
+];
+
+interface LeafConfig {
+  id: number;
+  shapeIndex: number;
+  color: string;
+  sizeClass: string;
+  animationClass: string;
+  delay: string;
+  blur: string;
+  scale: number;
+}
+
+const LEAVES: LeafConfig[] = [
+  {
+    id: 1,
+    shapeIndex: 0,
+    color: "rgba(122, 140, 85, 0.12)", // Sage Green
+    sizeClass: "w-14 h-14",
+    animationClass: "animate-leaf-drift-1",
+    delay: "-8s",
+    blur: "blur-[0.5px]",
+    scale: 1.0,
+  },
+  {
+    id: 2,
+    shapeIndex: 1,
+    color: "rgba(109, 122, 77, 0.10)", // Olive Green
+    sizeClass: "w-12 h-12",
+    animationClass: "animate-leaf-drift-2",
+    delay: "-18s",
+    blur: "blur-0",
+    scale: 0.8,
+  },
+  {
+    id: 3,
+    shapeIndex: 2,
+    color: "rgba(182, 138, 53, 0.08)", // Warm Gold
+    sizeClass: "w-16 h-16",
+    animationClass: "animate-leaf-drift-3",
+    delay: "-32s",
+    blur: "blur-[2px]",
+    scale: 1.2,
+  },
+  {
+    id: 4,
+    shapeIndex: 0,
+    color: "rgba(212, 197, 185, 0.15)", // Soft Beige
+    sizeClass: "w-10 h-10",
+    animationClass: "animate-leaf-drift-4",
+    delay: "-42s",
+    blur: "blur-0",
+    scale: 0.7,
+  },
+  {
+    id: 5,
+    shapeIndex: 1,
+    color: "rgba(122, 140, 85, 0.08)", // Sage Green
+    sizeClass: "w-16 h-16",
+    animationClass: "animate-leaf-drift-1",
+    delay: "-28s",
+    blur: "blur-[3px]", // Foreground deep parallax
+    scale: 1.4,
+  },
+  {
+    id: 6,
+    shapeIndex: 2,
+    color: "rgba(212, 197, 185, 0.12)", // Soft Beige
+    sizeClass: "w-12 h-12",
+    animationClass: "animate-leaf-drift-2",
+    delay: "-48s",
+    blur: "blur-[0.5px]",
+    scale: 0.9,
+  },
+  {
+    id: 7,
+    shapeIndex: 0,
+    color: "rgba(182, 138, 53, 0.09)", // Warm Gold
+    sizeClass: "w-14 h-14",
+    animationClass: "animate-leaf-drift-3",
+    delay: "-12s",
+    blur: "blur-0",
+    scale: 1.1,
+  },
+  {
+    id: 8,
+    shapeIndex: 1,
+    color: "rgba(109, 122, 77, 0.12)", // Olive Green
+    sizeClass: "w-10 h-10",
+    animationClass: "animate-leaf-drift-4",
+    delay: "-22s",
+    blur: "blur-[1px]",
+    scale: 0.75,
+  },
+];
+
 export default function FloatingParticles() {
-  // Renders beautiful, GPU-accelerated slow-floating leaves and seeds
-  // that drift in the background to convey a gentle farm breeze.
+  // Renders premium, minimalist, GPU-accelerated leaf drift animations.
+  // Using fixed position layer to drift across viewport, pointer-events disabled.
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 min-h-full select-none">
-      
-      {/* Leaf 1 - Top Left */}
-      <div 
-        className="absolute top-[12%] left-[6%] w-10 h-10 text-leaf/10 fill-leaf/10 ambient-float"
-        style={{ willChange: "transform" }}
-      >
-        <svg viewBox="0 0 24 24" className="w-full h-full">
-          <path d="M17 2C17 2 10 8 6 12C4 14 3 17 3 20C6 20 9 19 11 17C15 13 21 6 21 6C21 6 19 4 17 2Z" />
-        </svg>
-      </div>
-
-      {/* Leaf 2 - Mid Right */}
-      <div 
-        className="absolute top-[35%] right-[8%] w-12 h-12 text-nature/10 fill-nature/10 ambient-float-delayed"
-        style={{ willChange: "transform" }}
-      >
-        <svg viewBox="0 0 24 24" className="w-full h-full">
-          <path d="M2 22C2 22 10 18 14 10C16 6 22 2 22 2C22 2 18 8 14 10C10 12 2 22 2 22Z" />
-        </svg>
-      </div>
-
-      {/* Seed/Grain 3 - Lower Left */}
-      <div 
-        className="absolute top-[65%] left-[5%] w-8 h-8 text-gold/10 fill-gold/5 ambient-float"
-        style={{ willChange: "transform" }}
-      >
-        <svg viewBox="0 0 24 24" className="w-full h-full" stroke="currentColor" strokeWidth="1.2">
-          <path d="M12 3C12 3 6 8.5 6 13.5C6 16.8 8.7 19.5 12 19.5C15.3 19.5 18 16.8 18 13.5C18 8.5 12 3 12 3Z" />
-        </svg>
-      </div>
-
-      {/* Leaf 4 - Footer Area Left */}
-      <div 
-        className="absolute bottom-[20%] left-[12%] w-11 h-11 text-leaf/10 fill-leaf/10 ambient-float-delayed"
-        style={{ willChange: "transform" }}
-      >
-        <svg viewBox="0 0 24 24" className="w-full h-full">
-          <path d="M17 2C17 2 10 8 6 12C4 14 3 17 3 20C6 20 9 19 11 17C15 13 21 6 21 6C21 6 19 4 17 2Z" />
-        </svg>
-      </div>
-
-      {/* Seed 5 - Mid Left */}
-      <div 
-        className="absolute top-[48%] left-[15%] w-7 h-7 text-nature/10 fill-none ambient-float"
-        style={{ willChange: "transform" }}
-      >
-        <svg viewBox="0 0 24 24" className="w-full h-full" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 22V10M12 10C12 7.5 9.5 5.5 6.5 5.5C4 5.5 4 10 12 10ZM12 10C12 7.5 14.5 5.5 17.5 5.5C20 5.5 20 10 12 10Z" />
-        </svg>
-      </div>
-
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-[1] w-full h-full select-none">
+      {LEAVES.map((leaf) => (
+        <div
+          key={leaf.id}
+          className={`absolute ${leaf.sizeClass} ${leaf.animationClass} ${leaf.blur}`}
+          style={{
+            animationDelay: leaf.delay,
+            transform: `scale(${leaf.scale})`,
+            willChange: "transform, opacity",
+          }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="w-full h-full"
+            style={{ fill: leaf.color }}
+          >
+            {LEAF_SHAPES[leaf.shapeIndex]}
+          </svg>
+        </div>
+      ))}
     </div>
   );
 }

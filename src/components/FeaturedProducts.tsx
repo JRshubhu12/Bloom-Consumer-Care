@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ShoppingBag, Check, X, Eye, ChevronLeft, ChevronRight } from "lucide-react";
 import { m, AnimatePresence } from "motion/react";
-import { playWoodClick, playPaperRustle, playSeedDrop } from "../utils/audioUtils";
 
 interface FeaturedProductsProps {
   onAddToCart: (productName: string) => void;
@@ -107,7 +106,6 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
   };
 
   const scroll = (direction: "left" | "right") => {
-    playWoodClick();
     if (scrollContainerRef.current) {
       const { current } = scrollContainerRef;
       const scrollAmount = current.clientWidth > 768 ? current.clientWidth / 3 : current.clientWidth * 0.8;
@@ -117,8 +115,6 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
 
   const handleBuy = (id: string, name: string) => {
     setAddingToCartId(id);
-    playWoodClick();
-    playSeedDrop();
     const displayName = selectedFlavor && id === "prod-1" ? `${name} (${selectedFlavor})` : name;
     onAddToCart(displayName);
     setTimeout(() => {
@@ -132,7 +128,6 @@ export default function FeaturedProducts({ onAddToCart }: FeaturedProductsProps)
     }
     setSelectedProduct(prod);
     addToRecentlyViewed(prod.id);
-    playPaperRustle();
   };
 
   return (

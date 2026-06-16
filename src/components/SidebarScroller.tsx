@@ -4,7 +4,6 @@ import { m, AnimatePresence } from "motion/react";
 const SECTIONS = [
   { id: "hero", label: "Home" },
   { id: "our-story", label: "Our Story" },
-  { id: "trust-transparency", label: "Trust" },
   { id: "women-empowerment", label: "Community" },
   { id: "our-promise", label: "Our Promise" },
   { id: "featured-products", label: "Collection" },
